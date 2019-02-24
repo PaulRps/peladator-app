@@ -1,0 +1,62 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Dados do Jogador</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      
+      <div class="form-group"> 
+        <!-- <h6 for="name">Nome</h6> -->
+        <mat-form-field class="">
+          <input name="name" [(ngModel)]="addedPlayer.name" matInput placeholder="Digite o nome" value="" required>
+        </mat-form-field>
+      </div>
+      
+      <div class="form-group"> 
+        <!-- <h6 for="age">Idade</h6> -->
+        <mat-form-field class="">
+          <input name="age" [(ngModel)]="addedPlayer.age" matInput placeholder="Digite a idade" value="" required>
+        </mat-form-field>        
+      </div>
+
+      <div class="form-group">
+        <!-- <h6 for="Position">Posição</h6> -->
+        <mat-form-field>
+          <mat-select placeholder="Selecione a posição" name="position" [(ngModel)]="addedPlayer.positionId" required>
+            <mat-option *ngFor="let position of playerPositions" [value]="position">
+              {{position.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>   
+           
+      </div>
+
+      <div class="form-group">
+        <!-- <h6 for="Position">Nível</h6> -->
+        <mat-form-field>
+          <mat-select placeholder="Selecione o nível" name="skillLevel" [(ngModel)]="addedPlayer.skillLevel" required>              
+              <mat-option value="1">Carniça</mat-option>
+              <mat-option value="2">Teimoso</mat-option>
+              <mat-option value="3">Iniciante</mat-option>
+              <mat-option value="4">Boleiro</mat-option>          
+              <mat-option value="5">Joga muito</mat-option>
+          </mat-select>
+          
+        </mat-form-field>        
+      </div>          
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Salvar</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Jogador</button>
+
+<hr>
+
+<pre>{{closeResult}}</pre>
