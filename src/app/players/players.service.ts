@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Player } from './player';
 import { Observable, of  } from 'rxjs';
@@ -15,6 +15,8 @@ const httpOptions = {
 export class PlayersService {
 
   private playerUrl = 'api/player/';
+  
+  onTaskAdded = new EventEmitter<Player>();
 
   constructor(private http: HttpClient) { }
 

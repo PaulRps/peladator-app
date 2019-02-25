@@ -4,7 +4,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { PlayersService } from '../players.service'
 import { Player } from '../player';
 import { PlayerPosition } from '../player.position';
-import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-players-add',
@@ -16,29 +16,29 @@ export class PlayersAddComponent implements OnInit {
   closeResult: string;
   players: Player[];
   playerPositions: PlayerPosition[];
-  addedPlayer: Player;  
-  
+  addedPlayer: Player;
   
   constructor(private modalService: NgbModal, 
               private playersService: PlayersService) { }
 
   ngOnInit() {
 
-    // this.getPlayerPositions();
-    this.playerPositions = []; 
-    this.playerPositions.push(new PlayerPosition(1, 'goleiro'));   
-    this.playerPositions.push(new PlayerPosition(2, 'zagueiro'));   
+    this.getPlayerPositions();
     this.addedPlayer = new Player(null, null, null, null, null);    
   }  
 
-  addPlayer(player: Player){
+  addPlayer(event){
     
-    if (!player) { return; }
+    // if (!event) { return; }
 
-    this.playersService.addPlayer(player)
-      .subscribe(player => {
-        this.players.push(player);
+    // console.log(event);
+    // let player = new Player(null, null, null, null, null); 
 
+    this.playersService.addPlayer(this.addedPlayer)
+      .subscribe((player:Player) => {
+        this.addedPlayer = new Player(null, null, null, null, null);
+        // this.players.push(player);
+        this.playersService.onTaskAdded.emit(player);
     });
     
   }
@@ -46,7 +46,6 @@ export class PlayersAddComponent implements OnInit {
   getPlayerPositions(): void {
     this.playersService.getPlayerPositions()
     .subscribe(playerPositions => this.playerPositions = playerPositions);
-    
   }
 
   open(content) {
@@ -55,7 +54,6 @@ export class PlayersAddComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-    console.log(content);    
   }
 
   private getDismissReason(reason: any): string {

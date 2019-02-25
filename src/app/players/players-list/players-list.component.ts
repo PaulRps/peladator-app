@@ -39,6 +39,10 @@ export class PlayersListComponent implements OnInit {
 
   ngOnInit() {
     this.getPlayers();
+    
+    this.playersService.onTaskAdded.subscribe(
+      (player: Player) => this.players.push(player)
+    );
   }  
 
   getPlayers(): void {

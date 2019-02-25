@@ -6,52 +6,52 @@
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form >
       
       <div class="form-group"> 
-        <!-- <h6 for="name">Nome</h6> -->
         <mat-form-field class="">
           <input name="name" [(ngModel)]="addedPlayer.name" matInput placeholder="Digite o nome" value="" required>
         </mat-form-field>
+        <p>nome: {{addedPlayer.name}}</p>
       </div>
       
       <div class="form-group"> 
-        <!-- <h6 for="age">Idade</h6> -->
         <mat-form-field class="">
           <input name="age" [(ngModel)]="addedPlayer.age" matInput placeholder="Digite a idade" value="" required>
-        </mat-form-field>        
+        </mat-form-field>
+        <p>age: {{addedPlayer.age}}</p>        
       </div>
 
       <div class="form-group">
-        <!-- <h6 for="Position">Posição</h6> -->
         <mat-form-field>
-          <mat-select placeholder="Selecione a posição" name="position" [(ngModel)]="addedPlayer.positionId" required>
-            <mat-option *ngFor="let position of playerPositions" [value]="position">
+          <select matNativeControl placeholder="Selecione a posição" name="position" [(ngModel)]="addedPlayer.positionId" required>
+            <option value=""> ... </option>
+            <option *ngFor="let position of playerPositions" [value]="position.id">
               {{position.name}}
-            </mat-option>
-          </mat-select>
+            </option>
+          </select>
+          <p>position: {{addedPlayer.positionId}}</p>
         </mat-form-field>   
-           
       </div>
 
       <div class="form-group">
-        <!-- <h6 for="Position">Nível</h6> -->
         <mat-form-field>
-          <mat-select placeholder="Selecione o nível" name="skillLevel" [(ngModel)]="addedPlayer.skillLevel" required>              
-              <mat-option value="1">Carniça</mat-option>
-              <mat-option value="2">Teimoso</mat-option>
-              <mat-option value="3">Iniciante</mat-option>
-              <mat-option value="4">Boleiro</mat-option>          
-              <mat-option value="5">Joga muito</mat-option>
-          </mat-select>
-          
+          <select matNativeControl placeholder="Selecione o nível" name="skillLevel" [(ngModel)]="addedPlayer.skillLevel" required>              
+              <option value="1">Carniça</option>
+              <option value="2">Teimoso</option>
+              <option value="3">Iniciante</option>
+              <option value="4">Boleiro</option>          
+              <option value="5">Joga muito</option>
+          </select>     
+          <p>nivel: {{addedPlayer.skillLevel}}</p>     
         </mat-form-field>        
-      </div>          
+      </div>   
+
     </form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Salvar</button>
+    <button type="submit" class="btn btn-outline-dark" (click)="addPlayer($event)">Salvar</button>
   </div>
 </ng-template>
 
@@ -59,4 +59,4 @@
 
 <hr>
 
-<pre>{{closeResult}}</pre>
+<!-- <pre>{{closeResult}}</pre> -->
