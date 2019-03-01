@@ -4,6 +4,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { PlayersService } from '../players.service'
 import { Player } from '../player';
 import { PlayerPosition } from '../player.position';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -16,26 +17,34 @@ export class PlayersAddComponent implements OnInit {
   closeResult: string;
   players: Player[];
   playerPositions: PlayerPosition[];
-  addedPlayer: Player;
   playerLevels: any[];
+  playerForm: FormGroup;
   
   constructor(private modalService: NgbModal, 
               private playersService: PlayersService) { }
 
   ngOnInit() {
 
+    this.playerForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+      age: new FormControl(20,[Validators.required]),
+      skillLevel: new FormControl('', [Validators.required])
+    });
+
     this.getPlayerPositions();
-    this.addedPlayer = new Player(null, null, null, null, null);    
   }  
 
   addPlayer(){
     
+    if (this.playerForm.invalid){
+      return;
+    }
+    
     this.modalService.dismissAll();
-
-    this.playersService.addPlayer(this.addedPlayer)
+    var addedPlayer = new Player(null, this.playerForm.value['name'], this.playerForm.value['age'], this.playerForm.value['skillLevel']);
+    this.playersService.addPlayer(addedPlayer)
       .subscribe((players:Player[]) => {
         this.playersService.onPlayerAdded.emit(players);
-        this.addedPlayer = new Player(null, null, null, null, null);
     });
     
   }
@@ -64,6 +73,10 @@ export class PlayersAddComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.playerForm.controls[controlName].hasError(errorName);
   }
 
 }

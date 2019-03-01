@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule, MatOptionModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -11,14 +12,16 @@ import { MatSelectModule, MatOptionModule, MatFormFieldModule, MatInputModule } 
     MatSelectModule,     
     MatOptionModule,
     MatFormFieldModule, 
-    MatInputModule 
+    MatInputModule,
+    ReactiveFormsModule 
   ],
   exports: [
     MatTableModule,     
     MatSelectModule,     
     MatOptionModule,
     MatFormFieldModule, 
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule
   ]
 })
 

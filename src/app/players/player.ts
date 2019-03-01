@@ -9,8 +9,8 @@ export class Player {
     constructor(id: number,
                 name: String,
                 age: number,
-                skillLevel: String,
-                positionId: number) {
+                skillLevel: String
+                ) {
 
         this.id = id;
         this.name = name;
