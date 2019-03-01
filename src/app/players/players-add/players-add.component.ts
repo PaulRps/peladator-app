@@ -17,6 +17,7 @@ export class PlayersAddComponent implements OnInit {
   players: Player[];
   playerPositions: PlayerPosition[];
   addedPlayer: Player;
+  playerLevels: any[];
   
   constructor(private modalService: NgbModal, 
               private playersService: PlayersService) { }
@@ -27,25 +28,24 @@ export class PlayersAddComponent implements OnInit {
     this.addedPlayer = new Player(null, null, null, null, null);    
   }  
 
-  addPlayer(event){
+  addPlayer(){
     
-    // if (!event) { return; }
-
-    // console.log(event);
-    // let player = new Player(null, null, null, null, null); 
+    this.modalService.dismissAll();
 
     this.playersService.addPlayer(this.addedPlayer)
-      .subscribe((player:Player) => {
+      .subscribe((players:Player[]) => {
+        this.playersService.onPlayerAdded.emit(players);
         this.addedPlayer = new Player(null, null, null, null, null);
-        // this.players.push(player);
-        this.playersService.onTaskAdded.emit(player);
     });
     
   }
 
   getPlayerPositions(): void {
-    this.playersService.getPlayerPositions()
-    .subscribe(playerPositions => this.playerPositions = playerPositions);
+    this.playersService.getPlayerAddData()
+    .subscribe(playerAddData => {
+      this.playerPositions = playerAddData.positions;
+      this.playerLevels = playerAddData.skillLevels;
+    });
   }
 
   open(content) {

@@ -16,30 +16,30 @@ export class PlayersService {
 
   private playerUrl = 'api/player/';
   
-  onTaskAdded = new EventEmitter<Player>();
+  onPlayerAdded = new EventEmitter<Player[]>();
 
   constructor(private http: HttpClient) { }
 
   getPlayers(): Observable<Player[]> {
     return this.http.get<Player[]>(this.playerUrl)
       .pipe(
-        tap(_ => this.log('fetched heroes')),
-        catchError(this.handleError('getHeroes', []))
+        tap(_ => this.log('fetched players')),
+        catchError(this.handleError('getPlayers', []))
       );
   }
 
-  getPlayerPositions(): Observable<PlayerPosition[]> {
-    return this.http.get<PlayerPosition[]>(this.playerUrl+"/positions")
+  getPlayerAddData(): Observable<any> {
+    return this.http.get<any>(this.playerUrl+"/view-add-data")
       .pipe(
-        tap(_ => this.log('fetched heroes')),
-        catchError(this.handleError('getHeroes', []))
+        tap(_ => this.log('fetched view-add-data')),
+        catchError(this.handleError('getPlayerAddData', []))
       );
   }
 
-  addPlayer (player: Player): Observable<Player> {
-    return this.http.post<Player>(this.playerUrl, player, httpOptions).pipe(
-      tap((newHero: Player) => this.log(`added player w/ id=${newHero.id}`)),
-      catchError(this.handleError<Player>('addHero'))
+  addPlayer (player: Player): Observable<Player[]> {
+    return this.http.post<Player[]>(this.playerUrl, player, httpOptions).pipe(
+      tap((newPlayer: Player[]) => this.log(`added player w/ id=${newPlayer.toString()}`)),
+      catchError(this.handleError<Player[]>('addPlayer'))
     );
   }
 

@@ -12,17 +12,15 @@
         <mat-form-field class="">
           <input name="name" [(ngModel)]="addedPlayer.name" matInput placeholder="Digite o nome" value="" required>
         </mat-form-field>
-        <p>nome: {{addedPlayer.name}}</p>
       </div>
       
       <div class="form-group"> 
         <mat-form-field class="">
           <input name="age" [(ngModel)]="addedPlayer.age" matInput placeholder="Digite a idade" value="" required>
         </mat-form-field>
-        <p>age: {{addedPlayer.age}}</p>        
       </div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <mat-form-field>
           <select matNativeControl placeholder="Selecione a posição" name="position" [(ngModel)]="addedPlayer.positionId" required>
             <option value=""> ... </option>
@@ -32,18 +30,15 @@
           </select>
           <p>position: {{addedPlayer.positionId}}</p>
         </mat-form-field>   
-      </div>
+      </div> -->
 
       <div class="form-group">
         <mat-form-field>
           <select matNativeControl placeholder="Selecione o nível" name="skillLevel" [(ngModel)]="addedPlayer.skillLevel" required>              
-              <option value="1">Carniça</option>
-              <option value="2">Teimoso</option>
-              <option value="3">Iniciante</option>
-              <option value="4">Boleiro</option>          
-              <option value="5">Joga muito</option>
+            <option *ngFor="let level of playerLevels" [value]="level.description">
+              {{level.description}}
+            </option>  
           </select>     
-          <p>nivel: {{addedPlayer.skillLevel}}</p>     
         </mat-form-field>        
       </div>   
 
@@ -51,7 +46,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
-    <button type="submit" class="btn btn-outline-dark" (click)="addPlayer($event)">Salvar</button>
+    <button type="submit" class="btn btn-outline-dark" (click)="addPlayer()">Salvar</button>
   </div>
 </ng-template>
 
