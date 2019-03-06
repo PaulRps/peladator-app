@@ -35,4 +35,8 @@ export class PlayersListComponent implements OnInit {
     });
   }
 
+  applyFilter(filterValue: string) {
+    this.players.filter = filterValue.trim().toLowerCase();
+  }
+
 }
