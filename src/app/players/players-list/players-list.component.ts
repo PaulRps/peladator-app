@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Player } from '../player';
 import { PlayersService } from '../players.service';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-players-list',
@@ -13,6 +13,7 @@ export class PlayersListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'age', 'skillLevel'];
   players: MatTableDataSource<Player> = new MatTableDataSource<Player>();
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   
   constructor(private playersService: PlayersService) { }
   
@@ -28,7 +29,10 @@ export class PlayersListComponent implements OnInit {
 
   getPlayers(): void {
     this.playersService.getPlayers()
-    .subscribe(players => this.players = new MatTableDataSource(players));
+    .subscribe(players =>{
+      this.players = new MatTableDataSource(players)
+      this.players.paginator = this.paginator;
+    });
   }
 
 }

@@ -3,7 +3,7 @@
 import { NgModule } from '@angular/core';
 
 import { MatTableModule } from '@angular/material/table';
-import { MatSelectModule, MatOptionModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatSelectModule, MatOptionModule, MatFormFieldModule, MatInputModule, MatPaginatorModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -13,7 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatOptionModule,
     MatFormFieldModule, 
     MatInputModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    MatPaginatorModule
   ],
   exports: [
     MatTableModule,     
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatOptionModule,
     MatFormFieldModule, 
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatPaginatorModule
   ]
 })
 
