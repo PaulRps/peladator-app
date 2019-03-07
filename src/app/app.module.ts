@@ -11,13 +11,15 @@ import { AppComponent } from './app.component';
 import { PlayersComponent } from './players/players.component';
 import { PlayersListComponent } from './players/players-list/players-list.component';
 import { PlayersAddComponent } from './players/players-add/players-add.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayersComponent,
     PlayersListComponent,
-    PlayersAddComponent
+    PlayersAddComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
