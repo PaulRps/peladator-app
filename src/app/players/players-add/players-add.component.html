@@ -52,8 +52,7 @@
   </div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Jogador</button>
-
-<hr>
-
-<!-- <pre>{{closeResult}}</pre> -->
+<button mat-menu-item (click)="open(content)">
+  <mat-icon>person_add</mat-icon>
+  <span >Jogador</span>
+</button>

@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { PlayersComponent } from './players/players.component';
 import { PlayersListComponent } from './players/players-list/players-list.component';
 import { PlayersAddComponent } from './players/players-add/players-add.component';
-import { MenuComponent } from './menu/menu.component';
+import { HeaderComponent } from './menu/header/header.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { MenuComponent } from './menu/menu.component';
     PlayersComponent,
     PlayersListComponent,
     PlayersAddComponent,
-    MenuComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
