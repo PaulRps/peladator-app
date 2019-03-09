@@ -20,6 +20,10 @@ export class PlayersListComponent implements OnInit {
   constructor(private playersService: PlayersService, private dialogService: DialogService) { }
   
   ngOnInit() {
+    
+    // this.paginator._intl.firstPageLabel = ""; 
+    this.paginator.hidePageSize = true;
+
     this.getPlayers();
     
     this.playersService.onPlayerAdded.subscribe(
@@ -34,6 +38,7 @@ export class PlayersListComponent implements OnInit {
     .subscribe(players =>{
       this.players = new MatTableDataSource(players)
       this.players.paginator = this.paginator;
+      console.log(this.paginator);
     });
   }
 
