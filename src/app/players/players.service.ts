@@ -43,6 +43,16 @@ export class PlayersService {
     );
   }
 
+  deletePlayer (id: number): Observable<Player[]> {
+    
+    const url = `${this.playerUrl}/${id}`;
+
+    return this.http.delete<Player[]>(url, httpOptions).pipe(
+      tap((newPlayer: Player[]) => this.log(`added player w/ id=${newPlayer.toString()}`)),
+      catchError(this.handleError<Player[]>('addPlayer'))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

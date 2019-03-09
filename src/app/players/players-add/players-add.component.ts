@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { PlayersService } from '../players.service'
 import { Player } from '../player';
 import { PlayerPosition } from '../player.position';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DialogService } from 'src/app/dialogService';
+
 
 
 @Component({
@@ -20,14 +22,15 @@ export class PlayersAddComponent implements OnInit {
   playerLevels: any[];
   playerForm: FormGroup;
   
-  constructor(private modalService: NgbModal, 
+  constructor(private modalService: NgbModal,
+              private dialogService: DialogService,
               private playersService: PlayersService) { }
 
   ngOnInit() {
 
     this.playerForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-      age: new FormControl(20,[Validators.required]),
+      age: new FormControl(null,[Validators.required]),
       skillLevel: new FormControl('', [Validators.required])
     });
 
@@ -41,10 +44,14 @@ export class PlayersAddComponent implements OnInit {
     }
     
     this.modalService.dismissAll();
+    
     var addedPlayer = new Player(null, this.playerForm.value['name'], this.playerForm.value['age'], this.playerForm.value['skillLevel']);
+    
     this.playersService.addPlayer(addedPlayer)
-      .subscribe((players:Player[]) => {
+      .subscribe((players:Player[]) => {        
         this.playersService.onPlayerAdded.emit(players);
+        this.dialogService.successMessage("Jogador Adicionado!");
+        this.playerForm.reset();
     });
     
   }

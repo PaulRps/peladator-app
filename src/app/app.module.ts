@@ -28,7 +28,7 @@ import { HeaderComponent } from './menu/header/header.component';
     MaterialModule,
     FormsModule,       
     NgbModule.forRoot(),
-    HttpClientModule,    
+    HttpClientModule
   ],  
   providers: [],
   bootstrap: [AppComponent]

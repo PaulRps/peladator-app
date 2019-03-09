@@ -1,7 +1,9 @@
-<!-- <app-players-add></app-players-add> -->
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
+<div class="row">
+  <mat-form-field class="col-6 col-sm-8 col-md-8 col-lg-10" >
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <app-players-add class="col-6 col-sm-4 col-md-4 col-lg-2 pull-right"></app-players-add>
+</div>
 <table mat-table [dataSource]="players" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
@@ -37,6 +39,6 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr (click)="deletePlayer(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
