@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Player } from '../player';
 import { PlayersService } from '../players.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
+import Swal from 'sweetalert2';
+import { DialogService } from 'src/app/dialogService';
 
 @Component({
   selector: 'app-players-list',
@@ -15,9 +17,13 @@ export class PlayersListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
-  constructor(private playersService: PlayersService) { }
+  constructor(private playersService: PlayersService, private dialogService: DialogService) { }
   
   ngOnInit() {
+    
+    // this.paginator._intl.firstPageLabel = ""; 
+    this.paginator.hidePageSize = true;
+
     this.getPlayers();
     
     this.playersService.onPlayerAdded.subscribe(
@@ -32,6 +38,7 @@ export class PlayersListComponent implements OnInit {
     .subscribe(players =>{
       this.players = new MatTableDataSource(players)
       this.players.paginator = this.paginator;
+      console.log(this.paginator);
     });
   }
 
@@ -39,4 +46,25 @@ export class PlayersListComponent implements OnInit {
     this.players.filter = filterValue.trim().toLowerCase();
   }
 
+  deletePlayer(player){
+    Swal({
+      title: 'Deseja deletar o jogador ' + player.name + '?',
+      text: "Não será possível reverter!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sim, delete!'
+    }).then((result) => {
+      if (result.value) {        
+        this.playersService.deletePlayer(player.id).subscribe(
+          (players: Player[]) => {
+            this.players.data = players;
+            this.dialogService.successMessage('Jogador deletado!');
+          }
+        );        
+      }
+    });
+  }
 }

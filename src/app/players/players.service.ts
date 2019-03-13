@@ -29,7 +29,7 @@ export class PlayersService {
   }
 
   getPlayerAddData(): Observable<any> {
-    return this.http.get<any>(this.playerUrl+"/view-add-data")
+    return this.http.get<any>(this.playerUrl+"view-add-data")
       .pipe(
         tap(_ => this.log('fetched view-add-data')),
         catchError(this.handleError('getPlayerAddData', []))
@@ -38,6 +38,16 @@ export class PlayersService {
 
   addPlayer (player: Player): Observable<Player[]> {
     return this.http.post<Player[]>(this.playerUrl, player, httpOptions).pipe(
+      tap((newPlayer: Player[]) => this.log(`added player w/ id=${newPlayer.toString()}`)),
+      catchError(this.handleError<Player[]>('addPlayer'))
+    );
+  }
+
+  deletePlayer (id: number): Observable<Player[]> {
+    
+    const url = `${this.playerUrl}${id}`;
+
+    return this.http.delete<Player[]>(url, httpOptions).pipe(
       tap((newPlayer: Player[]) => this.log(`added player w/ id=${newPlayer.toString()}`)),
       catchError(this.handleError<Player[]>('addPlayer'))
     );

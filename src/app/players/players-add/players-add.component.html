@@ -10,14 +10,14 @@
       <div class="form-group"> 
         <mat-form-field class="">
           <input formControlName="name" id="name" matInput placeholder="Digite o nome" value="">
-          <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('name', 'required')">Campo obrigatório</mat-error>
         </mat-form-field>
       </div>
       
       <div class="form-group"> 
         <mat-form-field class="">
           <input formControlName="age" id="age" type="number" matInput placeholder="Digite a idade">
-          <mat-error *ngIf="hasError('age', 'required')">Name is required</mat-error>
+          <mat-error *ngIf="hasError('age', 'required')">Campo obrigatório</mat-error>
         </mat-form-field>
       </div>
       
@@ -28,7 +28,7 @@
               {{level.description}}
             </option>  
           </select>
-          <mat-error *ngIf="hasError('skillLevel', 'required')">skillLevel is required</mat-error>
+          <mat-error *ngIf="hasError('skillLevel', 'required')">Campo obrigatório</mat-error>
         </mat-form-field>        
       </div> 
       
@@ -46,14 +46,13 @@
       </div> -->
     </form>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar</button>
+  <div class="modal-footer">    
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click');playerForm.reset();">Cancelar</button>
     <button type="submit" class="btn btn-outline-dark" (click)="addPlayer()">Salvar</button>
   </div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Jogador</button>
-
-<hr>
-
-<!-- <pre>{{closeResult}}</pre> -->
+<button mat-menu-item (click)="open(content)">
+  <mat-icon>person_add</mat-icon>
+  <span >Jogador</span>
+</button>
