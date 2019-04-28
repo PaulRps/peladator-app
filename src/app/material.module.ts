@@ -11,6 +11,7 @@ import {
   MatPaginatorModule, 
   MatListModule,
   MatButtonModule, 
+  MatCheckboxModule,
   MatIconModule,
   MatMenuModule,
   MatToolbarModule 
@@ -29,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatListModule,
     MatButtonModule, 
+    MatCheckboxModule,
     MatIconModule,
     MatMenuModule,
     MatToolbarModule
@@ -42,7 +44,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MatPaginatorModule,
     MatListModule,
-    MatButtonModule, 
+    MatButtonModule,
+    MatCheckboxModule, 
     MatIconModule,
     MatMenuModule,
     MatToolbarModule

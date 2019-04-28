@@ -4,6 +4,7 @@ import { PlayersService } from '../players.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import Swal from 'sweetalert2';
 import { DialogService } from 'src/app/dialogService';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-players-list',
@@ -12,8 +13,9 @@ import { DialogService } from 'src/app/dialogService';
 })
 export class PlayersListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'age', 'skillLevel'];
+  displayedColumns: string[] = ['select', 'id', 'name', 'age', 'skillLevel'];
   players: MatTableDataSource<Player> = new MatTableDataSource<Player>();
+  selection = new SelectionModel<Player>(true, []);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
@@ -44,6 +46,27 @@ export class PlayersListComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.players.filter = filterValue.trim().toLowerCase();
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.players.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.players.data.forEach(row => this.selection.select(row));
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: Player): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
 
   deletePlayer(player){

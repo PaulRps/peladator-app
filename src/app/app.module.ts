@@ -12,6 +12,7 @@ import { PlayersComponent } from './players/players.component';
 import { PlayersListComponent } from './players/players-list/players-list.component';
 import { PlayersAddComponent } from './players/players-add/players-add.component';
 import { HeaderComponent } from './menu/header/header.component';
+import {MatchPlayersComponent} from './matches/match-players/match-players.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HeaderComponent } from './menu/header/header.component';
     PlayersComponent,
     PlayersListComponent,
     PlayersAddComponent,
-    HeaderComponent
+    HeaderComponent,
+    MatchPlayersComponent
   ],
   imports: [
     BrowserModule,
