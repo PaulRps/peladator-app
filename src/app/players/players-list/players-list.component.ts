@@ -28,15 +28,15 @@ export class PlayersListComponent implements OnInit {
 
     this.getPlayers();
     
-    this.playersService.onPlayerAdded.subscribe(
-      (players: Player[]) => {
-        this.players.data = players;
-      }
-    );
+    // this.playersService.onPlayerAdded.subscribe(
+    //   (players: Player[]) => {
+    //     this.players.data = players;
+    //   }
+    // );
   }  
 
   getPlayers(): void {
-    this.playersService.getPlayers()
+    this.playersService.getAll()
     .subscribe(players =>{
       this.players = new MatTableDataSource(players)
       this.players.paginator = this.paginator;
@@ -81,7 +81,7 @@ export class PlayersListComponent implements OnInit {
       confirmButtonText: 'Sim, delete!'
     }).then((result) => {
       if (result.value) {        
-        this.playersService.deletePlayer(player.id).subscribe(
+        this.playersService.delete(player.id).subscribe(
           (players: Player[]) => {
             this.players.data = players;
             this.dialogService.successMessage('Jogador deletado!');

@@ -5,12 +5,13 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
 import { PlayersComponent } from './players/players.component';
 import { PlayersListComponent } from './players/players-list/players-list.component';
-import { PlayersAddComponent } from './players/players-add/players-add.component';
+import { PlayerFormComponent } from './players/player-form/player-form.component';
 import { HeaderComponent } from './menu/header/header.component';
 import {MatchPlayersComponent} from './matches/match-players/match-players.component';
 
@@ -19,7 +20,7 @@ import {MatchPlayersComponent} from './matches/match-players/match-players.compo
     AppComponent,
     PlayersComponent,
     PlayersListComponent,
-    PlayersAddComponent,
+    PlayerFormComponent,
     HeaderComponent,
     MatchPlayersComponent
   ],
@@ -28,11 +29,12 @@ import {MatchPlayersComponent} from './matches/match-players/match-players.compo
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule,       
+    FormsModule,
     NgbModule.forRoot(),
     HttpClientModule
-  ],  
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents : [PlayerFormComponent]
 })
 export class AppModule { }

@@ -1,10 +1,9 @@
 export class PlayerPosition {
-    id: number;	
-    name: String;
-        
-    constructor(id: number, name: String) {
+    id: number;
+    name: string;
+
+    constructor(id: number, name: string) {
         this.id = id;
         this.name = name;
-    };
-
+    }
 }

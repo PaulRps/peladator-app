@@ -1,15 +1,15 @@
 export class Player {
     
     id: number;
-    name: String;
+    name: string;
     age: number;
-    skillLevel: String;
+    skillLevel: string;
     // positionId: number;
 
     constructor(id: number,
-                name: String,
+                name: string,
                 age: number,
-                skillLevel: String
+                skillLevel: string
                 ) {
 
         this.id = id;
@@ -19,11 +19,11 @@ export class Player {
         // this.positionId = positionId;
     }
 
-    public toString(): String {
+    public toString(): string {
         return "id: "+this.id +
                "\nname: "+this.name +
                "\nage: " + this.age +
-               "\nskillLevel: "+this.skillLevel ;//+
+               "\nskillLevel: "+this.skillLevel;//+
             //    "\nposition: " + this.positionId;
     }
 }
