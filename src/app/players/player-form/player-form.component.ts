@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild, Input, Output } from '@angular/core';
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { PlayersService } from '../players.service'
 import { Player } from '../player';
-import { PlayerPosition } from '../player.position';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DialogService } from 'src/app/dialogService';
-import { EventEmitter } from 'events';
+import { EventEmitter } from '@angular/core';
 
 
 
@@ -16,15 +15,12 @@ import { EventEmitter } from 'events';
   styleUrls: ['./player-form.component.scss']
 })
 export class PlayerFormComponent implements OnInit {
-
-  closeResult: string;
-  players: Player[];
-  playerPositions: PlayerPosition[];
-  playerLevels: any[];
+  
   playerForm: FormGroup;
+  playerLevels: any[];
 
-  @Input() player: Player;
-  @Output() newPlayerEvent: EventEmitter<Player> = new EventEmitter();
+  @Input() player: any;
+  @Output() newPlayerEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(private modalService: NgbModal,
               private dialogService: DialogService,
@@ -38,6 +34,17 @@ export class PlayerFormComponent implements OnInit {
       skillLevel: new FormControl('', [Validators.required])
     });
     // this.getPlayerPositions();
+    if (this.player){
+      this.playerForm.value['name'] = this.player.name;
+      this.playerForm.value['age'] = this.player.age;
+      this.playerForm.value['skillLevel'] = this.player.skillLevel;
+    } else {
+      this.playersService.getFormData()
+      .subscribe(playerAddData => {
+        // this.playerPositions = playerAddData.positions;
+        this.playerLevels = playerAddData.skillLevels;
+      });
+    }
     console.log(this.player);
   }
 
@@ -52,7 +59,14 @@ export class PlayerFormComponent implements OnInit {
     //     this.dialogService.successMessage("Jogador Adicionado!");
     //     this.playerForm.reset();
     // });
-    this.newPlayerEvent.emit(this.player);
+    this.activeModal.close();
+    this.playerForm.reset();
+    this.newPlayerEvent.emit(
+      new Player()
+          .setName(this.playerForm.value['name']) 
+          .setAge(this.playerForm.value['age'])
+          .setSkillLevel(this.playerForm.value['skillLevel'])            
+    );
   }
 
   // getPlayerPositions(): void {

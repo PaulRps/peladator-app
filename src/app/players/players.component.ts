@@ -73,7 +73,14 @@ export class PlayersComponent implements OnInit {
     //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     // });
     const modalRef = this.modalService.open(PlayerFormComponent);
-    modalRef.componentInstance.player = new Player(null, null, null, null);
+    modalRef.componentInstance.player = null;
+    modalRef.componentInstance.newPlayerEvent.subscribe((newPlayer)=>{
+      console.log(newPlayer);
+      this.playersService.save(newPlayer)
+        .subscribe((players: Player[]) => {
+          this.dialogService.successMessage("Jogador Adicionado!");          
+      });
+    });
 
   }
 
