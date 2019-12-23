@@ -23,10 +23,10 @@
       
       <div class="form-group">
         <mat-form-field>
-          <select matNativeControl placeholder="Selecione o nível" formControlName="skillLevel" id="skillLevel">
+          <select [compareWith]="compareSkillLevel" matNativeControl placeholder="Selecione o nível" formControlName="skillLevel" id="skillLevel">
             <option value=""> selecione</option>              
-            <option *ngFor="let level of playerLevels" [value]="level.description">
-              {{level.description}}
+            <option *ngFor="let level of playerLevels" [ngValue]="level">
+              {{level.name}}
             </option>  
           </select>
           <mat-error *ngIf="hasError('skillLevel', 'required')">Campo obrigatório</mat-error>
@@ -48,8 +48,9 @@
     </form>
   </div>
   <div class="modal-footer">    
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click');playerForm.reset();">Cancelar</button>
-    <button type="submit" class="btn btn-outline-dark" (click)="submit()">Salvar</button>
+    <button *ngIf="player" type="submit" class="btn btn-outline-dark btn-danger" (click)="submit(true)">Remover</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Save click');playerForm.reset();">Cancelar</button>
+    <button type="submit" class="btn btn-outline-dark" (click)="submit(false)">Salvar</button>
   </div>
 <!-- </ng-template> -->
 

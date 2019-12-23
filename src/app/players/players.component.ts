@@ -1,13 +1,15 @@
-import { PlayerFormComponent } from './player-form/player-form.component';
-import { AuthService } from './../auth/auth.service';
+import Swal from 'sweetalert2';
+import { ModalPlayerFormComponent } from './player-form/player-form.component';
+import { AuthService } from '../core/service/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { Player } from './player';
+import { Player } from './player.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PlayersService } from './players.service';
-import { DialogService } from '../dialogService';
+import { DialogService } from '../dialog.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CrudOperations } from '../shared/crud-operation.constants';
 
 @Component({
   selector: 'app-players',
@@ -15,23 +17,24 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./players.component.scss']
 })
 export class PlayersComponent implements OnInit {
-  
+
   displayedColumns: string[] = ['select', 'id', 'name', 'age', 'skillLevel'];
   players: MatTableDataSource<Player> = new MatTableDataSource<Player>();
   selection = new SelectionModel<Player>(true, []);
+  enablePlayersSelection = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
-  constructor(private playersService: PlayersService, 
+
+  constructor(private playersService: PlayersService,
               private dialogService: DialogService,
               private modalService: NgbModal,
               private authService: AuthService) { }
-  
+
   ngOnInit() {
     this.paginator.hidePageSize = true;
     // this.authService.getToken();
     this.getPlayers();
-  }  
+  }
 
   applyFilter(filterValue: string) {
     this.players.filter = filterValue.trim().toLowerCase();
@@ -39,7 +42,7 @@ export class PlayersComponent implements OnInit {
 
   getPlayers(): void {
     this.playersService.getAll()
-    .subscribe(players =>{
+    .subscribe(players => {
       this.players = new MatTableDataSource(players);
       this.players.paginator = this.paginator;
     });
@@ -66,22 +69,69 @@ export class PlayersComponent implements OnInit {
         this.players.data.forEach(row => this.selection.select(row));
   }
 
-  open() {
-    // this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    //   this.closeResult = `Closed with: ${result}`;
-    // }, (reason) => {
-    //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    // });
-    const modalRef = this.modalService.open(PlayerFormComponent);
-    modalRef.componentInstance.player = null;
-    modalRef.componentInstance.newPlayerEvent.subscribe((newPlayer)=>{
-      console.log(newPlayer);
-      this.playersService.save(newPlayer)
-        .subscribe((players: Player[]) => {
-          this.dialogService.successMessage("Jogador Adicionado!");          
-      });
+  open(player: Player) {
+    const modalRef = this.modalService.open(ModalPlayerFormComponent);
+    modalRef.componentInstance.player = player;
+    modalRef.componentInstance.newPlayerEvent.subscribe((result) => {
+      if (CrudOperations.isEqual(result.operation, CrudOperations.CREATE)) {
+        this.playersService.save(result.player)
+          .subscribe((players: Player[]) => {
+            if (players) {
+              this.dialogService.successMessage('Jogador Adicionado!');
+              this.players.data = players;
+            } else {
+              this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.');
+            }
+        });
+      } else if (CrudOperations.isEqual(result.operation, CrudOperations.DELETE)) {
+        this.deletePlayer(result.player);
+      }
     });
+  }
 
+  update(player: Player) {
+    this.open(player);
+  }
+
+  deletePlayer(player) {
+    Swal({
+      title: 'Deseja deletar o jogador ' + player.name + '?',
+      text: 'Não será possível reverter!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sim, delete!'
+    }).then((result) => {
+      if (result.value) {
+        this.playersService.delete(player.id).subscribe(
+          (players: Player[]) => {
+            if (players) {
+              this.players.data = players;
+              this.dialogService.successMessage('Jogador deletado!');
+            } else {
+              this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.');
+            }
+          }
+        );
+      }
+    });
+  }
+
+  allowPlayersSelection() {
+    this.enablePlayersSelection = true;
+  }
+
+  sortTeams() {
+    this.enablePlayersSelection = false;
+    if (this.selection.selected && this.selection.selected.length > 0) {
+      this.playersService.sortTeams(this.selection.selected)
+        .subscribe(players => {
+          console.log('gene ',players);
+          this.selection.clear();
+      });
+    }
   }
 
 }

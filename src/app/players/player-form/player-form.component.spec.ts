@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayerFormComponent } from './player-form.component';
+import { ModalPlayerFormComponent } from './player-form.component';
 
 describe('PlayersAddComponent', () => {
-  let component: PlayerFormComponent;
-  let fixture: ComponentFixture<PlayerFormComponent>;
+  let component: ModalPlayerFormComponent;
+  let fixture: ComponentFixture<ModalPlayerFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerFormComponent ]
+      declarations: [ ModalPlayerFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlayerFormComponent);
+    fixture = TestBed.createComponent(ModalPlayerFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

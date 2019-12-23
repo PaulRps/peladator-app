@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PlayersComponent } from './players/players.component';
 import { PlayersListComponent } from './players/players-list/players-list.component';
-import { PlayerFormComponent } from './players/player-form/player-form.component';
+import { ModalPlayerFormComponent } from './players/player-form/player-form.component';
 import { HeaderComponent } from './menu/header/header.component';
 import {MatchPlayersComponent} from './matches/match-players/match-players.component';
 
@@ -20,7 +20,7 @@ import {MatchPlayersComponent} from './matches/match-players/match-players.compo
     AppComponent,
     PlayersComponent,
     PlayersListComponent,
-    PlayerFormComponent,
+    ModalPlayerFormComponent,
     HeaderComponent,
     MatchPlayersComponent
   ],
@@ -35,6 +35,6 @@ import {MatchPlayersComponent} from './matches/match-players/match-players.compo
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents : [PlayerFormComponent]
+  entryComponents : [ModalPlayerFormComponent]
 })
 export class AppModule { }

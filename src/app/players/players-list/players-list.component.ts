@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Player } from '../player';
+import { Player } from '../player.model';
 import { PlayersService } from '../players.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import Swal from 'sweetalert2';
-import { DialogService } from 'src/app/dialogService';
+import { DialogService } from 'src/app/dialog.service';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
@@ -36,12 +36,12 @@ export class PlayersListComponent implements OnInit {
   }  
 
   getPlayers(): void {
-    this.playersService.getAll()
-    .subscribe(players =>{
-      this.players = new MatTableDataSource(players)
-      this.players.paginator = this.paginator;
-      console.log(this.paginator);
-    });
+    // this.playersService.getAll()
+    // .subscribe(players =>{
+    //   this.players = new MatTableDataSource(players)
+    //   this.players.paginator = this.paginator;
+    //   console.log(this.paginator);
+    // });
   }
 
   applyFilter(filterValue: string) {
@@ -66,28 +66,28 @@ export class PlayersListComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.getId() + 1}`;
   }
 
-  deletePlayer(player){
-    Swal({
-      title: 'Deseja deletar o jogador ' + player.name + '?',
-      text: "Não será possível reverter!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Sim, delete!'
-    }).then((result) => {
-      if (result.value) {        
-        this.playersService.delete(player.id).subscribe(
-          (players: Player[]) => {
-            this.players.data = players;
-            this.dialogService.successMessage('Jogador deletado!');
-          }
-        );        
-      }
-    });
-  }
+  // deletePlayer(player){
+  //   Swal({
+  //     title: 'Deseja deletar o jogador ' + player.name + '?',
+  //     text: "Não será possível reverter!",
+  //     type: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     cancelButtonText: 'Cancelar',
+  //     confirmButtonText: 'Sim, delete!'
+  //   }).then((result) => {
+  //     if (result.value) {        
+  //       this.playersService.delete(player.id).subscribe(
+  //         (players: Player[]) => {
+  //           this.players.data = players;
+  //           this.dialogService.successMessage('Jogador deletado!');
+  //         }
+  //       );        
+  //     }
+  //   });
+  // }
 }
