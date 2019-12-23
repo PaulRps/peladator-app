@@ -12,15 +12,13 @@ import { AppComponent } from './app.component';
 import { PlayersComponent } from './players/players.component';
 import { ModalPlayerFormComponent } from './players/player-form/player-form.component';
 import { HeaderComponent } from './menu/header/header.component';
-import {MatchPlayersComponent} from './matches/match-players/match-players.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayersComponent,
     ModalPlayerFormComponent,
-    HeaderComponent,
-    MatchPlayersComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
