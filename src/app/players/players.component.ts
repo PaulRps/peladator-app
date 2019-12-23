@@ -7,7 +7,7 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Player } from './player.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PlayersService } from './players.service';
-import { DialogService } from '../dialog.service';
+import { DialogService } from '../shared/dialog.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrudOperations } from '../shared/crud-operation.constants';
 
