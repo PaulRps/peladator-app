@@ -3,52 +3,55 @@
 import { NgModule } from '@angular/core';
 
 import { MatTableModule } from '@angular/material/table';
-import { 
-  MatSelectModule, 
-  MatOptionModule, 
-  MatFormFieldModule, 
-  MatInputModule, 
-  MatPaginatorModule, 
+import {
+  MatSelectModule,
+  MatOptionModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatPaginatorModule,
   MatListModule,
-  MatButtonModule, 
+  MatButtonModule,
   MatCheckboxModule,
   MatIconModule,
   MatMenuModule,
-  MatToolbarModule 
+  MatToolbarModule,
+  MatGridListModule
 } from '@angular/material';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
-    MatTableModule, 
-    MatSelectModule,     
+    MatTableModule,
+    MatSelectModule,
     MatOptionModule,
-    MatFormFieldModule, 
-    MatInputModule,
-    ReactiveFormsModule,
-    MatPaginatorModule,
-    MatListModule,
-    MatButtonModule, 
-    MatCheckboxModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule
-  ],
-  exports: [
-    MatTableModule,     
-    MatSelectModule,     
-    MatOptionModule,
-    MatFormFieldModule, 
+    MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
     MatPaginatorModule,
     MatListModule,
     MatButtonModule,
-    MatCheckboxModule, 
+    MatCheckboxModule,
     MatIconModule,
     MatMenuModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatGridListModule
+  ],
+  exports: [
+    MatTableModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatListModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatGridListModule
   ]
 })
 

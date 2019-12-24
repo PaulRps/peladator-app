@@ -8,7 +8,6 @@ import { EventEmitter } from '@angular/core';
 import { CrudOperations } from 'src/app/shared/crud-operation.constants';
 
 
-
 @Component({
   selector: 'app-player-form',
   templateUrl: './player-form.component.html',

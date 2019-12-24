@@ -10,6 +10,7 @@ import { PlayersService } from './players.service';
 import { DialogService } from '../shared/dialog.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrudOperations } from '../shared/crud-operation.constants';
+import { TeamsComponent } from '../modules/teams/teams.component';
 
 @Component({
   selector: 'app-players',
@@ -69,7 +70,7 @@ export class PlayersComponent implements OnInit {
         this.players.data.forEach(row => this.selection.select(row));
   }
 
-  open(player: Player) {
+  openForm(player: Player) {
     const modalRef = this.modalService.open(ModalPlayerFormComponent);
     modalRef.componentInstance.player = player;
     modalRef.componentInstance.newPlayerEvent.subscribe((result) => {
@@ -90,7 +91,7 @@ export class PlayersComponent implements OnInit {
   }
 
   update(player: Player) {
-    this.open(player);
+    this.openForm(player);
   }
 
   deletePlayer(player) {
@@ -127,11 +128,16 @@ export class PlayersComponent implements OnInit {
     this.enablePlayersSelection = false;
     if (this.selection.selected && this.selection.selected.length > 0) {
       this.playersService.sortTeams(this.selection.selected)
-        .subscribe(players => {
-          console.log('gene ',players);
+        .subscribe(teams => {
           this.selection.clear();
+          this.openTeams(teams);
       });
     }
   }
+
+ openTeams(teams) {
+  const modalRef = this.modalService.open(TeamsComponent, {size : 'lg'});
+  modalRef.componentInstance.teams = teams;
+ } 
 
 }

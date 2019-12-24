@@ -12,13 +12,15 @@ import { AppComponent } from './app.component';
 import { PlayersComponent } from './players/players.component';
 import { ModalPlayerFormComponent } from './players/player-form/player-form.component';
 import { HeaderComponent } from './menu/header/header.component';
+import { TeamsComponent } from './modules/teams/teams.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayersComponent,
     ModalPlayerFormComponent,
-    HeaderComponent
+    HeaderComponent,
+    TeamsComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,9 @@ import { HeaderComponent } from './menu/header/header.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents : [ModalPlayerFormComponent]
+  entryComponents : [
+    ModalPlayerFormComponent,
+    TeamsComponent
+  ]
 })
 export class AppModule { }
