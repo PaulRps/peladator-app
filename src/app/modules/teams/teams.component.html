@@ -5,39 +5,47 @@
     </button>
 </div>
 <div class="modal-body">
-  <!-- <div class="row"> -->
-    <!-- <div class="col-md-6" *ngFor="let team of teams.data | keyvalue">
-      <mat-list>
-        <h3>{{team.key}}</h3>
-        <mat-list-item *ngFor="let player of team.value">
-          <mat-icon mat-list-icon>person</mat-icon>
-          <span>{{player.name}}</span>
-          <span>&nbsp;&nbsp; - &nbsp;&nbsp;</span>
-          <span>{{player.skillLevel.name}}</span>
-        </mat-list-item>
-      </mat-list>
-    </div> -->
-  <!-- </div> -->
   <div class="row">
     <div class="col-sm-6" *ngFor="let team of teams.data | keyvalue; index as i">
-      <h3>Time {{i+1}}</h3>
-      <mat-grid-list cols="3" rowHeight="25px" *ngFor="let player of team.value">
+      <h3 style="margin-bottom: 10px;">Time {{i+1}}</h3>
+      <app-player 
+        *ngFor="let player of team.value" 
+        [data]="player" >
+      </app-player>
+      <!-- <mat-grid-list cols="3" rowHeight="40px" *ngFor="let player of team.value">
         <mat-grid-tile
-            [colspan]="1"
-            [rowspan]="3">
-          <img src="../../../assets/images/icons8-user-96.png" class="img-fluid rounded-circle hoverable" alt="hoverable">
-        </mat-grid-tile>
+          [colspan]="1"
+          [rowspan]="3"
+          [style.background]="'white'">
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <img src="../../../assets/images/icons8-user-96-2.png" class="img-fluid rounded-circle hoverable" alt="hoverable">
+            </div>
+            <div class="col-sm-12" style="background-color: royalblue;">
+              <h3 class="text-center">{{player.position.shortName}}</h3>
+            </div>
+          </div>
+        </mat-grid-tile>        
         <mat-grid-tile
-            [colspan]="1"
-            [rowspan]="3">        
-            <span>{{player.name}}</span>
+          [colspan]="2"
+          [rowspan]="3">
+          <div class="row">
+            <div class="col-sm-12">
+              <h1 class="text-center">{{player.id}}</h1>
+            </div>
+            <div class="col-sm-12">
+              <p class="text-center">{{player.name}}</p>
+            </div>
+            <div class="col-sm-12 text-center">
+              <mat-icon [ngClass]="(player.skillLevel.id >= 1)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
+              <mat-icon [ngClass]="(player.skillLevel.id >= 2)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
+              <mat-icon [ngClass]="(player.skillLevel.id >= 3)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
+              <mat-icon [ngClass]="(player.skillLevel.id >= 4)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
+              <mat-icon [ngClass]="(player.skillLevel.id >= 5)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
+            </div>
+          </div>
         </mat-grid-tile>
-        <mat-grid-tile
-            [colspan]="1"
-            [rowspan]="3">        
-            <span>{{player.skillLevel.name}}</span>
-        </mat-grid-tile>
-      </mat-grid-list>
+      </mat-grid-list> -->
     </div>
   </div>
 </div>

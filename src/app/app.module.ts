@@ -13,6 +13,7 @@ import { PlayersComponent } from './players/players.component';
 import { ModalPlayerFormComponent } from './players/player-form/player-form.component';
 import { HeaderComponent } from './menu/header/header.component';
 import { TeamsComponent } from './modules/teams/teams.component';
+import { PlayerComponent } from './players/player/player.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TeamsComponent } from './modules/teams/teams.component';
     PlayersComponent,
     ModalPlayerFormComponent,
     HeaderComponent,
-    TeamsComponent
+    TeamsComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,
