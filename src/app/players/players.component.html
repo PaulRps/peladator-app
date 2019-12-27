@@ -34,12 +34,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <!-- <app-players-list></app-players-list> -->
                     <table mat-table [dataSource]="players" class="mat-elevation-z8">
-
-                    <!--- Note that these columns can be defined in any order.
-                            The actual rendered columns are set as a property on the row definition" -->
-                    
                         <ng-container matColumnDef="select">
                             <th mat-header-cell *matHeaderCellDef>
                                 <mat-checkbox *ngIf="enablePlayersSelection" (change)="$event ? masterToggle() : null"
@@ -48,7 +43,7 @@
                                                 [aria-label]="checkboxLabel()">
                                 </mat-checkbox>
                             </th>
-                            <td mat-cell *matCellDef="let row">
+                            <td mat-cell *matCellDef="let row" width="10%">
                                 <mat-checkbox *ngIf="enablePlayersSelection" (click)="$event.stopPropagation()"
                                                 (change)="$event ? selection.toggle(row) : null"
                                                 [checked]="selection.isSelected(row)"
@@ -58,21 +53,28 @@
                         </ng-container>
                         <!-- Position Column -->
                         <ng-container matColumnDef="id">
-                            <th mat-header-cell *matHeaderCellDef> # </th>
-                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let element" width="10%"> {{element.id}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="player">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let element">
+                                <app-player [data]="element"></app-player>
+                            </td>
                         </ng-container>
                         
                         <!-- Name Column -->
-                        <ng-container matColumnDef="name">
+                        <!-- <ng-container matColumnDef="name">
                             <th mat-header-cell *matHeaderCellDef> Nome </th>
                             <td mat-cell *matCellDef="let element">{{element.name}}</td>
-                        </ng-container>
+                        </ng-container> -->
                         
                         <!-- Weight Column -->
-                        <ng-container matColumnDef="age">
+                        <!-- <ng-container matColumnDef="age">
                             <th mat-header-cell *matHeaderCellDef> Idade </th>
                             <td mat-cell *matCellDef="let element"> {{element.age}} </td>
-                        </ng-container>
+                        </ng-container> -->
                         
                         <!-- Symbol Column -->
                         <!-- <ng-container matColumnDef="position">
@@ -80,15 +82,15 @@
                             <td mat-cell *matCellDef="let element"> {{element.position}} </td>
                         </ng-container> -->
                         
-                        <ng-container matColumnDef="skillLevel">
+                        <!-- <ng-container matColumnDef="skillLevel">
                             <th mat-header-cell *matHeaderCellDef> Nível </th>
                             <td mat-cell *matCellDef="let element"> {{element.skillLevel.name}} </td>
-                        </ng-container>
+                        </ng-container> -->
                         
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr (click)="update(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
-                    <mat-paginator [pageSizeOptions]="[20]" showFirstLastButtons></mat-paginator>
+                    <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
                 </div>
             </div>
         </div>

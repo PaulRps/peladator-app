@@ -19,7 +19,7 @@ import { TeamsComponent } from '../modules/teams/teams.component';
 })
 export class PlayersComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'id', 'name', 'age', 'skillLevel'];
+  displayedColumns: string[] = ['select', 'id', 'player'/* 'name', 'age', 'skillLevel' */];
   players: MatTableDataSource<Player> = new MatTableDataSource<Player>();
   selection = new SelectionModel<Player>(true, []);
   enablePlayersSelection = false;

@@ -1,4 +1,4 @@
-<mat-grid-list cols="3" rowHeight="40px">
+<mat-grid-list cols="2" rowHeight="50px">
   <mat-grid-tile
     [colspan]="1"
     [rowspan]="3"
@@ -7,13 +7,13 @@
       <div class="col-sm-12 text-center">
         <img src="../../../assets/images/icons8-user-96-2.png" class="img-fluid rounded-circle hoverable" alt="hoverable">
       </div>
-      <div class="col-sm-12" style="background-color: royalblue;">
+      <div class="col-sm-12" style="background-color: #3f51b5;">
         <h3 class="text-center">{{data.position.shortName}}</h3>
       </div>
     </div>
   </mat-grid-tile>        
   <mat-grid-tile
-    [colspan]="2"
+    [colspan]="1"
     [rowspan]="3">
     <div class="row">
       <div class="col-sm-12">
@@ -29,6 +29,9 @@
         <mat-icon [ngClass]="(data.skillLevel.id >= 4)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
         <mat-icon [ngClass]="(data.skillLevel.id >= 5)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
       </div>
+      <!-- <div class="col-sm-12">
+        <p class="text-center">{{data.skillLevel.name}}</p>
+      </div> -->
     </div>
   </mat-grid-tile>
 </mat-grid-list>

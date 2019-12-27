@@ -10,7 +10,7 @@ export class PlayerComponent implements OnInit {
 
   @Input() data: Player;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
 
