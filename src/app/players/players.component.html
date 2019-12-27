@@ -1,17 +1,15 @@
-<!-- <div class="row"> -->
 <div class="col-md-2">&nbsp;</div>
-<!-- <div class="col-md-8"> -->
     <div class="row">
-        <mat-form-field class="col-3 col-sm-3 col-md-3 col-lg-3" >
+        <mat-form-field class="col-2 col-sm-2 col-md-2 col-lg-2" >
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
         </mat-form-field>
-        <div class="col-4 col-sm-4 col-md-4 col-lg-4 pull-right">
+        <div class="col-5 col-sm-5 col-md-5 col-lg-5 pull-right">
             <button mat-menu-item (click)="openForm()" title="Add Jogador">
                 <mat-icon>person_add</mat-icon>
                 <span >Jogador</span>
             </button>
         </div>
-        <div class="col-4 col-sm-4 col-md-4 col-lg-4 pull-right">
+        <div class="col-5 col-sm-5 col-md-5 col-lg-5 pull-right">
             <button *ngIf="!enablePlayersSelection" mat-menu-item (click)="allowPlayersSelection()" title="Gerar Times">
                 <mat-icon>casino</mat-icon>
                 <span>Gerar Times</span>
@@ -22,16 +20,8 @@
             </button>
         </div>
     </div>
-    <div id="tasksPanel" class="panel panel-default">
-        <div class="panel-heading">
-            <!-- <h3 class="panel-title">Jogadores da Pelada NCS</h3> -->
-        </div>
+    <div id="player-table" class="panel panel-default">
         <div class="panel-body">
-            <div class="row">
-                <div class="col-md-12">
-                <!-- <app-players-add></app-players-add> -->
-                </div>
-            </div>
             <div class="row">
                 <div class="col-md-12">
                     <table mat-table [dataSource]="players" class="mat-elevation-z8">
@@ -43,7 +33,7 @@
                                                 [aria-label]="checkboxLabel()">
                                 </mat-checkbox>
                             </th>
-                            <td mat-cell *matCellDef="let row" width="10%">
+                            <td class="clickable" mat-cell *matCellDef="let row" width="10%">
                                 <mat-checkbox *ngIf="enablePlayersSelection" (click)="$event.stopPropagation()"
                                                 (change)="$event ? selection.toggle(row) : null"
                                                 [checked]="selection.isSelected(row)"
@@ -51,46 +41,23 @@
                                 </mat-checkbox>
                             </td>
                         </ng-container>
-                        <!-- Position Column -->
+
                         <ng-container matColumnDef="id">
                             <th mat-header-cell *matHeaderCellDef></th>
-                            <td mat-cell *matCellDef="let element" width="10%"> {{element.id}} </td>
+                            <td class="clickable" mat-cell *matCellDef="let element" width="10%"> {{element.id}} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="player">
                             <th mat-header-cell *matHeaderCellDef></th>
-                            <td mat-cell *matCellDef="let element">
+                            <td class="clickable" mat-cell *matCellDef="let element">
                                 <app-player [data]="element"></app-player>
                             </td>
                         </ng-container>
                         
-                        <!-- Name Column -->
-                        <!-- <ng-container matColumnDef="name">
-                            <th mat-header-cell *matHeaderCellDef> Nome </th>
-                            <td mat-cell *matCellDef="let element">{{element.name}}</td>
-                        </ng-container> -->
-                        
-                        <!-- Weight Column -->
-                        <!-- <ng-container matColumnDef="age">
-                            <th mat-header-cell *matHeaderCellDef> Idade </th>
-                            <td mat-cell *matCellDef="let element"> {{element.age}} </td>
-                        </ng-container> -->
-                        
-                        <!-- Symbol Column -->
-                        <!-- <ng-container matColumnDef="position">
-                            <th mat-header-cell *matHeaderCellDef> Posição </th>
-                            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-                        </ng-container> -->
-                        
-                        <!-- <ng-container matColumnDef="skillLevel">
-                            <th mat-header-cell *matHeaderCellDef> Nível </th>
-                            <td mat-cell *matCellDef="let element"> {{element.skillLevel.name}} </td>
-                        </ng-container> -->
-                        
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr (click)="update(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
-                    <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+                    <mat-paginator [pageSizeOptions]="[18]" showFirstLastButtons></mat-paginator>
                 </div>
             </div>
         </div>

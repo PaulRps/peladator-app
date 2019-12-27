@@ -1,4 +1,4 @@
-<mat-grid-list cols="2" rowHeight="50px">
+<mat-grid-list cols="2" rowHeight="55px">
   <mat-grid-tile
     [colspan]="1"
     [rowspan]="3"
@@ -17,10 +17,11 @@
     [rowspan]="3">
     <div class="row">
       <div class="col-sm-12">
-        <h1 class="text-center">{{data.id}}</h1>
+        <h1 class="text-center">{{data.shirtNumber}}</h1>
       </div>
       <div class="col-sm-12">
         <p class="text-center">{{data.name}}</p>
+        <p class="text-center">{{data.age}} anos</p>
       </div>
       <div class="col-sm-12 text-center">
         <mat-icon [ngClass]="(data.skillLevel.id >= 1)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
@@ -32,6 +33,3 @@
       <!-- <div class="col-sm-12">
         <p class="text-center">{{data.skillLevel.name}}</p>
       </div> -->
-    </div>
-  </mat-grid-tile>
-</mat-grid-list>

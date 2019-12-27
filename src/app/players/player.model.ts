@@ -2,6 +2,8 @@ export class Player {
     id: number;
     name: string;
     age: number;
+    shirtNumber: number;
+    position: any;
     skillLevel: any;
     isSelected: boolean;
 
@@ -20,6 +22,16 @@ export class Player {
         return this;
     }
 
+    public setShirtNumber(number) {
+        this.shirtNumber = number;
+        return this;
+    }
+
+    public setPosition(position) {
+        this.position = position;
+        return this;
+    }
+
     public setSkillLevel(skillLevel) {
         this.skillLevel = skillLevel;
         return this;
@@ -35,6 +47,14 @@ export class Player {
 
     public getName(): string {
         return this.name;
+    }
+
+    public getShirtNumber() {
+        return this.shirtNumber;
+    }
+
+    public getPosition() {
+        return this.position;
     }
 
     public getSkillLevel() {
