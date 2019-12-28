@@ -61,9 +61,9 @@
     </form>
   </div>
   <div class="modal-footer">    
-    <button *ngIf="player" type="submit" class="btn btn-outline-dark btn-danger" (click)="submit(true)">Remover</button>
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Save click');playerForm.reset();">Cancelar</button>
-    <button type="submit" class="btn btn-outline-dark" (click)="submit(false)">Salvar</button>
+    <button *ngIf="player" type="submit" mat-raised-button color="warn" (click)="submit(true)">Remover</button>
+    <button type="button" mat-raised-button (click)="activeModal.close('Save click');playerForm.reset();">Cancelar</button>
+    <button type="submit" mat-raised-button color="primary" (click)="submit(false)">Salvar</button>
   </div>
 <!-- </ng-template> -->
 

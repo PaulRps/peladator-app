@@ -4,17 +4,17 @@
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
         </mat-form-field>
         <div class="col-5 col-sm-5 col-md-5 col-lg-5 pull-right">
-            <button mat-menu-item (click)="openForm()" title="Add Jogador">
+            <button mat-button (click)="openForm()" title="Add Jogador">
                 <mat-icon class="material-primary-color">person_add</mat-icon>
                 <span >Jogador</span>
             </button>
         </div>
         <div class="col-5 col-sm-5 col-md-5 col-lg-5 pull-right">
-            <button *ngIf="!enablePlayersSelection" mat-menu-item (click)="allowPlayersSelection()" title="Gerar Times">
+            <button mat-button *ngIf="!enablePlayersSelection" (click)="allowPlayersSelection()" title="Gerar Times">
                 <mat-icon class="material-primary-color">casino</mat-icon>
                 <span>Gerar Times</span>
             </button>
-            <button *ngIf="enablePlayersSelection" mat-menu-item (click)="sortTeams()" title="Sortear Times">
+            <button mat-button *ngIf="enablePlayersSelection" (click)="sortTeams()" title="Sortear Times">
                 <mat-icon class="material-primary-color">casino</mat-icon>
                 <span>Sortear</span>
             </button>
@@ -33,7 +33,7 @@
                                                 [aria-label]="checkboxLabel()">
                                 </mat-checkbox>
                             </th>
-                            <td class="clickable" mat-cell *matCellDef="let row" width="10%">
+                            <td class="clickable" mat-cell *matCellDef="let row" width="5%">
                                 <mat-checkbox *ngIf="enablePlayersSelection" (click)="$event.stopPropagation()"
                                                 (change)="$event ? selection.toggle(row) : null"
                                                 [checked]="selection.isSelected(row)"
@@ -44,7 +44,7 @@
 
                         <ng-container matColumnDef="id">
                             <th mat-header-cell *matHeaderCellDef></th>
-                            <td class="clickable" mat-cell *matCellDef="let element" width="10%"> {{element.id}} </td>
+                            <td class="clickable" mat-cell *matCellDef="let element" width="15%"> {{element.id}} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="player">
