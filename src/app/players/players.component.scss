@@ -1,6 +1,10 @@
+@import "~@angular/material/theming";
+@import '../app.component.scss';
+
 table {
     width: 100%;
 }
+
 .mat-form-field {
     font-size: 14px;
     width: 100%;
@@ -8,4 +12,8 @@ table {
 
 .clickable {
     cursor: pointer;
+}
+
+.material-primary-color {
+    color: mat-color($primaryPalette);
 }
