@@ -6,17 +6,17 @@
         <div class="col-5 col-sm-5 col-md-5 col-lg-5 pull-right">
             <button mat-button (click)="openForm()" title="Add Jogador">
                 <mat-icon class="material-primary-color">person_add</mat-icon>
-                <span >Jogador</span>
+                <span >&nbsp;&nbsp;Jogador</span>
             </button>
         </div>
         <div class="col-5 col-sm-5 col-md-5 col-lg-5 pull-right">
             <button mat-button *ngIf="!enablePlayersSelection" (click)="allowPlayersSelection()" title="Gerar Times">
                 <mat-icon class="material-primary-color">casino</mat-icon>
-                <span>Gerar Times</span>
+                <span>&nbsp;&nbsp;Gerar Times</span>
             </button>
             <button mat-button *ngIf="enablePlayersSelection" (click)="sortTeams()" title="Sortear Times">
                 <mat-icon class="material-primary-color">casino</mat-icon>
-                <span>Sortear</span>
+                <span>&nbsp;&nbsp;Sortear</span>
             </button>
         </div>
     </div>

@@ -15,7 +15,9 @@ import {
   MatIconModule,
   MatMenuModule,
   MatToolbarModule,
-  MatGridListModule
+  MatGridListModule,
+  MatSidenavModule,
+  MatDividerModule
 } from '@angular/material';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -35,7 +37,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatMenuModule,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSidenavModule,
+    MatDividerModule
   ],
   exports: [
     MatTableModule,
@@ -51,7 +55,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatMenuModule,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSidenavModule,
+    MatDividerModule
   ]
 })
 

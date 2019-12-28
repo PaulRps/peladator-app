@@ -14,6 +14,7 @@ import { ModalPlayerFormComponent } from './players/player-form/player-form.comp
 import { HeaderComponent } from './menu/header/header.component';
 import { TeamsComponent } from './modules/teams/teams.component';
 import { PlayerComponent } from './players/player/player.component';
+import { SidenavListComponent } from './menu/sidenav-list/sidenav-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PlayerComponent } from './players/player/player.component';
     ModalPlayerFormComponent,
     HeaderComponent,
     TeamsComponent,
-    PlayerComponent
+    PlayerComponent,
+    SidenavListComponent
   ],
   imports: [
     BrowserModule,
