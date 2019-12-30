@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Player } from './player.model';
+import { Player } from '../../shared/models/player.model';
 import { Observable, of  } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
-import { Logger } from '../shared/logger.component';
+import { environment } from '../../../environments/environment';
+import { LoggerService } from '../../core/services/logger.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,44 +22,44 @@ export class PlayersService {
   getAll(): Observable<any[]> {
     return this.http.get<any[]>(this.playerUrl)
     .pipe(
-      tap(_ => Logger.log('fetched players', _)),
-      catchError(Logger.handleError('getPlayers', []))
+      tap(_ => LoggerService.log('fetched players', _)),
+      catchError(LoggerService.handleError('getPlayers', []))
     );
   }
 
   getFormData(): Observable<any> {
     return this.http.get<any>(this.playerUrl + '/form-data')
     .pipe(
-      tap(_ => Logger.log('fetched form-data', _)),
-      catchError(Logger.handleError('getFormData', []))
+      tap(_ => LoggerService.log('fetched form-data', _)),
+      catchError(LoggerService.handleError('getFormData', []))
     );
   }
 
   save(player: Player): Observable<Player[]> {
     return this.http.post<Player[]>(this.playerUrl, player, httpOptions).pipe(
-      tap((players: Player[]) => Logger.log(`added player w/ id=${players ? players.toString() : ''}`, players)),
-      catchError(Logger.handleError<Player[]>('addPlayer'))
+      tap((players: Player[]) => LoggerService.log(`added player w/ id=${players ? players.toString() : ''}`, players)),
+      catchError(LoggerService.handleError<Player[]>('addPlayer'))
     );
   }
 
   update(player: Player): Observable<Player[]> {
     return this.http.put<Player[]>(this.playerUrl, player, httpOptions).pipe(
-      tap((players: Player[]) => Logger.log(`update player w/ id=${players ? players.toString() : ''}`, players)),
-      catchError(Logger.handleError<Player[]>('updatePlayer'))
+      tap((players: Player[]) => LoggerService.log(`update player w/ id=${players ? players.toString() : ''}`, players)),
+      catchError(LoggerService.handleError<Player[]>('updatePlayer'))
     );
   }
 
   delete(id: number): Observable<Player[]> {
     return this.http.delete<Player[]>(`${this.playerUrl}/${id}`, httpOptions).pipe(
-      tap((players: Player[]) => Logger.log(`deleted player w/ id=${players ? players.toString() : ''}`, players)),
-      catchError(Logger.handleError<Player[]>('deletePlayer'))
+      tap((players: Player[]) => LoggerService.log(`deleted player w/ id=${players ? players.toString() : ''}`, players)),
+      catchError(LoggerService.handleError<Player[]>('deletePlayer'))
     );
   }
 
   sortTeams(selectedPlayers: Player[]) {
     return this.http.post(this.playerUrl + '/sort-teams', selectedPlayers, httpOptions).pipe(
-      tap((players: Player[]) => Logger.log(`sort teams w/ id=${players ? players.toString() : ''}`, players)),
-      catchError(Logger.handleError<Player[]>('sortTeams'))
+      tap((players: Player[]) => LoggerService.log(`sort teams w/ id=${players ? players.toString() : ''}`, players)),
+      catchError(LoggerService.handleError<Player[]>('sortTeams'))
     );
   }
 }

@@ -1,4 +1,3 @@
-<!-- <ng-template #content let-modal> -->
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Dados do Jogador</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
@@ -54,10 +53,9 @@
           <mat-icon style="cursor: pointer;" #star3 (click)="activeStar(star3, 3)" [ngClass]="starIconClasses[2]">grade</mat-icon>
           <mat-icon style="cursor: pointer;" #star4 (click)="activeStar(star4, 4)" [ngClass]="starIconClasses[3]">grade</mat-icon>
           <mat-icon style="cursor: pointer;" #star5 (click)="activeStar(star5, 5)" [ngClass]="starIconClasses[4]">grade</mat-icon>
+          <p class="has-error" *ngIf="hasErrorSkillLevelField">Campo obrigatório</p>
         </mat-form-field>        
       </div> 
-      
-      
     </form>
   </div>
   <div class="modal-footer">    
@@ -65,9 +63,3 @@
     <button type="button" mat-raised-button (click)="activeModal.close('Save click');playerForm.reset();">Cancelar</button>
     <button type="submit" mat-raised-button color="primary" (click)="submit(false)">Salvar</button>
   </div>
-<!-- </ng-template> -->
-
-<!-- <button mat-menu-item (click)="open(content)" title="Add Jogador">
-  <mat-icon>person_add</mat-icon>
-  <span >Jogador</span>
-</button> -->

@@ -1,32 +1,32 @@
-import { Component, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { PlayersService } from '../players.service';
-import { Player } from '../player.model';
+import { PlayersService } from '../../players.service';
+import { Player } from '../../../../shared/models/player.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
-import { CrudOperations } from 'src/app/shared/crud-operation.constants';
-
+import { CrudOperations } from 'src/app/shared/constants/crud-operation';
 
 @Component({
   selector: 'app-player-form',
   templateUrl: './player-form.component.html',
   styleUrls: ['./player-form.component.scss']
 })
-export class ModalPlayerFormComponent implements OnInit {
+export class PlayerFormComponent implements OnInit {
 
   private activeIconClass = 'mat-icon material-icons level-icon-active';
+  hasErrorSkillLevelField = false;
   playerForm: FormGroup;
   playerLevels: any[];
   playerPositions: any[];
-  starIconClasses: string[] = ["mat-icon notranslate material-icons mat-icon-no-color",
-                              "mat-icon notranslate material-icons mat-icon-no-color",
-                              "mat-icon notranslate material-icons mat-icon-no-color",
-                              "mat-icon notranslate material-icons mat-icon-no-color",
-                              "mat-icon notranslate material-icons mat-icon-no-color"];
+  starIconClasses: string[] = ['mat-icon notranslate material-icons mat-icon-no-color',
+                              'mat-icon notranslate material-icons mat-icon-no-color',
+                              'mat-icon notranslate material-icons mat-icon-no-color',
+                              'mat-icon notranslate material-icons mat-icon-no-color',
+                              'mat-icon notranslate material-icons mat-icon-no-color'];
   @Input() player: Player;
   @Output() newPlayerEvent: EventEmitter<any> = new EventEmitter();
-  
+
 
   constructor(public activeModal: NgbActiveModal,
               private playersService: PlayersService) { }
@@ -60,11 +60,21 @@ export class ModalPlayerFormComponent implements OnInit {
   }
 
   submit(isDeletion) {
+    
     if (this.playerForm.invalid) {
+      for (let field in this.playerForm.controls) {
+        this.playerForm.controls[field].markAsTouched();
+      }
       return;
     }
+      
+    if (this.starIconClasses.filter((el => el === this.activeIconClass)).length === 0) {
+      this.hasErrorSkillLevelField = true;
+      return;
+    }
+
     this.activeModal.close();
-    
+
     const temp = isDeletion ?
         this.player :
         new Player()
@@ -73,7 +83,7 @@ export class ModalPlayerFormComponent implements OnInit {
             .setAge(this.playerForm.value.age)
             .setShirtNumber(this.playerForm.value.shirtNumber)
             .setPosition(this.playerForm.value.position);
-    
+
     for (let i = this.starIconClasses.length; i >= 0; i--) {
       if (this.starIconClasses[i] === this.activeIconClass) {
         temp.skillLevel = this.playerLevels.filter((el) => el.id === i + 1)[0];
@@ -88,14 +98,15 @@ export class ModalPlayerFormComponent implements OnInit {
   }
 
   activeStar(starIcon, index) {
-    let newClass = "mat-icon notranslate material-icons mat-icon-no-color";
-    if (starIcon && starIcon['_elementRef']['nativeElement']['className'] === "mat-icon notranslate material-icons mat-icon-no-color") {
+    this.hasErrorSkillLevelField = false;
+    let newClass = 'mat-icon notranslate material-icons mat-icon-no-color';
+    if (starIcon && starIcon._elementRef.nativeElement.className === 'mat-icon notranslate material-icons mat-icon-no-color') {
       newClass = this.activeIconClass;
     }
 
     if (index < this.starIconClasses.length && this.starIconClasses[index] === this.activeIconClass) {
       for (let i = index; i < this.starIconClasses.length; i++) {
-        this.starIconClasses[i] = "mat-icon notranslate material-icons mat-icon-no-color";
+        this.starIconClasses[i] = 'mat-icon notranslate material-icons mat-icon-no-color';
       }
       return;
     }

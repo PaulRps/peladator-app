@@ -1,23 +1,22 @@
 import Swal from 'sweetalert2';
-import { ModalPlayerFormComponent } from './player-form/player-form.component';
-import { AuthService } from '../core/service/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { Player } from './player.model';
+import { Player } from '../../../../shared/models/player.model';
 import { SelectionModel } from '@angular/cdk/collections';
-import { PlayersService } from './players.service';
-import { DialogService } from '../shared/dialog.service';
+import { PlayersService } from '../../players.service';
+import { DialogService } from 'src/app/core/services/dialog.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CrudOperations } from '../shared/crud-operation.constants';
-import { TeamsComponent } from '../modules/teams/teams.component';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { PlayerFormComponent } from '../player-form/player-form.component';
+import { CrudOperations } from 'src/app/shared/constants/crud-operation';
+import { SortTeamsComponent } from 'src/app/modules/player/components/sort-teams/sort-teams.component';
 
 @Component({
-  selector: 'app-players',
-  templateUrl: './players.component.html',
-  styleUrls: ['./players.component.scss']
+  selector: 'app-player-table',
+  templateUrl: './player-table.component.html',
+  styleUrls: ['./player-table.component.scss']
 })
-export class PlayersComponent implements OnInit {
+export class PlayerTableComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'id', 'player'/* 'name', 'age', 'skillLevel' */];
   players: MatTableDataSource<Player> = new MatTableDataSource<Player>();
@@ -71,7 +70,7 @@ export class PlayersComponent implements OnInit {
   }
 
   openForm(player: Player) {
-    const modalRef = this.modalService.open(ModalPlayerFormComponent);
+    const modalRef = this.modalService.open(PlayerFormComponent);
     modalRef.componentInstance.player = player;
     modalRef.componentInstance.newPlayerEvent.subscribe((result) => {
       if (CrudOperations.isEqual(result.operation, CrudOperations.CREATE)) {
@@ -146,8 +145,7 @@ export class PlayersComponent implements OnInit {
   }
 
  openTeams(teams) {
-  const modalRef = this.modalService.open(TeamsComponent, {size : 'lg'});
+  const modalRef = this.modalService.open(SortTeamsComponent, {size : 'lg'});
   modalRef.componentInstance.teams = teams;
- } 
-
+ }
 }
