@@ -4,8 +4,11 @@ import { Injectable } from '@angular/core';
 import { tap, catchError } from 'rxjs/operators';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': 'my-auth-token'
+    })
+  };
 
 @Injectable({
     providedIn: 'root'
@@ -17,14 +20,13 @@ export class AuthService {
     constructor(private http: HttpClient) {}
 
     getToken() {
-        // return this.http.post(this.authUrl,
-        //     {userName: "", password: ""},
-        //     httpOptions)
-        //     .pipe(tap((response)=>{
-        //         console.log(response)
+        // return this.http.post(this.authUrl,{userName: "Paulo", password: "123456"}, httpOptions)
+        //     .pipe(tap((response) => {
+        //         console.log(response);
         //     }),
-        //     catchError((a)=>
-        //         a
-        //     ));
+        //     catchError((a) => {
+
+        //         console.error('auth error', a); return a;
+        //     }));
     }
 }

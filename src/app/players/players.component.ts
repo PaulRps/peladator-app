@@ -33,7 +33,7 @@ export class PlayersComponent implements OnInit {
 
   ngOnInit() {
     this.paginator.hidePageSize = true;
-    // this.authService.getToken();
+    this.authService.getToken();
     this.getPlayers();
   }
 
@@ -79,6 +79,16 @@ export class PlayersComponent implements OnInit {
           .subscribe((players: Player[]) => {
             if (players) {
               this.dialogService.successMessage('Jogador Adicionado!');
+              this.players.data = players;
+            } else {
+              this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.');
+            }
+        });
+      } else  if (CrudOperations.isEqual(result.operation, CrudOperations.UPDATE)) {
+        this.playersService.update(result.player)
+          .subscribe((players: Player[]) => {
+            if (players) {
+              this.dialogService.successMessage('Jogador Atualizado!');
               this.players.data = players;
             } else {
               this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.');

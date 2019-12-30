@@ -83,7 +83,7 @@ export class ModalPlayerFormComponent implements OnInit {
     this.playerForm.reset();
     this.newPlayerEvent.emit({
       player: temp,
-      operation: isDeletion ? CrudOperations.DELETE : CrudOperations.CREATE
+      operation: isDeletion ? CrudOperations.DELETE : this.player ? CrudOperations.UPDATE : CrudOperations.CREATE
     });
   }
 
