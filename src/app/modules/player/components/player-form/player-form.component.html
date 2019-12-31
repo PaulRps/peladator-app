@@ -5,7 +5,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="playerForm" validate (ngSubmit)="addPlayer(playerForm.value)">
+    <form [formGroup]="playerForm">
       <div class="form-group"> 
         <mat-form-field class="">
           <img matPrefix  src="../../../assets/images/icons8-user-96-2.png" class="img-fluid rounded-circle hoverable" alt="hoverable">
