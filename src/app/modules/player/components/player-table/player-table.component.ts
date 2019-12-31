@@ -1,14 +1,12 @@
-import Swal from 'sweetalert2';
+import { PlayerCrudComponent } from './../player-crud/player-crud.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Player } from '../../../../shared/models/player.model';
 import { SelectionModel } from '@angular/cdk/collections';
-import { PlayersService } from '../../players.service';
+import { PlayerService } from '../../player.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { PlayerFormComponent } from '../player-form/player-form.component';
-import { CrudOperations } from 'src/app/shared/constants/crud-operation';
 import { SortTeamsComponent } from 'src/app/modules/player/components/sort-teams/sort-teams.component';
 
 @Component({
@@ -25,7 +23,7 @@ export class PlayerTableComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private playersService: PlayersService,
+  constructor(private playerService: PlayerService,
               private dialogService: DialogService,
               private modalService: NgbModal,
               private authService: AuthService) { }
@@ -34,6 +32,11 @@ export class PlayerTableComponent implements OnInit {
     this.paginator.hidePageSize = true;
     this.authService.getToken();
     this.getPlayers();
+    this.playerService.playersEvent.subscribe(
+      (players: Player[]) => {
+        this.players.data = players;
+      }
+    );
   }
 
   applyFilter(filterValue: string) {
@@ -41,7 +44,7 @@ export class PlayerTableComponent implements OnInit {
   }
 
   getPlayers(): void {
-    this.playersService.getAll()
+    this.playerService.getAll()
     .subscribe(players => {
       this.players = new MatTableDataSource(players);
       this.players.paginator = this.paginator;
@@ -69,64 +72,8 @@ export class PlayerTableComponent implements OnInit {
         this.players.data.forEach(row => this.selection.select(row));
   }
 
-  openForm(player: Player) {
-    const modalRef = this.modalService.open(PlayerFormComponent);
-    modalRef.componentInstance.player = player;
-    modalRef.componentInstance.newPlayerEvent.subscribe((result) => {
-      if (CrudOperations.isEqual(result.operation, CrudOperations.CREATE)) {
-        this.playersService.save(result.player)
-          .subscribe((players: Player[]) => {
-            if (players) {
-              this.dialogService.successMessage('Jogador Adicionado!');
-              this.players.data = players;
-            } else {
-              this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.');
-            }
-        });
-      } else  if (CrudOperations.isEqual(result.operation, CrudOperations.UPDATE)) {
-        this.playersService.update(result.player)
-          .subscribe((players: Player[]) => {
-            if (players) {
-              this.dialogService.successMessage('Jogador Atualizado!');
-              this.players.data = players;
-            } else {
-              this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.');
-            }
-        });
-      } else if (CrudOperations.isEqual(result.operation, CrudOperations.DELETE)) {
-        this.deletePlayer(result.player);
-      }
-    });
-  }
-
   update(player: Player) {
-    this.openForm(player);
-  }
-
-  deletePlayer(player) {
-    Swal({
-      title: 'Deseja deletar o jogador ' + player.name + '?',
-      text: 'Não será possível reverter!',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Sim, delete!'
-    }).then((result) => {
-      if (result.value) {
-        this.playersService.delete(player.id).subscribe(
-          (players: Player[]) => {
-            if (players) {
-              this.players.data = players;
-              this.dialogService.successMessage('Jogador deletado!');
-            } else {
-              this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.');
-            }
-          }
-        );
-      }
-    });
+    new PlayerCrudComponent(this.modalService, this.dialogService, this.playerService).updateDelete(player);
   }
 
   allowPlayersSelection() {
@@ -136,7 +83,7 @@ export class PlayerTableComponent implements OnInit {
   sortTeams() {
     this.enablePlayersSelection = false;
     if (this.selection.selected && this.selection.selected.length > 0) {
-      this.playersService.sortTeams(this.selection.selected)
+      this.playerService.sortTeams(this.selection.selected)
         .subscribe(teams => {
           this.selection.clear();
           this.openTeams(teams);
