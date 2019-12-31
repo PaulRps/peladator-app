@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve --proxy-config proxy-conf.json -o",
     "build": "ng build",
-    "postbuild": "npm run deploy",    
+    "postbuild": "npm run deploy",
     "predeploy": "rimraf ../peladator-api/src/main/resources/static/ && mkdirp ../peladator-api/src/main/resources/static/",
     "deploy": "copyfiles -f dist/** ../peladator-api/src/main/resources/static",
     "test": "ng test",

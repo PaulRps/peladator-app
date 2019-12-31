@@ -1,36 +1,32 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
-import { PlayersComponent } from './players/players.component';
-import { PlayersListComponent } from './players/players-list/players-list.component';
-import { PlayersAddComponent } from './players/players-add/players-add.component';
-import { HeaderComponent } from './menu/header/header.component';
+import { SharedModule } from './shared/shared.module';
+import { PlayerModule } from './modules/player/player.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PlayersComponent,
-    PlayersListComponent,
-    PlayersAddComponent,
-    HeaderComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,       
-    NgbModule.forRoot(),
+    
+    CoreModule,
+    SharedModule,
+    PlayerModule,
+    
     HttpClientModule
-  ],  
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents : []
 })
 export class AppModule { }

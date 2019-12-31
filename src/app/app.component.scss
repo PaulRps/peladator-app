@@ -1,0 +1,31 @@
+@import "~@angular/material/theming";
+
+$primaryPalette: mat-palette($mat-indigo);
+$accentPalette:  mat-palette($mat-pink, A200, A100, A400);
+
+// the default warn palette is red, so use that if the theme doesn't define one
+$warnPalette:    mat-palette($mat-red);
+
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+    height: 100%;
+}
+ 
+mat-sidenav {
+    width: 250px;
+}
+ 
+main {
+    padding: 10px;
+}
+
+.background-material-primary-color {
+    background-color: mat-color($primaryPalette);
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.material-primary-color {
+    color: mat-color($primaryPalette);
+}

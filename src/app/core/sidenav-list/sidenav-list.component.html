@@ -1,0 +1,17 @@
+<mat-nav-list>
+  <div class="background-material-primary-color">
+    <h2 style="color: white;" matSubheader>
+      <mat-icon>sports_soccer</mat-icon>&nbsp;&nbsp;Peladator
+    </h2>
+  </div>
+  
+  <a class="clickable" mat-list-item routerLink="/player" (click)="onSidenavClose()">
+    <mat-icon class="material-primary-color">people</mat-icon>
+    <span class="nav-caption">Jogadores</span>   
+  </a>
+  <mat-divider></mat-divider>
+  <a class="clickable" mat-list-item routerLink="#" (click)="onSidenavClose()">
+      <mat-icon class="material-primary-color">monetization_on</mat-icon>
+      <span class="nav-caption">Pagamento</span>
+  </a>
+</mat-nav-list>
