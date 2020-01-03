@@ -1,11 +1,11 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Player } from '../../shared/models/player.model';
-import { Observable, of  } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { LoggerService } from '../../core/services/logger.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
+import { Injectable, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

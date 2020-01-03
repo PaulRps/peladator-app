@@ -1,6 +1,7 @@
 import { PlayerCrudComponent } from './../player-crud/player-crud.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Player } from '../../../../shared/models/player.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PlayerService } from '../../player.service';
@@ -21,7 +22,7 @@ export class PlayerTableComponent implements OnInit {
   selection = new SelectionModel<Player>(true, []);
   enablePlayersSelection = false;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private playerService: PlayerService,
               private dialogService: DialogService,
