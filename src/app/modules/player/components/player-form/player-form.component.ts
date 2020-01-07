@@ -61,7 +61,7 @@ export class PlayerFormComponent implements OnInit {
     });
   }
 
-  private submit(isDeletion) {
+  submit(isDeletion) {
 
     if (this.playerForm.invalid) {
       this.formMarkAllasTouched();
@@ -102,13 +102,13 @@ export class PlayerFormComponent implements OnInit {
     this.activeModal.close();
   }
 
-  private formMarkAllasTouched() {
+  formMarkAllasTouched() {
     for (const field in this.playerForm.controls) {
       this.playerForm.controls[field].markAsTouched();
     }
   }
 
-  private setSkillLevel(player) {
+  setSkillLevel(player) {
     for (let i = this.starIconClasses.length; i >= 0; i--) {
       if (this.starIconClasses[i] === this.activeIconClass) {
         player.skillLevel = this.playerLevels.filter((el) => el.id === i + 1)[0];
@@ -117,7 +117,7 @@ export class PlayerFormComponent implements OnInit {
     }
   }
 
-  private activeStar(starIcon, index) {
+  activeStar(starIcon, index) {
     this.hasErrorSkillLevelField = false;
     let newClass = 'mat-icon notranslate material-icons mat-icon-no-color';
     if (starIcon && starIcon._elementRef.nativeElement.className === 'mat-icon notranslate material-icons mat-icon-no-color') {
@@ -136,11 +136,11 @@ export class PlayerFormComponent implements OnInit {
     }
   }
 
-  private compareItemSelect(a, b) {
+  compareItemSelect(a, b) {
     return a && b && a.id === b.id;
   }
 
-  private hasError = (controlName: string, errorName: string) => {
+  hasError = (controlName: string, errorName: string) => {
     return this.playerForm.controls[controlName].hasError(errorName);
   }
 

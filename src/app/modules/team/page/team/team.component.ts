@@ -10,15 +10,12 @@ import { KeyValue } from '@angular/common';
 })
 export class TeamComponent implements OnInit {
 
-  private players: any;//{[key:string] : Player[]};
-  private player: Player;
+  players: any;//{[key:string] : Player[]};
   constructor(private playerService: PlayerService) {}
 
   ngOnInit() {
     this.playerService.groupByPosition().subscribe(response => {
       this.players = response;
-      this.player = this.players['GK'][0];
-      console.log(Object.keys(this.players['GK']));
     });
   }
 
