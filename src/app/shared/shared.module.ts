@@ -3,21 +3,27 @@ import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { PlayerComponent } from './components/player/player.component';
 
 @NgModule({
-    declarations: [],
+    declarations: [
+        PlayerComponent
+    ],
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        NgbModule
+        NgbModule,
+        MaterialModule
     ],
     exports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,
-        NgbModule
+        NgbModule,
+
+        PlayerComponent
     ]
 })
 export class SharedModule {}

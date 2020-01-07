@@ -16,6 +16,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatToolbarModule,
     MatGridListModule,
     MatSidenavModule,
-    MatDividerModule
+    MatDividerModule,
+    ScrollingModule
   ],
   exports: [
     MatTableModule,
@@ -53,7 +55,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatToolbarModule,
     MatGridListModule,
     MatSidenavModule,
-    MatDividerModule
+    MatDividerModule,
+    ScrollingModule
   ]
 })
 

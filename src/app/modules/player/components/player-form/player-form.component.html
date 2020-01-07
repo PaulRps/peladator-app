@@ -1,7 +1,7 @@
 <div class="modal-header">
   <h4 class="modal-title" id="modal-basic-title">Dados do Jogador</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
+  <button tabindex="-1" mat-icon-button (click)="activeModal.dismiss('Cross click')">
+    <mat-icon>closed</mat-icon>
   </button>
 </div>
 <div class="modal-body">
@@ -9,7 +9,7 @@
     <div class="form-group"> 
       <mat-form-field class="">
         <img matPrefix  src="../../../assets/images/icons8-user-96-2.png" class="img-fluid rounded-circle hoverable" alt="hoverable">
-        <input matInput placeholder="" id="issueType">
+        <input matInput placeholder="" id="issueType" disabled>
       </mat-form-field>
     </div>
     <div class="form-group"> 

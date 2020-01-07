@@ -1,0 +1,10 @@
+<div class="row" *ngFor="let player of players | keyvalue: originalOrder" >
+  <h2 *ngIf="player.value.length > 0">{{player.key}}</h2>  
+  <div *ngIf="player.value.length > 0" class="outer">
+    <a class="noblue-text" routerLink="." routerLinkActive="router-link-active" >
+      <div *ngFor="let item of player.value; index as i" (click)="selectPlayer(item)" [ngClass]="{'selected-player': item.isSelected}">
+        <app-player style="width: 100%; height: 100%;" [data]="item"></app-player>
+      </div>
+    </a>
+  </div>
+</div>

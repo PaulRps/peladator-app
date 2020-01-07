@@ -5,13 +5,19 @@
     </h2>
   </div>
   
-  <a class="clickable" mat-list-item routerLink="/player" (click)="onSidenavClose()">
+  <a class="clickable" mat-list-item routerLink="/player" routerLinkActive="active" (click)="onSidenavClose()">
     <mat-icon class="material-primary-color">people</mat-icon>
     <span class="nav-caption">Jogadores</span>   
   </a>
   <mat-divider></mat-divider>
+  <!-- <app-team-menu-item class="clickable" (click)="onSidenavClose()"> </app-team-menu-item> -->
+  <a class="clickable" mat-list-item routerLink="/teams" (click)="onSidenavClose()">
+    <mat-icon class="material-primary-color align-middle">casino</mat-icon>
+    <span>&nbsp;&nbsp;Times</span>
+  </a>
+  <mat-divider></mat-divider>
   <a class="clickable" mat-list-item routerLink="#" (click)="onSidenavClose()">
-      <mat-icon class="material-primary-color">monetization_on</mat-icon>
-      <span class="nav-caption">Pagamento</span>
+    <mat-icon class="material-primary-color">monetization_on</mat-icon>
+    <span class="nav-caption">Pagamento</span>
   </a>
 </mat-nav-list>

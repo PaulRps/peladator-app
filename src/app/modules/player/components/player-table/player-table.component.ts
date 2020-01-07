@@ -23,6 +23,7 @@ export class PlayerTableComponent implements OnInit {
   enablePlayersSelection = false;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild('playerCrud', {static: true}) playerCrud: PlayerCrudComponent;
 
   constructor(private playerService: PlayerService,
               private dialogService: DialogService,
@@ -74,7 +75,7 @@ export class PlayerTableComponent implements OnInit {
   }
 
   update(player: Player) {
-    new PlayerCrudComponent(this.modalService, this.dialogService, this.playerService).updateDelete(player);
+    this.playerCrud.updateDelete(player);
   }
 
   allowPlayersSelection() {

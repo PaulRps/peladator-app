@@ -74,6 +74,14 @@ export class PlayerService {
     );
   }
 
+  groupByPosition() {
+    return this.http.get(this.playerUrl + '/groupby-position')
+    .pipe(
+      tap(_ => LoggerService.log('group by position players', _)),
+      catchError(LoggerService.handleError('groupByPosition', []))
+    );
+  }
+
   sortTeams(selectedPlayers: Player[]) {
     return this.http.post(this.playerUrl + '/sort-teams', selectedPlayers, httpOptions).pipe(
       tap((players: Player[]) => LoggerService.log(`sort teams w/ id=${players ? players.toString() : ''}`, players)),

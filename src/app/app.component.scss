@@ -29,3 +29,15 @@ main {
 .material-primary-color {
     color: mat-color($primaryPalette);
 }
+
+.nounderline {
+    text-decoration: none !important;
+}
+
+.noblue-text {//TODO: fix this, its not working
+   color: inherit;
+}
+
+.selected-player {
+    background-color: mat-color($accentPalette);
+}

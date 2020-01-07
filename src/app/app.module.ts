@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { PlayerModule } from './modules/player/player.module';
 import { CoreModule } from './core/core.module';
+import { TeamModule } from './modules/team/team.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     SharedModule,
     PlayerModule,
+    TeamModule,
     
     HttpClientModule
   ],
