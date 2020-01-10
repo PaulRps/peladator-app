@@ -21,8 +21,8 @@ export class TeamService {
   constructor(private http: HttpClient,
               private dialogService: DialogService) { }
 
-  sortTeams(selectedPlayers: Player[]) {
-    return this.http.post(this.teamUrl + '/sort-teams', selectedPlayers, httpOptions).pipe(
+  public sort(sortTeam: any) {
+    return this.http.post(this.teamUrl + '/sort-teams', sortTeam, httpOptions).pipe(
       tap((players: Player[]) => LoggerService.log(`sort teams w/ id=${players ? players.toString() : ''}`, players)),
       catchError(LoggerService.handleError<Player[]>('sortTeams'))
     );

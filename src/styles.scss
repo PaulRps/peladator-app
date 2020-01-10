@@ -6,3 +6,8 @@ html, body {
     margin: 0;
     height: 100%;
 }
+
+//fix mat select in a modal
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+    z-index: 99999 !important;
+}

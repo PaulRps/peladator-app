@@ -6,15 +6,13 @@ import { NgModule } from '@angular/core';
 import { PlayerTableComponent } from './components/player-table/player-table.component';
 import { PlayersComponent } from './page/players.component';
 import { CoreModule } from 'src/app/core/core.module';
-import { SortTeamsComponent } from './components/sort-teams/sort-teams.component';
 
 @NgModule({
     declarations: [
         PlayerFormComponent,
         PlayerTableComponent,
         PlayersComponent,
-        PlayerCrudComponent,
-        SortTeamsComponent
+        PlayerCrudComponent
     ],
     imports: [
         CoreModule,
@@ -23,8 +21,7 @@ import { SortTeamsComponent } from './components/sort-teams/sort-teams.component
     ],
     exports: [],
     entryComponents : [
-        PlayerFormComponent,
-        SortTeamsComponent
+        PlayerFormComponent
     ]
 })
 export class PlayerModule {}

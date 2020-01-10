@@ -8,7 +8,6 @@ import { PlayerService } from '../../player.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { SortTeamsComponent } from 'src/app/modules/player/components/sort-teams/sort-teams.component';
 
 @Component({
   selector: 'app-player-table',
@@ -81,20 +80,4 @@ export class PlayerTableComponent implements OnInit {
   allowPlayersSelection() {
     this.enablePlayersSelection = true;
   }
-
-  sortTeams() {
-    this.enablePlayersSelection = false;
-    if (this.selection.selected && this.selection.selected.length > 0) {
-      this.playerService.sortTeams(this.selection.selected)
-        .subscribe(teams => {
-          this.selection.clear();
-          this.openTeams(teams);
-      });
-    }
-  }
-
- openTeams(teams) {
-  const modalRef = this.modalService.open(SortTeamsComponent, {size : 'lg'});
-  modalRef.componentInstance.teams = teams;
- }
 }

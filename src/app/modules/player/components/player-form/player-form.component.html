@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title" id="modal-basic-title">Dados do Jogador</h4>
-  <button tabindex="-1" mat-icon-button (click)="activeModal.dismiss('Cross click')">
+  <button tabindex="0" mat-icon-button (click)="activeModal.dismiss('Cross click')">
     <mat-icon>closed</mat-icon>
   </button>
 </div>
@@ -13,41 +13,42 @@
       </mat-form-field>
     </div>
     <div class="form-group"> 
-      <mat-form-field class="">
-        <input formControlName="name" id="name" matInput placeholder="Nome" value="">
+      <mat-form-field>
+        <input formControlName="name" id="name" matInput placeholder="Nome" value="" required>
         <mat-error *ngIf="hasError('name', 'required')">Campo obrigatório</mat-error>
       </mat-form-field>
     </div>
     
     <div class="form-group"> 
       <mat-form-field class="">
-        <input formControlName="age" id="age" type="number" matInput placeholder="Idade">
+        <input formControlName="age" id="age" type="number" matInput placeholder="Idade" required>
         <mat-error *ngIf="hasError('age', 'required')">Campo obrigatório</mat-error>
       </mat-form-field>
     </div>
     
     <div class="form-group">
       <mat-form-field>
-        <select [compareWith]="compareItemSelect" matNativeControl placeholder="Posição" id="position" formControlName="position">
-          <option value=""> ... </option>
-          <option *ngFor="let position of playerPositions" [ngValue]="position">
-            {{position.name}}
-          </option>
-        </select>
+        <mat-label>Posição</mat-label>
+        <mat-select name="position" [compareWith]="compareItemSelect" formControlName="position" required>
+          <mat-option [value]="">--</mat-option>
+          <mat-option *ngFor="let pos of playerPositions" [value]="pos">
+            {{pos.name}}
+          </mat-option>
+        </mat-select>
         <mat-error *ngIf="hasError('position', 'required')">Campo obrigatório</mat-error>
-      </mat-form-field>   
+      </mat-form-field>
     </div>
 
     <div class="form-group"> 
       <mat-form-field class="">
-        <input formControlName="shirtNumber" id="shirtNumber" type="number" matInput placeholder="Número da camisa">
+        <input formControlName="shirtNumber" id="shirtNumber" type="number" matInput placeholder="Número da camisa" required>
         <mat-error *ngIf="hasError('shirtNumber', 'required')">Campo obrigatório</mat-error>
       </mat-form-field>
     </div>
 
     <div class="form-group">
       <mat-form-field>
-        <input matInput placeholder="Nível" id="skillLevel" disabled>
+        <input matInput placeholder="Nível" id="skillLevel" disabled required>
         <mat-icon style="cursor: pointer;" #star1 (click)="activeStar(star1, 1)" [ngClass]="starIconClasses[0]">grade</mat-icon>
         <mat-icon style="cursor: pointer;" #star2 (click)="activeStar(star2, 2)" [ngClass]="starIconClasses[1]">grade</mat-icon>
         <mat-icon style="cursor: pointer;" #star3 (click)="activeStar(star3, 3)" [ngClass]="starIconClasses[2]">grade</mat-icon>

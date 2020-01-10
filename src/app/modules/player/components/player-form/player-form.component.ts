@@ -1,5 +1,4 @@
 import { CrudOperations } from 'src/app/shared/constants/crud-operation';
-import Swal from 'sweetalert2';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -33,7 +32,6 @@ export class PlayerFormComponent implements OnInit {
               private playerService: PlayerService) { }
 
   ngOnInit() {
-
     this.playerForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
       age: new FormControl(null, [Validators.required]),
@@ -137,7 +135,8 @@ export class PlayerFormComponent implements OnInit {
   }
 
   compareItemSelect(a, b) {
-    return a && b && a.id === b.id;
+    // return a && b && a.id === b.id;
+    return a && b ? a.id === b.id : a === b;
   }
 
   hasError = (controlName: string, errorName: string) => {
