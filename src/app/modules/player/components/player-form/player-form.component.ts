@@ -34,8 +34,8 @@ export class PlayerFormComponent implements OnInit {
   ngOnInit() {
     this.playerForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-      age: new FormControl(null, [Validators.required]),
-      shirtNumber: new FormControl(null, [Validators.required]),
+      age: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(99)]),
+      shirtNumber: new FormControl(null, [Validators.required, Validators.min(1), , Validators.max(99)]),
       position: new FormControl(null, [Validators.required])
     });
 

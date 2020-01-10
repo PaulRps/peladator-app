@@ -14,8 +14,15 @@ export class TeamSortComponent implements OnInit {
     this.teams = this.router.getCurrentNavigation().extras.state;
     console.log(this.teams);
     if (!this.teams) {
-      // this.location.back();
-      this.teams =
+      this.location.back();
+    }
+  }
+
+  ngOnInit() {
+  }
+
+  mock = () => {
+    this.teams =
       [
         {
           name: 'Verde',
@@ -60,10 +67,5 @@ export class TeamSortComponent implements OnInit {
           ]
         }
       ];
-    }
   }
-
-  ngOnInit() {
-  }
-
 }

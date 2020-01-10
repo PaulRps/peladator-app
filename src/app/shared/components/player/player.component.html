@@ -1,27 +1,20 @@
-<mat-grid-list cols="2" rowHeight="50px" gutterSize="10px">
-  <mat-grid-tile
-    [colspan]="1"
-    [rowspan]="3">
-    <div class="row">
-      <div class="col-sm-12 text-center">
+<mat-grid-list cols="1" rowHeight="10px" gutterSize="10px" [ngClass]="{'selected-player': data.isSelected, 'default-player': !data.isSelected}" style="color: white;">
+  <mat-grid-tile [colspan]="1" [rowspan]="2" style="margin-top: 5px;">
+    <h4 class="text-center">{{data.name}}</h4>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="6">
+      <div class="col-sm-1 border-right text-center" style="padding-left: 0px;">
+        <h2>{{data.shirtNumber}}</h2>
+        <h6>{{data.position.shortName}}</h6>
+        <small>{{data.age}} anos</small>
+      </div>
+      <div class="col-sm-2">
         <img src="../../../assets/images/icons8-user-96-2.png" class="rounded-circle hoverable" alt="hoverable">
       </div>
-      <div class="col-sm-12 background-material-primary-color">
-        <h3 class="text-center">{{data.position.shortName}}</h3>
-      </div>
-    </div>
-  </mat-grid-tile>        
-  <mat-grid-tile
-    [colspan]="1"
-    [rowspan]="3">
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="1" [rowspan]="3">
     <div class="row">
-      <div class="col-sm-12">
-        <h1 class="text-center">{{data.shirtNumber}}</h1>
-      </div>
-      <div class="col-sm-12">
-        <p class="text-center">{{data.name}}</p>
-        <p class="text-center">{{data.age}} anos</p>
-      </div>
       <div class="col-sm-12 text-center">
         <mat-icon [ngClass]="(data.skillLevel.id >= 1)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
         <mat-icon [ngClass]="(data.skillLevel.id >= 2)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
@@ -29,6 +22,9 @@
         <mat-icon [ngClass]="(data.skillLevel.id >= 4)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
         <mat-icon [ngClass]="(data.skillLevel.id >= 5)?'level-icon-active':'level-icon-inactive'">grade</mat-icon>
       </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
       <!-- <div class="col-sm-12">
         <p class="text-center">{{data.skillLevel.name}}</p>
       </div> -->

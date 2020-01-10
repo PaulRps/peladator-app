@@ -40,4 +40,11 @@ main {
 
 .selected-player {
     background-color: mat-color($accentPalette);
+    margin-bottom: 5px;
+}
+
+.default-player {
+    // background-color: mat-color($primaryPalette);
+    background-color: #304FFE;
+    margin-bottom: 5px;
 }

@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <table mat-table [dataSource]="players" class="mat-elevation-z8">
-                        <ng-container matColumnDef="select">
+                        <!-- <ng-container matColumnDef="select">
                             <th mat-header-cell *matHeaderCellDef>
                                 <mat-checkbox *ngIf="enablePlayersSelection" (change)="$event ? masterToggle() : null"
                                                 [checked]="selection.hasValue() && isAllSelected()"
@@ -32,12 +32,12 @@
                                                 [aria-label]="checkboxLabel(row)">
                                 </mat-checkbox>
                             </td>
-                        </ng-container>
+                        </ng-container> -->
 
-                        <ng-container matColumnDef="id">
+                        <!-- <ng-container matColumnDef="id">
                             <th mat-header-cell *matHeaderCellDef></th>
                             <td class="clickable text-center" mat-cell *matCellDef="let element" width="15%"> {{element.id}} </td>
-                        </ng-container>
+                        </ng-container> -->
 
                         <ng-container matColumnDef="player">
                             <th mat-header-cell *matHeaderCellDef></th>

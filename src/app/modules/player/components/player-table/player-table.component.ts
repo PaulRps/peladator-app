@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class PlayerTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'id', 'player'/* 'name', 'age', 'skillLevel' */];
+  displayedColumns: string[] = [/* 'select', 'id', */ 'player'/* 'name', 'age', 'skillLevel' */];
   players: MatTableDataSource<Player> = new MatTableDataSource<Player>();
   selection = new SelectionModel<Player>(true, []);
   enablePlayersSelection = false;

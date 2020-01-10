@@ -23,6 +23,8 @@
       <mat-form-field class="">
         <input formControlName="age" id="age" type="number" matInput placeholder="Idade" required>
         <mat-error *ngIf="hasError('age', 'required')">Campo obrigatório</mat-error>
+        <mat-error *ngIf="hasError('age', 'min')">Valor mínimo é 1</mat-error>
+        <mat-error *ngIf="hasError('age', 'max')">Valor máximo é 99</mat-error>
       </mat-form-field>
     </div>
     
@@ -43,6 +45,8 @@
       <mat-form-field class="">
         <input formControlName="shirtNumber" id="shirtNumber" type="number" matInput placeholder="Número da camisa" required>
         <mat-error *ngIf="hasError('shirtNumber', 'required')">Campo obrigatório</mat-error>
+        <mat-error *ngIf="hasError('shirtNumber', 'min')">Valor mínimo é 1</mat-error>
+        <mat-error *ngIf="hasError('shirtNumber', 'max')">Valor máximo é 99</mat-error>
       </mat-form-field>
     </div>
 

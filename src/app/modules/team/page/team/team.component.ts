@@ -1,5 +1,5 @@
 import { TeamService } from './../../team.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlayerService } from './../../../player/player.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Player } from 'src/app/shared/models/player.model';
@@ -22,7 +22,7 @@ export class TeamComponent implements OnInit {
 
   ngOnInit() {
     this.sortTeamForm = new FormGroup({
-      nrTeams: new FormControl(null)
+      amount: new FormControl(null, [Validators.required])
     });
     this.playerService.groupByPosition().subscribe(response => {
       this.players = response;
@@ -30,6 +30,11 @@ export class TeamComponent implements OnInit {
   }
 
   sort() {
+    if (this.sortTeamForm.invalid) {
+      this.sortTeamForm.markAllAsTouched();
+      return;
+    }
+
     const selectedPlayers: Player[] = [];
     Object.keys(this.players).forEach((k) => {
       this.players[k].forEach(p => {

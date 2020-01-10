@@ -1,12 +1,9 @@
 <div class="row">
-  <div class="col-sm-12">
+  <!-- <div class="col-sm-12">
     <h1 class="modal-title" id="modal-basic-title">Times Sorteados</h1>
-  </div>
-  <div class="col-sm-6 shadow p-3 mb-5 bg-white rounded" *ngFor="let team of teams">
+  </div> -->
+  <div class="col-sm-6 shadow p-3 mb-5 rounded" *ngFor="let team of teams">
     <h4 style="margin-bottom: 10px;">{{team.name}}</h4>
-    <app-player 
-      *ngFor="let player of team.players" 
-      [data]="player">
-    </app-player>
+    <app-player *ngFor="let player of team.players" [data]="player"></app-player>
   </div>
 </div>
