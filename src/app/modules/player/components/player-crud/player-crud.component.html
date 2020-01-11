@@ -1,4 +1,9 @@
-<button mat-button (click)="create()" title="Add Jogador">
+<button *ngIf="!floatMode" mat-button (click)="create()" title="Add Jogador">
   <mat-icon class="material-primary-color">person_add</mat-icon>
   <span >&nbsp;&nbsp;Jogador</span>
 </button>
+<div *ngIf="floatMode" class="div-float-button fixed-bottom row justify-content-end">
+  <button (click)="create()" mat-fab color="accent">
+      <mat-icon>add</mat-icon>
+  </button>
+</div>

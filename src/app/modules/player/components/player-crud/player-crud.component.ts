@@ -6,6 +6,7 @@ import { PlayerFormComponent } from '../player-form/player-form.component';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { CrudOperations } from 'src/app/shared/constants/crud-operation';
 import {MatDialog} from '@angular/material/dialog';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-player-crud',
@@ -13,6 +14,8 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./player-crud.component.scss']
 })
 export class PlayerCrudComponent implements OnInit {
+
+  @Input() floatMode: boolean;
 
   constructor(private modalService: MatDialog,
               private dialogService: DialogService,
