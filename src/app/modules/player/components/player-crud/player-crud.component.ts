@@ -1,11 +1,11 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PlayerService } from '../../player.service';
 import { Player } from 'src/app/shared/models/player.model';
 import { PlayerFormComponent } from '../player-form/player-form.component';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { CrudOperations } from 'src/app/shared/constants/crud-operation';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-player-crud',
@@ -14,21 +14,23 @@ import { CrudOperations } from 'src/app/shared/constants/crud-operation';
 })
 export class PlayerCrudComponent implements OnInit {
 
-  constructor(private modalService: NgbModal,
+  constructor(private modalService: MatDialog,
               private dialogService: DialogService,
               private playerService: PlayerService) { }
 
   ngOnInit() {}
 
   private openForm(player?: Player) {
-    const modalRef = this.modalService.open(PlayerFormComponent);
-    modalRef.componentInstance.player = player;
-    return modalRef.componentInstance.newPlayerEvent;
+    const dialogRef = this.modalService.open(PlayerFormComponent, {
+      data: player
+    });
+    return dialogRef.afterClosed();
   }
 
   create() {
     this.openForm()
       .subscribe(newPlayer => {
+        if (!newPlayer) { return; }
         this.playerService.save(newPlayer)
           .subscribe(response => {
             if (!response) {
@@ -41,14 +43,14 @@ export class PlayerCrudComponent implements OnInit {
   public updateDelete(player: Player) {
     this.openForm(player)
       .subscribe(result => {
-        if (CrudOperations.isEqual(CrudOperations.UPDATE, result.operation)) {
+        if (result && CrudOperations.isEqual(CrudOperations.UPDATE, result.operation)) {
           this.playerService.update(result.player)
             .subscribe((players: Player[]) => {
               if (!players) {
                 this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.');
               }
             });
-        } else if (CrudOperations.isEqual(CrudOperations.DELETE, result.operation)) {
+        } else if (result && CrudOperations.isEqual(CrudOperations.DELETE, result.operation)) {
           this.deletePlayer(result.player);
         }
       });
@@ -76,5 +78,4 @@ export class PlayerCrudComponent implements OnInit {
       }
     });
   }
-
 }

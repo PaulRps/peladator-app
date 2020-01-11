@@ -1,10 +1,9 @@
 @import "~@angular/material/theming";
+@import '../theme.scss';
 
-$primaryPalette: mat-palette($mat-indigo);
-$accentPalette:  mat-palette($mat-pink, A200, A100, A400);
+@include mat-core();
 
-// the default warn palette is red, so use that if the theme doesn't define one
-$warnPalette:    mat-palette($mat-red);
+$alterPrimary: mat-palette($customPrimary, 500, 200, 500);
 
 mat-sidenav-container, mat-sidenav-content, mat-sidenav {
     height: 100%;
@@ -19,7 +18,7 @@ main {
 }
 
 .background-material-primary-color {
-    background-color: mat-color($primaryPalette);
+    background-color: mat-color($customPrimary);
 }
 
 .clickable {
@@ -27,24 +26,23 @@ main {
 }
 
 .material-primary-color {
-    color: mat-color($primaryPalette);
+    color: mat-color($customPrimary);
 }
 
 .nounderline {
     text-decoration: none !important;
 }
 
-.noblue-text {//TODO: fix this, its not working
+.noblue-text {
    color: inherit;
 }
 
 .selected-player {
-    background-color: mat-color($accentPalette);
+    background: mat-color($customAccent);
     margin-bottom: 5px;
 }
 
 .default-player {
-    // background-color: mat-color($primaryPalette);
-    background-color: #304FFE;
+    background-color: mat-color($alterPrimary);
     margin-bottom: 5px;
 }

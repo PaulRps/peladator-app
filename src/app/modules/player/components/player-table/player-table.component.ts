@@ -5,8 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Player } from '../../../../shared/models/player.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PlayerService } from '../../player.service';
-import { DialogService } from 'src/app/core/services/dialog.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -16,7 +14,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class PlayerTableComponent implements OnInit {
 
-  displayedColumns: string[] = [/* 'select', 'id', */ 'player'/* 'name', 'age', 'skillLevel' */];
+  displayedColumns: string[] = ['player'];
   players: MatTableDataSource<Player> = new MatTableDataSource<Player>();
   selection = new SelectionModel<Player>(true, []);
   enablePlayersSelection = false;
@@ -25,8 +23,6 @@ export class PlayerTableComponent implements OnInit {
   @ViewChild('playerCrud', {static: true}) playerCrud: PlayerCrudComponent;
 
   constructor(private playerService: PlayerService,
-              private dialogService: DialogService,
-              private modalService: NgbModal,
               private authService: AuthService) { }
 
   ngOnInit() {

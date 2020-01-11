@@ -1,4 +1,4 @@
-<mat-grid-list cols="1" rowHeight="10px" gutterSize="10px" [ngClass]="{'selected-player': data.isSelected, 'default-player': !data.isSelected}" style="color: white;">
+<mat-grid-list cols="1" rowHeight="10px" gutterSize="10px" [ngClass]="{'selected-player': data.isSelected, 'default-player': !data.isSelected}">
   <mat-grid-tile [colspan]="1" [rowspan]="2" style="margin-top: 5px;">
     <h4 class="text-center">{{data.name}}</h4>
   </mat-grid-tile>
@@ -12,7 +12,6 @@
         <img src="../../../assets/images/icons8-user-96-2.png" class="rounded-circle hoverable" alt="hoverable">
       </div>
   </mat-grid-tile>
-
   <mat-grid-tile [colspan]="1" [rowspan]="3">
     <div class="row">
       <div class="col-sm-12 text-center">
@@ -25,6 +24,3 @@
     </div>
   </mat-grid-tile>
 </mat-grid-list>
-      <!-- <div class="col-sm-12">
-        <p class="text-center">{{data.skillLevel.name}}</p>
-      </div> -->

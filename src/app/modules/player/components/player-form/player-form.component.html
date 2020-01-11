@@ -1,10 +1,5 @@
-<div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Dados do Jogador</h4>
-  <button tabindex="0" mat-icon-button (click)="activeModal.dismiss('Cross click')">
-    <mat-icon>closed</mat-icon>
-  </button>
-</div>
-<div class="modal-body">
+<h4 mat-dialog-title id="modal-basic-title">Dados do Jogador</h4>
+<div mat-dialog-content>
   <form [formGroup]="playerForm">
     <div class="form-group"> 
       <mat-form-field class="">
@@ -63,9 +58,9 @@
     </div> 
   </form>
 </div>
-<div class="modal-footer">    
-  <button *ngIf="player" type="submit" mat-raised-button color="warn" (click)="submit(true)">Remover</button>
-  <button type="button" mat-raised-button (click)="activeModal.close('Save click');playerForm.reset();">Cancelar</button>
+<div mat-dialog-actions>
+  <button *ngIf="data" type="submit" mat-raised-button color="warn" (click)="submit(true)">Remover</button>
+  <button type="button" mat-raised-button (click)="close();playerForm.reset();">Cancelar</button>
   <button type="submit" mat-raised-button color="primary" (click)="submit(false)">Salvar</button>
 </div>
 

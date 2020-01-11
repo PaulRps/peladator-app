@@ -1,57 +1,38 @@
 <div class="col-md-2">&nbsp;</div>
-    <div class="row">
-        <mat-form-field class="col-4 col-sm-4 col-md-4 col-lg-4" >
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
-        </mat-form-field>
-        <div class="col-3 col-sm-3 col-md-3 col-lg-3 pull-right">
-            <app-player-crud #playerCrud></app-player-crud>
-        </div>
-        <div class="col-3 col-sm-3 col-md-3 col-lg-3 pull-right">
-            <button mat-button>
-                <app-team-menu-item></app-team-menu-item>
-            </button>
-        </div>
+<div class="row">
+    <mat-form-field class="col-4 col-sm-4 col-md-4 col-lg-4" >
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+    <div class="col-3 col-sm-3 col-md-3 col-lg-3 pull-right">
+        <app-player-crud #playerCrud></app-player-crud>
     </div>
-    <div id="player-table" class="panel panel-default">
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <table mat-table [dataSource]="players" class="mat-elevation-z8">
-                        <!-- <ng-container matColumnDef="select">
-                            <th mat-header-cell *matHeaderCellDef>
-                                <mat-checkbox *ngIf="enablePlayersSelection" (change)="$event ? masterToggle() : null"
-                                                [checked]="selection.hasValue() && isAllSelected()"
-                                                [indeterminate]="selection.hasValue() && !isAllSelected()"
-                                                [aria-label]="checkboxLabel()">
-                                </mat-checkbox>
-                            </th>
-                            <td class="clickable" mat-cell *matCellDef="let row" width="5%">
-                                <mat-checkbox *ngIf="enablePlayersSelection" (click)="$event.stopPropagation()"
-                                                (change)="$event ? selection.toggle(row) : null"
-                                                [checked]="selection.isSelected(row)"
-                                                [aria-label]="checkboxLabel(row)">
-                                </mat-checkbox>
-                            </td>
-                        </ng-container> -->
-
-                        <!-- <ng-container matColumnDef="id">
-                            <th mat-header-cell *matHeaderCellDef></th>
-                            <td class="clickable text-center" mat-cell *matCellDef="let element" width="15%"> {{element.id}} </td>
-                        </ng-container> -->
-
-                        <ng-container matColumnDef="player">
-                            <th mat-header-cell *matHeaderCellDef></th>
-                            <td class="clickable" mat-cell *matCellDef="let element">
-                                <app-player [data]="element"></app-player>
-                            </td>
-                        </ng-container>
-                        
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr (click)="update(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                    <mat-paginator [pageSizeOptions]="[18]" showFirstLastButtons></mat-paginator>
-                </div>
-            </div>
-        </div>
+    <div class="col-3 col-sm-3 col-md-3 col-lg-3 pull-right">
+        <button mat-button>
+            <app-team-menu-item></app-team-menu-item>
+        </button>
     </div>
+    <div class="col-md-12">
+        <!-- <div class="col-sm-12"> TODO: put page size on right top corner
+            <mat-form-field class="pull-right text-right" style="width: 40%;">
+                <mat-label>Página</mat-label>
+                <mat-select name="paginator">
+                    <mat-option [value]="5">5</mat-option>
+                    <mat-option [value]="10">10</mat-option>
+                    <mat-option [value]="20">20</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div> -->
+        <table mat-table [dataSource]="players" class="mat-elevation-z8">
+            <ng-container matColumnDef="player">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td class="clickable" mat-cell *matCellDef="let element">
+                    <app-player [data]="element"></app-player>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr (click)="update(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>
 <div class="col-md-2">&nbsp;</div>

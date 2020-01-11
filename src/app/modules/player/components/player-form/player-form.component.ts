@@ -1,16 +1,17 @@
 import { CrudOperations } from 'src/app/shared/constants/crud-operation';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { PlayerService } from '../../player.service';
 import { Player } from '../../../../shared/models/player.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DialogService } from 'src/app/core/services/dialog.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Inject } from '@angular/core';
+import { Optional } from '@angular/core';
 
 @Component({
   selector: 'app-player-form',
   templateUrl: './player-form.component.html',
-  styleUrls: ['./player-form.component.scss']
+  styleUrls: ['./player-form.component.scss']  
 })
 export class PlayerFormComponent implements OnInit {
 
@@ -25,11 +26,10 @@ export class PlayerFormComponent implements OnInit {
                               'mat-icon notranslate material-icons mat-icon-no-color',
                               'mat-icon notranslate material-icons mat-icon-no-color'];
   @Input() player: Player;
-  @Output() newPlayerEvent: EventEmitter<any> = new EventEmitter();
 
-  constructor(public activeModal: NgbActiveModal,
-              private dialogService: DialogService,
-              private playerService: PlayerService) { }
+  constructor(public dialogRef: MatDialogRef<PlayerFormComponent>,
+              @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+              private playerService: PlayerService) {}
 
   ngOnInit() {
     this.playerForm = new FormGroup({
@@ -43,16 +43,16 @@ export class PlayerFormComponent implements OnInit {
     .subscribe(formData => {
       this.playerLevels = formData.skillLevels;
       this.playerPositions = formData.positions;
-      if (this.player) {
+      if (this.data) {
         this.playerForm.setValue(
           {
-            name: this.player.name,
-            age: this.player.age,
-            shirtNumber: this.player.shirtNumber,
-            position: this.player.position
+            name: this.data.name,
+            age: this.data.age,
+            shirtNumber: this.data.shirtNumber,
+            position: this.data.position
           }
         );
-        for (let i = 0; i < this.player.skillLevel.id; i++) {
+        for (let i = 0; i < this.data.skillLevel.id; i++) {
           this.starIconClasses[i] = this.activeIconClass;
         }
       }
@@ -72,9 +72,9 @@ export class PlayerFormComponent implements OnInit {
     }
 
     const temp = isDeletion ?
-        this.player :
+        this.data :
         new Player()
-            .setId(this.player ? this.player.id : null)
+            .setId(this.data ? this.data.id : null)
             .setName(this.playerForm.value.name)
             .setAge(this.playerForm.value.age)
             .setShirtNumber(this.playerForm.value.shirtNumber)
@@ -82,22 +82,26 @@ export class PlayerFormComponent implements OnInit {
 
     this.setSkillLevel(temp);
 
+    this.playerForm.reset();
+
     if (isDeletion) {// delete
-      this.newPlayerEvent.emit({
+      this.dialogRef.close({
         operation: CrudOperations.DELETE,
         player: temp
       });
-    } else if (this.player) {// update
-      this.newPlayerEvent.emit({
+    } else if (this.data) {// update
+      this.dialogRef.close({
         operation: CrudOperations.UPDATE,
         player: temp
       });
     } else {// create
-      this.newPlayerEvent.emit(temp);
+      this.dialogRef.close(temp);
     }
+    
+  }
 
-    this.playerForm.reset();
-    this.activeModal.close();
+  close() {
+    this.dialogRef.close();
   }
 
   formMarkAllasTouched() {
