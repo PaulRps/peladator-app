@@ -1,4 +1,5 @@
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export class LoggerService {
     public static handleError<T>(operation = 'operation', result?: T) {
@@ -12,6 +13,8 @@ export class LoggerService {
     }
 
     public static log(message: string, object: any) {
-        console.log(message, object);
+        if (!environment.production) {
+            console.log(message, object);
+        }
     }
 }

@@ -12,7 +12,6 @@ export class TeamSortComponent implements OnInit {
   constructor(private router: Router,
               private location: Location) {
     this.teams = this.router.getCurrentNavigation().extras.state;
-    console.log(this.teams);
     if (!this.teams) {
       this.location.back();
     }

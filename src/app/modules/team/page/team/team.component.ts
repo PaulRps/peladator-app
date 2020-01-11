@@ -45,7 +45,6 @@ export class TeamComponent implements OnInit {
     });
     this.teamService.sort({amount: this.amount, players: selectedPlayers})
       .subscribe((response) => {
-        console.log('sorted teams', response);
         if (response && response.length > 0) {
           this.router.navigateByUrl('/teams/sorted', { state: response });
         }
