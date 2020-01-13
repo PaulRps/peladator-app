@@ -3,7 +3,7 @@
 
 @include mat-core();
 
-$alterPrimary: mat-palette($customPrimary, 500, 200, 500);
+$alter-primary: mat-palette($custom-primary, 500, 200, 500);
 
 mat-sidenav-container, mat-sidenav-content, mat-sidenav {
     height: 100%;
@@ -18,7 +18,7 @@ main {
 }
 
 .background-material-primary-color {
-    background-color: mat-color($customPrimary);
+    background-color: mat-color($custom-primary);
 }
 
 .clickable {
@@ -26,7 +26,7 @@ main {
 }
 
 .material-primary-color {
-    color: mat-color($customPrimary);
+    color: mat-color($custom-primary);
 }
 
 .nounderline {
@@ -38,11 +38,11 @@ main {
 }
 
 .selected-player {
-    background: mat-color($customAccent);
+    background: mat-color($custom-accent);
     margin-bottom: 5px;
 }
 
 .default-player {
-    background-color: mat-color($alterPrimary);
+    background-color: mat-color($alter-primary);
     margin-bottom: 5px;
 }

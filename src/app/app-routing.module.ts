@@ -1,4 +1,4 @@
-import { TeamComponent } from './modules/team/page/team/team.component';
+import { TeamComponent } from './modules/team/page/team.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PlayersComponent } from './modules/player/page/players.component';

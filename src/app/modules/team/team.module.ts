@@ -3,7 +3,7 @@ import { TeamMenuItemComponent } from './components/team-menu-item/team-menu-ite
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TeamSortComponent } from './components/team-sort/team-sort.component';
-import { TeamComponent } from './page/team/team.component';
+import { TeamComponent } from './page/team.component';
 
 @NgModule({
     declarations: [

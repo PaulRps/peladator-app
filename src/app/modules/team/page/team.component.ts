@@ -1,6 +1,6 @@
-import { TeamService } from './../../team.service';
+import { TeamService } from './../team.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PlayerService } from './../../../player/player.service';
+import { PlayerService } from './../../player/player.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Player } from 'src/app/shared/models/player.model';
 import { KeyValue } from '@angular/common';
