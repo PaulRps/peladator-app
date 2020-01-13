@@ -139,7 +139,6 @@ export class PlayerFormComponent implements OnInit {
   }
 
   compareItemSelect(a, b) {
-    // return a && b && a.id === b.id;
     return a && b ? a.id === b.id : a === b;
   }
 

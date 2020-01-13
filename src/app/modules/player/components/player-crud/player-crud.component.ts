@@ -25,6 +25,7 @@ export class PlayerCrudComponent implements OnInit {
 
   private openForm(player?: Player) {
     const dialogRef = this.modalService.open(PlayerFormComponent, {
+      autoFocus: false,
       data: player
     });
     return dialogRef.afterClosed();
