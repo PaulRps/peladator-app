@@ -17,8 +17,7 @@ export class TeamSortComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   mock = () => {
     this.teams =

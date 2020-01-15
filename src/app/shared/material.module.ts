@@ -18,6 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSidenavModule,
     MatDividerModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatChipsModule
   ],
   exports: [
     MatTableModule,
@@ -59,7 +61,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSidenavModule,
     MatDividerModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    MatChipsModule
   ]
 })
 

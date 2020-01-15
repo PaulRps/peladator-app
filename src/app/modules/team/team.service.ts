@@ -21,6 +21,12 @@ export class TeamService {
   constructor(private http: HttpClient,
               private dialogService: DialogService) { }
 
+  public loadTeamsPage() {
+    return this.http.get(this.teamUrl + '/load-teams-page').pipe(
+      tap((players: any) => LoggerService.log(`load teams page w/ id=${players ? players.toString() : ''}`, players)),
+      catchError(LoggerService.handleError<Player[]>('loadTeamsPage'))
+    );
+  }
   public sort(sortTeam: any) {
     return this.http.post(this.teamUrl + '/sort-teams', sortTeam, httpOptions).pipe(
       tap((players: Player[]) => LoggerService.log(`sort teams w/ id=${players ? players.toString() : ''}`, players)),

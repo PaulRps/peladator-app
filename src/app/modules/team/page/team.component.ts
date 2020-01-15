@@ -1,3 +1,4 @@
+import { DialogService } from 'src/app/core/services/dialog.service';
 import { TeamService } from './../team.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlayerService } from './../../player/player.service';
@@ -5,6 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Player } from 'src/app/shared/models/player.model';
 import { KeyValue } from '@angular/common';
 import { Router } from '@angular/router';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-team',
@@ -13,20 +15,31 @@ import { Router } from '@angular/router';
 })
 export class TeamComponent implements OnInit {
 
-  players: any;//{[key:string] : Player[]};
+  players: any; // {[key:string] : Player[]};
   sortTeamForm: FormGroup;
   amount: number;
-  constructor(private playerService: PlayerService,
+  sortFields: any[];
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  fieldIsSelected = false;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  sortStrategies: any[];
+  constructor(private dialogService: DialogService,
               private teamService: TeamService,
               private router: Router) {}
 
   ngOnInit() {
     this.sortTeamForm = new FormGroup({
-      amount: new FormControl(null, [Validators.required])
+      amount: new FormControl(null, [Validators.required]),
+      teamSize: new FormControl(null, [Validators.required])
     });
-    this.playerService.groupByPosition().subscribe(response => {
-      this.players = response;
+    this.teamService.loadTeamsPage().subscribe(response => {
+      this.players = response.playersGroupedByPosition;
+      this.sortStrategies = response.sortStrategies;
     });
+    this.sortFields = [{id: 0, name: 'Nível'}];
   }
 
   sort() {
@@ -34,7 +47,6 @@ export class TeamComponent implements OnInit {
       this.sortTeamForm.markAllAsTouched();
       return;
     }
-
     const selectedPlayers: Player[] = [];
     Object.keys(this.players).forEach((k) => {
       this.players[k].forEach(p => {
@@ -43,8 +55,19 @@ export class TeamComponent implements OnInit {
         }
       });
     });
-    this.teamService.sort({amount: this.amount, players: selectedPlayers})
-      .subscribe((response) => {
+
+    if (selectedPlayers.length < this.sortTeamForm.value.amount) {
+      this.dialogService.warnMessage('A quantidade de jogadores selecionados é insuficiente!');
+      return;
+    }
+
+    this.teamService.sort({
+      amount: this.sortTeamForm.value.amount,
+      teamSize: this.sortTeamForm.value.teamSize,
+      sortStrategy: this.sortFields.length > 1 ? this.sortFields[1] : null, // TODO: adjust this field
+      players: selectedPlayers
+
+    }).subscribe((response) => {
         if (response && response.length > 0) {
           this.router.navigateByUrl('/teams/sorted', { state: response });
         }
@@ -56,7 +79,7 @@ export class TeamComponent implements OnInit {
   }
 
   selectAllPlayer = (players: Player[]): void => {
-    for (let p of players) {
+    for (const p of players) {
       this.selectPlayer(p);
     }
   }
@@ -67,6 +90,26 @@ export class TeamComponent implements OnInit {
 
   keyDescOrder = (a: KeyValue<string, Player[]>, b: KeyValue<string, Player[]>): number => {
     return a.key > b.key ? -1 : (b.key > a.key ? 1 : 0);
+  }
+
+  add(field): void {
+    if (field) {
+      if (this.sortFields.indexOf(field) < 0) {
+        this.sortFields.push(field);
+        field.isSelected = true;
+      }
+    }
+  }
+
+  remove(field): void {
+    if (field.id === 0 && field.name === 'Nível') {
+      return;
+    }
+    const index = this.sortFields.indexOf(field);
+    if (index >= 0) {
+      this.sortFields.splice(index, 1);
+      field.isSelected = false;
+    }
   }
 
 }

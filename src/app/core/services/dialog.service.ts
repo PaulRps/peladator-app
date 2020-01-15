@@ -6,17 +6,31 @@ import Swal from 'sweetalert2';
 })
 export class DialogService {
 
-    successMessage(message: string) {
+    public successMessage(message: string) {
         Swal({
             title: message,
             type: 'success'
         });
     }
-    
-    errorMessage(message: string) {
+
+    public errorMessage(message: string) {
         Swal({
             title: message,
             type: 'error'
+        });
+    }
+
+    public warnMessage(message: string) {
+        Swal({
+            title: message,
+            type: 'warning'
+        });
+    }
+
+    public infoMessage(message: string) {
+        Swal({
+            title: message,
+            type: 'info'
         });
     }
 
