@@ -15,19 +15,17 @@
         </button>
     </div>
     <div class="col-md-12">
-        <!-- <div class="col-sm-12"> TODO: put page size on right top corner
-            <mat-form-field class="pull-right text-right" style="width: 40%;">
-                <mat-label>Página</mat-label>
-                <mat-select name="paginator">
-                    <mat-option [value]="5">5</mat-option>
-                    <mat-option [value]="10">10</mat-option>
-                    <mat-option [value]="20">20</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div> -->
         <table mat-table [dataSource]="players" class="mat-elevation-z8">
             <ng-container matColumnDef="player">
-                <th mat-header-cell *matHeaderCellDef></th>
+                <th mat-header-cell *matHeaderCellDef>
+                    <!-- <div class="col-7 offset-5 col-sm-5 offset-sm-7 col-md-3 offset-md-9 col-lg-2 offset-lg-10" style="width: 100%;">
+                        <mat-select [(ngModel)]="pageSize" name="paginator">
+                            <mat-option [value]="5">5</mat-option>
+                            <mat-option [value]="10">10</mat-option>
+                            <mat-option [value]="20">20</mat-option>
+                        </mat-select>
+                    </div> -->
+                </th>
                 <td class="clickable" mat-cell *matCellDef="let element">
                     <app-player [data]="element"></app-player>
                 </td>
@@ -35,8 +33,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr (click)="update(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator style="display: flex;
-        justify-content: left;" [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+        <mat-paginator style="display: flex; justify-content: left;" [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
     </div>    
 </div>
 <div class="col-md-2">&nbsp;</div>
