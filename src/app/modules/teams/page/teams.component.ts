@@ -1,19 +1,18 @@
 import { DialogService } from 'src/app/core/services/dialog.service';
-import { TeamService } from './../team.service';
+import { TeamsService } from '../teams.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PlayerService } from './../../player/player.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Player } from 'src/app/shared/models/player.model';
 import { KeyValue } from '@angular/common';
 import { Router } from '@angular/router';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
-  selector: 'app-team',
-  templateUrl: './team.component.html',
-  styleUrls: ['./team.component.scss']
+  selector: 'app-teams',
+  templateUrl: './teams.component.html',
+  styleUrls: ['./teams.component.scss']
 })
-export class TeamComponent implements OnInit {
+export class TeamsComponent implements OnInit {
 
   players: any; // {[key:string] : Player[]};
   sortTeamForm: FormGroup;
@@ -27,7 +26,7 @@ export class TeamComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   sortStrategies: any[];
   constructor(private dialogService: DialogService,
-              private teamService: TeamService,
+              private teamService: TeamsService,
               private router: Router) {}
 
   ngOnInit() {

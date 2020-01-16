@@ -1,7 +1,7 @@
 import { CrudOperations } from 'src/app/shared/constants/crud-operation';
 import { Component, OnInit, Input } from '@angular/core';
 
-import { PlayerService } from '../../player.service';
+import { PlayersService } from '../../players.service';
 import { Player } from '../../../../shared/models/player.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -29,7 +29,7 @@ export class PlayerFormComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<PlayerFormComponent>,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-              private playerService: PlayerService) {}
+              private playerService: PlayersService) {}
 
   ngOnInit() {
     this.playerForm = new FormGroup({

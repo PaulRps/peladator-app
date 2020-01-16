@@ -1,27 +1,29 @@
-import { TeamModule } from './../team/team.module';
+import { TeamsModule } from './../teams/teams.module';
+import { PlayerListComponent } from './components/player-list/player-list.component';
 import { PlayerCrudComponent } from './components/player-crud/player-crud.component';
-import { SharedModule } from './../../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { PlayerFormComponent } from './components/player-form/player-form.component';
 import { NgModule } from '@angular/core';
-import { PlayerTableComponent } from './components/player-table/player-table.component';
 import { PlayersComponent } from './page/players.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { PlayersRoutingModule } from './players-routing.module';
 
 @NgModule({
     declarations: [
         PlayerFormComponent,
-        PlayerTableComponent,
+        PlayerListComponent,
         PlayersComponent,
         PlayerCrudComponent
     ],
     imports: [
+        PlayersRoutingModule,
         CoreModule,
         SharedModule,
-        TeamModule
+        TeamsModule
     ],
     exports: [],
     entryComponents : [
         PlayerFormComponent
     ]
 })
-export class PlayerModule {}
+export class PlayersModule {}

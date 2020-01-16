@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
-import { PlayerService } from '../../player.service';
+import { PlayersService } from '../../players.service';
 import { Player } from 'src/app/shared/models/player.model';
 import { PlayerFormComponent } from '../player-form/player-form.component';
 import { DialogService } from 'src/app/core/services/dialog.service';
@@ -19,7 +19,7 @@ export class PlayerCrudComponent implements OnInit {
 
   constructor(private modalService: MatDialog,
               private dialogService: DialogService,
-              private playerService: PlayerService) { }
+              private playerService: PlayersService) { }
 
   ngOnInit() {}
 

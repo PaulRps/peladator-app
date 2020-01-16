@@ -3,8 +3,7 @@ import { Player } from '../../shared/models/player.model';
 import { environment } from '../../../environments/environment';
 import { LoggerService } from '../../core/services/logger.service';
 import { DialogService } from 'src/app/core/services/dialog.service';
-import { Injectable, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { tap, catchError } from 'rxjs/operators';
 
 const httpOptions = {
@@ -14,7 +13,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class TeamService {
+export class TeamsService {
 
   private teamUrl = environment.apiUrl + '/team';
 

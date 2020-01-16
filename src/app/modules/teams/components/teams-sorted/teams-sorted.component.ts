@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-team-sort',
-  templateUrl: './team-sort.component.html',
-  styleUrls: ['./team-sort.component.scss']
+  selector: 'app-teams-sorted',
+  templateUrl: './teams-sorted.component.html',
+  styleUrls: ['./teams-sorted.component.scss']
 })
-export class TeamSortComponent implements OnInit {
+export class TeamsSortedComponent implements OnInit {
   teams: any;
   constructor(private router: Router,
               private location: Location) {

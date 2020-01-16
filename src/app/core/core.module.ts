@@ -1,9 +1,9 @@
 import { RouterModule } from '@angular/router';
-import { TeamModule } from './../modules/team/team.module';
 import { NgModule } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { SidenavListComponent } from './sidenav-list/sidenav-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { TeamsModule } from '../modules/teams/teams.module';
 
 @NgModule({
     declarations: [
@@ -14,7 +14,7 @@ import { SharedModule } from '../shared/shared.module';
         RouterModule,
 
         SharedModule,
-        TeamModule
+        TeamsModule
     ],
     exports: [
         HeaderComponent,

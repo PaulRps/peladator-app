@@ -14,7 +14,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class PlayerService {
+export class PlayersService {
 
   private playerUrl = environment.apiUrl + '/player';
   public playersEvent = new EventEmitter<Player[]>();

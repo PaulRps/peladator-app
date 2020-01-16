@@ -1,18 +1,18 @@
-import { PlayerCrudComponent } from './../player-crud/player-crud.component';
+import { PlayerCrudComponent } from '../player-crud/player-crud.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Player } from '../../../../shared/models/player.model';
 import { SelectionModel } from '@angular/cdk/collections';
-import { PlayerService } from '../../player.service';
+import { PlayersService } from '../../players.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
-  selector: 'app-player-table',
-  templateUrl: './player-table.component.html',
-  styleUrls: ['./player-table.component.scss']
+  selector: 'app-player-list',
+  templateUrl: './player-list.component.html',
+  styleUrls: ['./player-list.component.scss']
 })
-export class PlayerTableComponent implements OnInit {
+export class PlayerListComponent implements OnInit {
 
   displayedColumns: string[] = ['player'];
   players: MatTableDataSource<Player> = new MatTableDataSource<Player>();
@@ -22,7 +22,7 @@ export class PlayerTableComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild('playerCrud', {static: true}) playerCrud: PlayerCrudComponent;
 
-  constructor(private playerService: PlayerService,
+  constructor(private playerService: PlayersService,
               private authService: AuthService) { }
 
   ngOnInit() {
