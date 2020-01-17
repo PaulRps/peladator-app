@@ -4,7 +4,7 @@
 
 $custom-primary: mat-palette($mat-red);
 $custom-accent: mat-palette($custom-primary, 200, 100, 400);
-$custom-warn:  mat-palette($mat-pink, 500, 500, 500); 
+$custom-warn:  mat-palette($mat-deep-orange, 500, 500, 500); 
 $custom-theme: mat-dark-theme($custom-primary, $custom-accent, $custom-warn);
 
 @include angular-material-theme($custom-theme);
