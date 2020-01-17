@@ -58,9 +58,9 @@
     </div> 
   </form>
 </div>
-<div mat-dialog-actions>
-  <button *ngIf="data" type="submit" mat-raised-button color="warn" (click)="submit(true)">Remover</button>
-  <button type="button" mat-raised-button (click)="close();playerForm.reset();">Cancelar</button>
-  <button type="submit" mat-raised-button color="primary" (click)="submit(false)">Salvar</button>
+<div mat-dialog-actions class="d-flex justify-content-end">
+  <button class="decrease-horizontal-padding" *ngIf="data" type="submit" mat-raised-button color="warn" (click)="submit(true)">Remover</button>
+  <button class="decrease-horizontal-padding" type="button" mat-raised-button (click)="close();playerForm.reset();">Cancelar</button>
+  <button class="decrease-horizontal-padding" type="submit" mat-raised-button color="primary" (click)="submit(false)">Salvar</button>
 </div>
 
