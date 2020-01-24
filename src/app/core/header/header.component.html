@@ -1,17 +1,11 @@
 <mat-toolbar color="primary">
   <div>
-    <button class="" mat-icon-button (click)="onToggleSidenav()">
+    <button mat-icon-button (click)="onToggleSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
   </div>
-  <div class="d-flex justify-content-start">
-    <span class="fill-remaining-space text-center">Peladator</span>
+  <div class="d-flex" style="width: 100%;">
+    <span class="justify-content-start fill-remaining-space text-left align-self-center">Peladator</span>
+    <app-theme-picker class="justify-content-end align-self-center"></app-theme-picker>
   </div>
-  <!-- <div class="justify-content-end">
-    <button mat-button [matMenuTriggerFor]="menu">Tema</button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>1</button>
-      <button mat-menu-item>2</button>
-    </mat-menu>
-  </div> -->
 </mat-toolbar>

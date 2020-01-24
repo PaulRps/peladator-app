@@ -1,17 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
-// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import "theme.scss";
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~@angular/material/theming';
+@import "./assets/styles/themes/theme.scss";
 
 @include mat-core();
-@include angular-material-theme($custom-theme);
 
-html, body { 
-    margin: 0;
-    height: 100%;
+$primary: mat-palette($mat-red);
+$accent: mat-palette($primary, 200, 100, 400);
+$warn: mat-palette($mat-deep-orange, 500, 500, 500);
+$theme: mat-dark-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);
+@include material-custom-theme($theme);
+
+
+html,
+body {
+  margin: 0;
+  height: 100%;
 }
-
-//fix mat select in a modal
-// .cdk-global-overlay-wrapper, .cdk-overlay-container {
-//     z-index: 99999 !important;
-// }

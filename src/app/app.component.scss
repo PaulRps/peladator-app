@@ -1,48 +1,23 @@
-@import "~@angular/material/theming";
-@import '../theme.scss';
+@import "./app-theme.scss";
 
-@include mat-core();
-
-$alter-primary: mat-palette($custom-primary, 500, 200, 500);
-
-mat-sidenav-container, mat-sidenav-content, mat-sidenav {
-    height: 100%;
-}
- 
+mat-sidenav-container,
+mat-sidenav-content,
 mat-sidenav {
-    width: 250px;
-}
- 
-main {
-    padding: 10px;
+  height: 100%;
 }
 
-.background-material-primary-color {
-    background-color: mat-color($custom-primary);
+mat-sidenav {
+  width: 250px;
+}
+
+main {
+  padding: 10px;
 }
 
 .clickable {
-    cursor: pointer;
-}
-
-.material-primary-color {
-    color: mat-color($custom-primary);
+  cursor: pointer;
 }
 
 .nounderline {
-    text-decoration: none !important;
-}
-
-.noblue-text {
-   color: inherit;
-}
-
-.selected-player {
-    background: mat-color($custom-accent);
-    margin-bottom: 5px;
-}
-
-.default-player {
-    background-color: mat-color($alter-primary);
-    margin-bottom: 5px;
+  text-decoration: none !important;
 }

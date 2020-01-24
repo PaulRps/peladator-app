@@ -1,0 +1,32 @@
+@mixin my-theme($theme) {
+  // $primary: map-get($theme, primary);
+  // $accent: map-get($theme, accent);
+  // $warn: map-get($theme, warn);
+  // $background: map-get($theme, background);
+  // $foreground: map-get($theme, foreground);
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  .background-material-primary-color {
+    background-color: mat-color($primary);
+  }
+
+  .material-primary-color {
+    color: mat-color($primary);
+  }
+
+  .noblue-text {
+    color: inherit;
+  }
+
+  .selected-player {
+    background: mat-color($accent);
+    margin-bottom: 5px;
+  }
+
+  .default-player {
+    background-color: mat-color($primary);
+    margin-bottom: 5px;
+  }
+}

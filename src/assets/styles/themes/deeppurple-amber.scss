@@ -1,0 +1,9 @@
+@import 'theme.scss';
+
+// Define the light theme.
+$primary: mat-palette($mat-deep-purple);
+$accent:  mat-palette($mat-amber, 700);
+
+$theme: mat-light-theme($primary, $accent);
+@include angular-material-theme($theme);
+@include material-custom-theme($theme);

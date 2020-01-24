@@ -4,11 +4,13 @@ import { HeaderComponent } from './header/header.component';
 import { SidenavListComponent } from './sidenav-list/sidenav-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { TeamsModule } from '../modules/teams/teams.module';
+import { ThemePickerComponent } from './components/theme-picker/theme-picker.component';
 
 @NgModule({
     declarations: [
         HeaderComponent,
-        SidenavListComponent
+        SidenavListComponent,
+        ThemePickerComponent
     ],
     imports: [
         RouterModule,
@@ -18,7 +20,8 @@ import { TeamsModule } from '../modules/teams/teams.module';
     ],
     exports: [
         HeaderComponent,
-        SidenavListComponent
+        SidenavListComponent,
+        ThemePickerComponent
     ],
     providers: [],
     entryComponents : []

@@ -1,18 +1,18 @@
 <mat-nav-list>
   <div class="background-material-primary-color">
-    <h2 style="color: white;" matSubheader>
-      <mat-icon>sports_soccer</mat-icon>&nbsp;&nbsp;Peladator
+    <h2 matSubheader>
+      <mat-icon color="white">sports_soccer</mat-icon>&nbsp;&nbsp;Peladator
     </h2>
   </div>
-  
+
   <a class="clickable" mat-list-item routerLink="/player" routerLinkActive="active" (click)="onSidenavClose()">
-    <mat-icon class="material-primary-color">people</mat-icon>
-    <span class="nav-caption">Jogadores</span>   
+    <mat-icon color="primary" class="material-primary-color">people</mat-icon>
+    <span class="nav-caption">Jogadores</span>
   </a>
   <mat-divider></mat-divider>
   <!-- <app-team-menu-item class="clickable" (click)="onSidenavClose()"> </app-team-menu-item> -->
   <a class="clickable" mat-list-item routerLink="/teams" (click)="onSidenavClose()">
-    <mat-icon class="material-primary-color align-middle">casino</mat-icon>
+    <mat-icon color="primary" class=" align-middle">casino</mat-icon>
     <span>&nbsp;&nbsp;Times</span>
   </a>
   <mat-divider></mat-divider>
