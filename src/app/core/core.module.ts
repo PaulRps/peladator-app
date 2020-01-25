@@ -7,23 +7,23 @@ import { TeamsModule } from '../modules/teams/teams.module';
 import { ThemePickerComponent } from './components/theme-picker/theme-picker.component';
 
 @NgModule({
-    declarations: [
-        HeaderComponent,
-        SidenavListComponent,
-        ThemePickerComponent
-    ],
-    imports: [
-        RouterModule,
+  declarations: [
+    HeaderComponent,
+    SidenavListComponent,
+    ThemePickerComponent
+  ],
+  imports: [
+    RouterModule,
 
-        SharedModule,
-        TeamsModule
-    ],
-    exports: [
-        HeaderComponent,
-        SidenavListComponent,
-        ThemePickerComponent
-    ],
-    providers: [],
-    entryComponents : []
+    SharedModule,
+    TeamsModule
+  ],
+  exports: [
+    HeaderComponent,
+    SidenavListComponent,
+    ThemePickerComponent
+  ],
+  providers: [],
+  entryComponents: []
 })
-export class CoreModule {}
+export class CoreModule { }

@@ -8,9 +8,9 @@ describe('TeamMenuItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TeamsMenuItemComponent ]
+      declarations: [TeamsMenuItemComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

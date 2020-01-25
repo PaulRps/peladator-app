@@ -8,7 +8,8 @@
           <mat-option [value]="3">3</mat-option>
           <mat-option [value]="4">4</mat-option>
         </mat-select>
-        <mat-error *ngIf="sortTeamForm && sortTeamForm.controls['amount'].hasError('required')">Campo obrigatório</mat-error>
+        <mat-error *ngIf="sortTeamForm && sortTeamForm.controls['amount'].hasError('required')">Campo obrigatório
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="form-group">
@@ -23,26 +24,27 @@
           <mat-option [value]="10">10</mat-option>
           <mat-option [value]="11">11</mat-option>
         </mat-select>
-        <mat-error *ngIf="sortTeamForm && sortTeamForm.controls['teamSize'].hasError('required')">Campo obrigatório</mat-error>
+        <mat-error *ngIf="sortTeamForm && sortTeamForm.controls['teamSize'].hasError('required')">Campo obrigatório
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="form-group shadow-lg rounded">
       <mat-form-field class="fill-all-width" appearance="none">
         <mat-label>Critérios de seleção</mat-label>
         <mat-chip-list #fields aria-label="field selection">
-          <mat-chip *ngFor="let field of sortFields" [selectable]="selectable" [removable]="removable" (removed)="remove(field)">
+          <mat-chip *ngFor="let field of sortFields" [selectable]="selectable" [removable]="removable"
+            (removed)="remove(field)">
             {{field.name}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
-          <input [matChipInputFor]="fields"
-                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [matChipInputAddOnBlur]="addOnBlur"
-                 disabled>
-        </mat-chip-list>        
+          <input [matChipInputFor]="fields" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur" disabled>
+        </mat-chip-list>
       </mat-form-field>
       <mat-form-field class="fill-all-width">
         <mat-chip-list>
-          <mat-chip *ngFor="let item of sortStrategies" [hidden]="item.isSelected" color="accent" (click)="add(item)" selected>Posição</mat-chip>
+          <mat-chip *ngFor="let item of sortStrategies" [hidden]="item.isSelected" color="accent" (click)="add(item)"
+            selected>Posição</mat-chip>
         </mat-chip-list>
       </mat-form-field>
     </div>
@@ -62,7 +64,7 @@
     </mat-card-header>
     <mat-card-content>
       <div class="outer">
-        <a class="noblue-text" routerLink="." routerLinkActive="router-link-active" >
+        <a class="noblue-text" routerLink="." routerLinkActive="router-link-active">
           <div style="max-width: 500px;" *ngFor="let item of player.value; index as i" (click)="selectPlayer(item)">
             <app-player style="width: 100%; height: 100%;" [data]="item"></app-player>
           </div>

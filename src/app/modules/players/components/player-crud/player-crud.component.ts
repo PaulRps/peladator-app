@@ -5,7 +5,7 @@ import { Player } from 'src/app/shared/models/player.model';
 import { PlayerFormComponent } from '../player-form/player-form.component';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { CrudOperations } from 'src/app/shared/constants/crud-operation';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-player-crud',
@@ -15,10 +15,10 @@ import {MatDialog} from '@angular/material/dialog';
 export class PlayerCrudComponent implements OnInit {
 
   constructor(private modalService: MatDialog,
-              private dialogService: DialogService,
-              private playerService: PlayersService) { }
+    private dialogService: DialogService,
+    private playerService: PlayersService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   private openForm(player?: Player) {
     const dialogRef = this.modalService.open(PlayerFormComponent, {

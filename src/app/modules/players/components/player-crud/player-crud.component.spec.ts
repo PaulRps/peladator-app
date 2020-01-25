@@ -8,9 +8,9 @@ describe('PlayerCreateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayerCrudComponent ]
+      declarations: [PlayerCrudComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

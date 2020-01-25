@@ -16,9 +16,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatCardModule} from '@angular/material/card';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 @NgModule({
@@ -66,4 +66,4 @@ import {MatChipsModule} from '@angular/material/chips';
   ]
 })
 
-export class MaterialModule {}
+export class MaterialModule { }

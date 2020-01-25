@@ -9,21 +9,21 @@ import { CoreModule } from 'src/app/core/core.module';
 import { PlayersRoutingModule } from './players-routing.module';
 
 @NgModule({
-    declarations: [
-        PlayerFormComponent,
-        PlayerListComponent,
-        PlayersComponent,
-        PlayerCrudComponent
-    ],
-    imports: [
-        PlayersRoutingModule,
-        CoreModule,
-        SharedModule,
-        TeamsModule
-    ],
-    exports: [],
-    entryComponents : [
-        PlayerFormComponent
-    ]
+  declarations: [
+    PlayerFormComponent,
+    PlayerListComponent,
+    PlayersComponent,
+    PlayerCrudComponent
+  ],
+  imports: [
+    PlayersRoutingModule,
+    CoreModule,
+    SharedModule,
+    TeamsModule
+  ],
+  exports: [],
+  entryComponents: [
+    PlayerFormComponent
+  ]
 })
-export class PlayersModule {}
+export class PlayersModule { }

@@ -1,39 +1,41 @@
 <div class="col-md-2">&nbsp;</div>
-<div class="col-1 offset-9 col-sm-1 offset-sm-9 col-md-1 offset-md-9 col-lg-1 offset-lg-10 div-float-button fixed-bottom">
-    <app-player-crud #playerCrud></app-player-crud>
+<div
+  class="col-1 offset-9 col-sm-1 offset-sm-9 col-md-1 offset-md-9 col-lg-1 offset-lg-10 div-float-button fixed-bottom">
+  <app-player-crud #playerCrud></app-player-crud>
 </div>
 <div class="row">
-    <mat-form-field class="col-4 col-sm-4 col-md-4 col-lg-4" >
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
-    </mat-form-field>
-    <!-- <div class="col-3 col-sm-3 col-md-3 col-lg-3 pull-right">
+  <mat-form-field class="col-4 col-sm-4 col-md-4 col-lg-4">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+  </mat-form-field>
+  <!-- <div class="col-3 col-sm-3 col-md-3 col-lg-3 pull-right">
         <app-player-crud #playerCrud></app-player-crud>
     </div> -->
-    <div class="col-3 col-sm-3 col-md-3 col-lg-3 pull-right">
-        <button mat-button>
-            <app-teams-menu-item></app-teams-menu-item>
-        </button>
-    </div>
-    <div class="col-md-12">
-        <table mat-table [dataSource]="players" class="mat-elevation-z8">
-            <ng-container matColumnDef="player">
-                <th mat-header-cell *matHeaderCellDef>
-                    <!-- <div class="col-7 offset-5 col-sm-5 offset-sm-7 col-md-3 offset-md-9 col-lg-2 offset-lg-10" style="width: 100%;">
+  <div class="col-3 col-sm-3 col-md-3 col-lg-3 pull-right">
+    <button mat-button>
+      <app-teams-menu-item></app-teams-menu-item>
+    </button>
+  </div>
+  <div class="col-md-12">
+    <table mat-table [dataSource]="players" class="mat-elevation-z8">
+      <ng-container matColumnDef="player">
+        <th mat-header-cell *matHeaderCellDef>
+          <!-- <div class="col-7 offset-5 col-sm-5 offset-sm-7 col-md-3 offset-md-9 col-lg-2 offset-lg-10" style="width: 100%;">
                         <mat-select [(ngModel)]="pageSize" name="paginator">
                             <mat-option [value]="5">5</mat-option>
                             <mat-option [value]="10">10</mat-option>
                             <mat-option [value]="20">20</mat-option>
                         </mat-select>
                     </div> -->
-                </th>
-                <td class="clickable" mat-cell *matCellDef="let element">
-                    <app-player [data]="element"></app-player>
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr (click)="update(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator style="display: flex; justify-content: left;" [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
-    </div>    
+        </th>
+        <td class="clickable" mat-cell *matCellDef="let element">
+          <app-player [data]="element"></app-player>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr (click)="update(row)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator style="display: flex; justify-content: left;" [pageSizeOptions]="[10]" showFirstLastButtons>
+    </mat-paginator>
+  </div>
 </div>
 <div class="col-md-2">&nbsp;</div>

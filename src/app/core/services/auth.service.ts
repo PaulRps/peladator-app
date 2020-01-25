@@ -4,29 +4,29 @@ import { Injectable } from '@angular/core';
 import { tap, catchError } from 'rxjs/operators';
 
 const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'my-auth-token'
-    })
-  };
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthService {
 
-    private authUrl = environment.apiUrl + '/auth';
+  private authUrl = environment.apiUrl + '/auth';
 
-    constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-    getToken() {
-        // return this.http.post(this.authUrl,{userName: "Paulo", password: "123456"}, httpOptions)
-        //     .pipe(tap((response) => {
-        //         console.log(response);
-        //     }),
-        //     catchError((a) => {
+  getToken() {
+    // return this.http.post(this.authUrl,{userName: "Paulo", password: "123456"}, httpOptions)
+    //     .pipe(tap((response) => {
+    //         console.log(response);
+    //     }),
+    //     catchError((a) => {
 
-        //         console.error('auth error', a); return a;
-        //     }));
-    }
+    //         console.error('auth error', a); return a;
+    //     }));
+  }
 }

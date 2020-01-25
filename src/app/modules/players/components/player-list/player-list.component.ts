@@ -19,11 +19,11 @@ export class PlayerListComponent implements OnInit {
   selection = new SelectionModel<Player>(true, []);
   enablePlayersSelection = false;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild('playerCrud', {static: true}) playerCrud: PlayerCrudComponent;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild('playerCrud', { static: true }) playerCrud: PlayerCrudComponent;
 
   constructor(private playerService: PlayersService,
-              private authService: AuthService) { }
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.paginator.hidePageSize = true;
@@ -42,10 +42,10 @@ export class PlayerListComponent implements OnInit {
 
   getPlayers(): void {
     this.playerService.getAll()
-    .subscribe(players => {
-      this.players = new MatTableDataSource(players);
-      this.players.paginator = this.paginator;
-    });
+      .subscribe(players => {
+        this.players = new MatTableDataSource(players);
+        this.players.paginator = this.paginator;
+      });
   }
 
   isAllSelected() {
@@ -65,8 +65,8 @@ export class PlayerListComponent implements OnInit {
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.players.data.forEach(row => this.selection.select(row));
+      this.selection.clear() :
+      this.players.data.forEach(row => this.selection.select(row));
   }
 
   update(player: Player) {

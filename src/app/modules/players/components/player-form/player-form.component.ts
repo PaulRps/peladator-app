@@ -11,7 +11,7 @@ import { Optional } from '@angular/core';
 @Component({
   selector: 'app-player-form',
   templateUrl: './player-form.component.html',
-  styleUrls: ['./player-form.component.scss']  
+  styleUrls: ['./player-form.component.scss']
 })
 export class PlayerFormComponent implements OnInit {
 
@@ -21,15 +21,15 @@ export class PlayerFormComponent implements OnInit {
   playerLevels: any[];
   playerPositions: any[];
   starIconClasses: string[] = ['mat-icon notranslate material-icons mat-icon-no-color',
-                              'mat-icon notranslate material-icons mat-icon-no-color',
-                              'mat-icon notranslate material-icons mat-icon-no-color',
-                              'mat-icon notranslate material-icons mat-icon-no-color',
-                              'mat-icon notranslate material-icons mat-icon-no-color'];
+    'mat-icon notranslate material-icons mat-icon-no-color',
+    'mat-icon notranslate material-icons mat-icon-no-color',
+    'mat-icon notranslate material-icons mat-icon-no-color',
+    'mat-icon notranslate material-icons mat-icon-no-color'];
   @Input() player: Player;
 
   constructor(public dialogRef: MatDialogRef<PlayerFormComponent>,
-              @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-              private playerService: PlayersService) {}
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private playerService: PlayersService) { }
 
   ngOnInit() {
     this.playerForm = new FormGroup({
@@ -40,23 +40,23 @@ export class PlayerFormComponent implements OnInit {
     });
 
     this.playerService.getFormData()
-    .subscribe(formData => {
-      this.playerLevels = formData.skillLevels;
-      this.playerPositions = formData.positions;
-      if (this.data) {
-        this.playerForm.setValue(
-          {
-            name: this.data.name,
-            age: this.data.age,
-            shirtNumber: this.data.shirtNumber,
-            position: this.data.position
+      .subscribe(formData => {
+        this.playerLevels = formData.skillLevels;
+        this.playerPositions = formData.positions;
+        if (this.data) {
+          this.playerForm.setValue(
+            {
+              name: this.data.name,
+              age: this.data.age,
+              shirtNumber: this.data.shirtNumber,
+              position: this.data.position
+            }
+          );
+          for (let i = 0; i < this.data.skillLevel.id; i++) {
+            this.starIconClasses[i] = this.activeIconClass;
           }
-        );
-        for (let i = 0; i < this.data.skillLevel.id; i++) {
-          this.starIconClasses[i] = this.activeIconClass;
         }
-      }
-    });
+      });
   }
 
   submit(isDeletion) {
@@ -72,13 +72,13 @@ export class PlayerFormComponent implements OnInit {
     }
 
     const temp = isDeletion ?
-        this.data :
-        new Player()
-            .setId(this.data ? this.data.id : null)
-            .setName(this.playerForm.value.name)
-            .setAge(this.playerForm.value.age)
-            .setShirtNumber(this.playerForm.value.shirtNumber)
-            .setPosition(this.playerForm.value.position);
+      this.data :
+      new Player()
+        .setId(this.data ? this.data.id : null)
+        .setName(this.playerForm.value.name)
+        .setAge(this.playerForm.value.age)
+        .setShirtNumber(this.playerForm.value.shirtNumber)
+        .setPosition(this.playerForm.value.position);
 
     this.setSkillLevel(temp);
 
@@ -97,7 +97,7 @@ export class PlayerFormComponent implements OnInit {
     } else {// create
       this.dialogRef.close(temp);
     }
-    
+
   }
 
   close() {

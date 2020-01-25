@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./players.component.scss']
 })
 export class PlayersComponent implements OnInit {
-  
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

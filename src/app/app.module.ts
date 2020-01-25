@@ -17,14 +17,14 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    
+
     CoreModule,
     SharedModule,
-    
+
     HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents : []
+  entryComponents: []
 })
 export class AppModule { }

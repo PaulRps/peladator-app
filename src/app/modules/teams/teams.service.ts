@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { tap, catchError } from 'rxjs/operators';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({
@@ -18,7 +18,7 @@ export class TeamsService {
   private teamUrl = environment.apiUrl + '/team';
 
   constructor(private http: HttpClient,
-              private dialogService: DialogService) { }
+    private dialogService: DialogService) { }
 
   public loadTeamsPage() {
     return this.http.get(this.teamUrl + '/load-teams-page').pipe(

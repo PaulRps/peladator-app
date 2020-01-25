@@ -10,14 +10,14 @@ import { Location } from '@angular/common';
 export class TeamsSortedComponent implements OnInit {
   teams: any;
   constructor(private router: Router,
-              private location: Location) {
+    private location: Location) {
     this.teams = this.router.getCurrentNavigation().extras.state;
     if (!this.teams) {
       this.location.back();
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   mock = () => {
     this.teams =
@@ -30,16 +30,16 @@ export class TeamsSortedComponent implements OnInit {
               name: 'Dida',
               age: 41,
               shirtNumber: 12,
-              skillLevel: {id: 4, name: 'Boleiro'},
-              position: {id: 1, name: 'Goleiro', shortName: 'GL'}
+              skillLevel: { id: 4, name: 'Boleiro' },
+              position: { id: 1, name: 'Goleiro', shortName: 'GL' }
             },
             {
               id: 1,
               name: 'Messi',
               age: 34,
               shirtNumber: 10,
-              skillLevel: {id: 5, name: 'Joga Muito'},
-              position: {id: 7, name: 'Atacante', shortName: 'ATA'}
+              skillLevel: { id: 5, name: 'Joga Muito' },
+              position: { id: 7, name: 'Atacante', shortName: 'ATA' }
             }
           ]
         },
@@ -51,16 +51,16 @@ export class TeamsSortedComponent implements OnInit {
               name: 'Dida',
               age: 41,
               shirtNumber: 12,
-              skillLevel: {id: 4, name: 'Boleiro'},
-              position: {id: 1, name: 'Goleiro', shortName: 'GL'}
+              skillLevel: { id: 4, name: 'Boleiro' },
+              position: { id: 1, name: 'Goleiro', shortName: 'GL' }
             },
             {
               id: 1,
               name: 'Messi',
               age: 34,
               shirtNumber: 10,
-              skillLevel: {id: 5, name: 'Joga Muito'},
-              position: {id: 7, name: 'Atacante', shortName: 'ATA'}
+              skillLevel: { id: 5, name: 'Joga Muito' },
+              position: { id: 7, name: 'Atacante', shortName: 'ATA' }
             }
           ]
         }

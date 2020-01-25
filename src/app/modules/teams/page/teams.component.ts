@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Player } from 'src/app/shared/models/player.model';
 import { KeyValue } from '@angular/common';
 import { Router } from '@angular/router';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-teams',
@@ -26,8 +26,8 @@ export class TeamsComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   sortStrategies: any[];
   constructor(private dialogService: DialogService,
-              private teamService: TeamsService,
-              private router: Router) {}
+    private teamService: TeamsService,
+    private router: Router) { }
 
   ngOnInit() {
     this.sortTeamForm = new FormGroup({
@@ -38,7 +38,7 @@ export class TeamsComponent implements OnInit {
       this.players = response.playersGroupedByPosition;
       this.sortStrategies = response.sortStrategies;
     });
-    this.sortFields = [{id: 0, name: 'Nível'}];
+    this.sortFields = [{ id: 0, name: 'Nível' }];
   }
 
   sort() {
@@ -67,10 +67,10 @@ export class TeamsComponent implements OnInit {
       players: selectedPlayers
 
     }).subscribe((response) => {
-        if (response && response.length > 0) {
-          this.router.navigateByUrl('/teams/sorted', { state: response });
-        }
-      });
+      if (response && response.length > 0) {
+        this.router.navigateByUrl('/teams/sorted', { state: response });
+      }
+    });
   }
 
   selectPlayer = (player: Player) => {
