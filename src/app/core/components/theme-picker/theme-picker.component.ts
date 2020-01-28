@@ -48,7 +48,7 @@ export class ThemePickerComponent implements OnInit {
     if (theme.isDefault) {
       this.styleManager.removeStyle('theme');
     } else {
-      this.styleManager.setStyle('theme', `./assets/styles/themes/compiled-themes/${theme.name}.css`);
+      this.styleManager.setStyle('theme', `./assets/styles/themes/compiled/${theme.name}.css`);
     }
   }
 

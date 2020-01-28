@@ -10,7 +10,8 @@
     "deploy": "copyfiles -f dist/** ../peladator-api/src/main/resources/static",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "compile-themes": "node-sass src/assets/styles/themes/source --output src/assets/styles/themes/compiled --output-style compressed"
   },
   "private": true,
   "dependencies": {
@@ -32,7 +33,6 @@
     "ng-bootstrap": "^1.6.3",
     "popper": "^1.0.1",
     "rxjs": "~6.5.4",
-    "sweetalert2": "^7.33.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

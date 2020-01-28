@@ -1,4 +1,3 @@
-import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
 import { PlayersService } from '../../players.service';
 import { Player } from 'src/app/shared/models/player.model';
@@ -15,8 +14,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class PlayerCrudComponent implements OnInit {
 
   constructor(private modalService: MatDialog,
-    private dialogService: DialogService,
-    private playerService: PlayersService) { }
+              private dialogService: DialogService,
+              private playerService: PlayersService) { }
 
   ngOnInit() { }
 
@@ -58,17 +57,12 @@ export class PlayerCrudComponent implements OnInit {
   }
 
   deletePlayer(player: Player) {
-    Swal({
-      title: 'Deseja deletar o jogador ' + player.name + '?',
-      text: 'Não será possível reverter!',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Sim, delete!'
-    }).then((result) => {
-      if (result.value) {
+    this.dialogService.confirm(
+      'Deseja deletar o jogador ' + player.name + '?',
+      'Não será possível reverter!',
+      'Cancelar',
+      'Sim, delete!',
+      () => {
         this.playerService.delete(player.id).subscribe(
           (players: Player[]) => {
             if (!players) {
@@ -76,7 +70,6 @@ export class PlayerCrudComponent implements OnInit {
             }
           }
         );
-      }
     });
   }
 }

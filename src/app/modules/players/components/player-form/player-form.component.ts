@@ -1,3 +1,4 @@
+import { DialogService } from 'src/app/core/services/dialog.service';
 import { CrudOperations } from 'src/app/shared/constants/crud-operation';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -28,8 +29,9 @@ export class PlayerFormComponent implements OnInit {
   @Input() player: Player;
 
   constructor(public dialogRef: MatDialogRef<PlayerFormComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-    private playerService: PlayersService) { }
+              @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogService: DialogService,
+              private playerService: PlayersService) { }
 
   ngOnInit() {
     this.playerForm = new FormGroup({
@@ -60,7 +62,6 @@ export class PlayerFormComponent implements OnInit {
   }
 
   submit(isDeletion) {
-
     if (this.playerForm.invalid) {
       this.formMarkAllasTouched();
       return;

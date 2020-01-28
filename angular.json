@@ -91,18 +91,18 @@
             "styles": [
               "src/styles.scss",
               {
-                "input": "src/assets/styles/themes/compiled-themes/pink-grey.css",
+                "input": "src/assets/styles/themes/compiled/pink-grey.css",
                 "lazy": true,
                 "bundleName": "pink-grey"
               },
               {
-                "input": "src/assets/styles/themes/compiled-themes/purple-green.css",
+                "input": "src/assets/styles/themes/compiled/purple-green.css",
                 "lazy": true,
                 "bundleName": "purple-green"
               },
 
               {
-                "input": "src/assets/styles/themes/compiled-themes/deeppurple-amber.css",
+                "input": "src/assets/styles/themes/compiled/deeppurple-amber.css",
                 "lazy": true,
                 "bundleName": "deeppurple-amber"
               }
