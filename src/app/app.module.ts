@@ -27,4 +27,6 @@ import { CoreModule } from './core/core.module';
   bootstrap: [AppComponent],
   entryComponents: []
 })
-export class AppModule { }
+  export class AppModule {
+
+  }
