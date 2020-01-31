@@ -35,7 +35,10 @@ export class PlayerCrudComponent implements OnInit {
       }
       this.playerService.save(newPlayer).subscribe(response => {
         if (!response) {
-          this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.', '200px');
+          this.dialogService.errorMessage(
+            'Ocorreu um erro durante essa operação, tente novamente mais tarde.',
+            '200px'
+          );
         }
       });
     });
@@ -46,7 +49,10 @@ export class PlayerCrudComponent implements OnInit {
       if (result && CrudOperations.isEqual(CrudOperations.UPDATE, result.operation)) {
         this.playerService.update(result.player).subscribe((players: Player[]) => {
           if (!players) {
-            this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.', '200px');
+            this.dialogService.errorMessage(
+              'Ocorreu um erro durante essa operação, tente novamente mais tarde.',
+              '200px'
+            );
           }
         });
       } else if (result && CrudOperations.isEqual(CrudOperations.DELETE, result.operation)) {
@@ -64,7 +70,10 @@ export class PlayerCrudComponent implements OnInit {
       () => {
         this.playerService.delete(player.id).subscribe((players: Player[]) => {
           if (!players) {
-            this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.', '200px');
+            this.dialogService.errorMessage(
+              'Ocorreu um erro durante essa operação, tente novamente mais tarde.',
+              '200px'
+            );
           }
         });
       }
