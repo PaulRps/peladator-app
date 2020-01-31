@@ -7,61 +7,67 @@ import { AlertInfoComponent } from '../components/alert/alert-info/alert-info.co
 import { AlertConfirmComponent } from '../components/alert/alert-confirm/alert-confirm.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DialogService {
+  constructor(private modalService: MatDialog) {}
 
-  constructor(private modalService: MatDialog) { }
-
-  public successMessage(message: string) {
+  public successMessage(message: string, height?: string, width?: string) {
     this.modalService.open(AlertSuccessComponent, {
-      height: AlertSuccessComponent.height,
-      width: AlertSuccessComponent.width,
+      height: height || AlertSuccessComponent.height,
+      width: width || AlertSuccessComponent.width,
       autoFocus: false,
-      data: {text: message}
+      data: { text: message },
     });
   }
 
-  public errorMessage(message: string) {
+  public errorMessage(message: string, height?: string, width?: string) {
     this.modalService.open(AlertErrorComponent, {
-      height: AlertErrorComponent.height,
-      width: AlertErrorComponent.width,
+      height: height || AlertErrorComponent.height,
+      width: width || AlertErrorComponent.width,
       autoFocus: false,
-      data: {text: message}
+      data: { text: message },
     });
   }
 
-  public warnMessage(message: string) {
+  public warnMessage(message: string, height?: string, width?: string) {
     this.modalService.open(AlertWarnComponent, {
-      height: AlertWarnComponent.height,
-      width: AlertWarnComponent.width,
+      height: height || AlertWarnComponent.height,
+      width: width || AlertWarnComponent.width,
       autoFocus: false,
-      data: {text: message}
+      data: { text: message },
     });
   }
 
-  public infoMessage(message: string) {
+  public infoMessage(message: string, height?: string, width?: string) {
     this.modalService.open(AlertInfoComponent, {
-      height: AlertInfoComponent.height,
-      width: AlertInfoComponent.width,
+      height: height || AlertInfoComponent.height,
+      width: width || AlertInfoComponent.width,
       autoFocus: false,
-      data: {text: message}
+      data: { text: message },
     });
   }
 
-  public confirm(tittle: string, contet: string, cancelTxtButton: string, confirmTxtButton, confirmFunction: any) {
+  public confirm(
+    tittle: string,
+    contet: string,
+    cancelTxtButton: string,
+    confirmTxtButton,
+    confirmFunction: any,
+    height?: string,
+    width?: string
+  ) {
     this.modalService.open(AlertConfirmComponent, {
-      height: AlertConfirmComponent.height,
-      width: AlertConfirmComponent.width,
+      height: height || AlertConfirmComponent.height,
+      width: width || AlertConfirmComponent.width,
       autoFocus: false,
       data: {
         title: tittle,
         content: contet,
         cancelTextButton: cancelTxtButton,
         confirmTextButton: confirmTxtButton,
-        confirm: confirmFunction
-      }
+        confirm: confirmFunction,
+      },
     });
   }
-
 }

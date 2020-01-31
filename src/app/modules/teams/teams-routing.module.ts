@@ -5,14 +5,16 @@ import { TeamsSortedComponent } from './components/teams-sorted/teams-sorted.com
 
 const routes: Routes = [
   {
-    path: '', component: TeamsComponent/* , children: [
+    path: '',
+    component: TeamsComponent /* , children: [
         {path: 'sorted', component: TeamsSortedComponent}
-    ] */}, // TODO: fix to use child path
-  { path: 'teams/sorted', component: TeamsSortedComponent }
+    ] */,
+  }, // TODO: fix to use child path
+  { path: 'teams/sorted', component: TeamsSortedComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class TeamsRoutingModule { }
+export class TeamsRoutingModule {}

@@ -9,51 +9,50 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-player-crud',
   templateUrl: './player-crud.component.html',
-  styleUrls: ['./player-crud.component.scss']
+  styleUrls: ['./player-crud.component.scss'],
 })
 export class PlayerCrudComponent implements OnInit {
+  constructor(
+    private modalService: MatDialog,
+    private dialogService: DialogService,
+    private playerService: PlayersService
+  ) {}
 
-  constructor(private modalService: MatDialog,
-              private dialogService: DialogService,
-              private playerService: PlayersService) { }
-
-  ngOnInit() { }
+  ngOnInit() {}
 
   private openForm(player?: Player) {
     const dialogRef = this.modalService.open(PlayerFormComponent, {
       autoFocus: false,
-      data: player
+      data: player,
     });
     return dialogRef.afterClosed();
   }
 
   create() {
-    this.openForm()
-      .subscribe(newPlayer => {
-        if (!newPlayer) { return; }
-        this.playerService.save(newPlayer)
-          .subscribe(response => {
-            if (!response) {
-              this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.');
-            }
-          });
+    this.openForm().subscribe(newPlayer => {
+      if (!newPlayer) {
+        return;
+      }
+      this.playerService.save(newPlayer).subscribe(response => {
+        if (!response) {
+          this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.', '200px');
+        }
       });
+    });
   }
 
   public updateDelete(player: Player) {
-    this.openForm(player)
-      .subscribe(result => {
-        if (result && CrudOperations.isEqual(CrudOperations.UPDATE, result.operation)) {
-          this.playerService.update(result.player)
-            .subscribe((players: Player[]) => {
-              if (!players) {
-                this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.');
-              }
-            });
-        } else if (result && CrudOperations.isEqual(CrudOperations.DELETE, result.operation)) {
-          this.deletePlayer(result.player);
-        }
-      });
+    this.openForm(player).subscribe(result => {
+      if (result && CrudOperations.isEqual(CrudOperations.UPDATE, result.operation)) {
+        this.playerService.update(result.player).subscribe((players: Player[]) => {
+          if (!players) {
+            this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.', '200px');
+          }
+        });
+      } else if (result && CrudOperations.isEqual(CrudOperations.DELETE, result.operation)) {
+        this.deletePlayer(result.player);
+      }
+    });
   }
 
   deletePlayer(player: Player) {
@@ -63,13 +62,12 @@ export class PlayerCrudComponent implements OnInit {
       'Cancelar',
       'Sim, delete!',
       () => {
-        this.playerService.delete(player.id).subscribe(
-          (players: Player[]) => {
-            if (!players) {
-              this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.');
-            }
+        this.playerService.delete(player.id).subscribe((players: Player[]) => {
+          if (!players) {
+            this.dialogService.errorMessage('Ocorreu um erro durante essa operação, tente novamente mais tarde.', '200px');
           }
-        );
-    });
+        });
+      }
+    );
   }
 }

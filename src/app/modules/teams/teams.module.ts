@@ -6,21 +6,10 @@ import { TeamsComponent } from './page/teams.component';
 import { TeamsRoutingModule } from './teams-routing.module';
 
 @NgModule({
-  declarations: [
-    TeamsSortedComponent,
-    TeamsComponent,
-    TeamsMenuItemComponent
-  ],
-  imports: [
-    TeamsRoutingModule,
-    SharedModule
-  ],
-  exports: [
-    TeamsSortedComponent,
-    TeamsComponent,
-    TeamsMenuItemComponent
-  ],
+  declarations: [TeamsSortedComponent, TeamsComponent, TeamsMenuItemComponent],
+  imports: [TeamsRoutingModule, SharedModule],
+  exports: [TeamsSortedComponent, TeamsComponent, TeamsMenuItemComponent],
   providers: [],
-  entryComponents: []
+  entryComponents: [],
 })
-export class TeamsModule { }
+export class TeamsModule {}

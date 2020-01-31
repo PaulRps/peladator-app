@@ -62,10 +62,7 @@ export class Player {
   }
 
   public toString(): string {
-    return 'id: ' + this.id +
-      '\nname: ' + this.name +
-      '\nage: ' + this.age +
-      '\nskillLevel: ' + this.skillLevel; // +
+    return 'id: ' + this.id + '\nname: ' + this.name + '\nage: ' + this.age + '\nskillLevel: ' + this.skillLevel; // +
     //    "\nposition: " + this.positionId;
   }
 }

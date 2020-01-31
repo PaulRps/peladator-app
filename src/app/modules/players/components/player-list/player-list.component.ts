@@ -5,15 +5,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Player } from '../../../../shared/models/player.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PlayersService } from '../../players.service';
-import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-player-list',
   templateUrl: './player-list.component.html',
-  styleUrls: ['./player-list.component.scss']
+  styleUrls: ['./player-list.component.scss'],
 })
 export class PlayerListComponent implements OnInit {
-
   displayedColumns: string[] = ['player'];
   players: MatTableDataSource<Player> = new MatTableDataSource<Player>();
   selection = new SelectionModel<Player>(true, []);
@@ -22,18 +20,14 @@ export class PlayerListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild('playerCrud', { static: true }) playerCrud: PlayerCrudComponent;
 
-  constructor(private playerService: PlayersService,
-    private authService: AuthService) { }
+  constructor(private playerService: PlayersService) {}
 
   ngOnInit() {
     this.paginator.hidePageSize = true;
-    this.authService.getToken();
     this.getPlayers();
-    this.playerService.playersEvent.subscribe(
-      (players: Player[]) => {
-        this.players.data = players;
-      }
-    );
+    this.playerService.playersEvent.subscribe((players: Player[]) => {
+      this.players.data = players;
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -41,11 +35,10 @@ export class PlayerListComponent implements OnInit {
   }
 
   getPlayers(): void {
-    this.playerService.getAll()
-      .subscribe(players => {
-        this.players = new MatTableDataSource(players);
-        this.players.paginator = this.paginator;
-      });
+    this.playerService.getAll().subscribe(players => {
+      this.players = new MatTableDataSource(players);
+      this.players.paginator = this.paginator;
+    });
   }
 
   isAllSelected() {
@@ -64,9 +57,7 @@ export class PlayerListComponent implements OnInit {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.players.data.forEach(row => this.selection.select(row));
+    this.isAllSelected() ? this.selection.clear() : this.players.data.forEach(row => this.selection.select(row));
   }
 
   update(player: Player) {

@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~@angular/material/theming';
-@import "./assets/styles/themes/theme.scss";
+@import './assets/styles/themes/theme.scss';
 
 @include mat-core();
 
@@ -12,7 +12,6 @@ $theme: mat-dark-theme($primary, $accent, $warn);
 
 @include angular-material-theme($theme);
 @include material-custom-theme($theme);
-
 
 html,
 body {

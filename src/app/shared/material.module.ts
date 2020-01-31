@@ -20,7 +20,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 
-
 @NgModule({
   imports: [
     MatTableModule,
@@ -41,7 +40,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatDividerModule,
     MatCardModule,
     MatDialogModule,
-    MatChipsModule
+    MatChipsModule,
   ],
   exports: [
     MatTableModule,
@@ -62,8 +61,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatDividerModule,
     MatCardModule,
     MatDialogModule,
-    MatChipsModule
-  ]
+    MatChipsModule,
+  ],
 })
-
-export class MaterialModule { }
+export class MaterialModule {}

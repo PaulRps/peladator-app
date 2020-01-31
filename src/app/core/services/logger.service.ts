@@ -1,4 +1,4 @@
-import { Observable, of } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 export class LoggerService {
@@ -8,7 +8,7 @@ export class LoggerService {
         console.error(error); // log to console instead
         LoggerService.log(`${operation} failed: ${error.message}`, error);
       }
-      return of(result as T);
+      return throwError(result as T);
     };
   }
 

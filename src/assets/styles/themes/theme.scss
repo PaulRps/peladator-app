@@ -1,5 +1,5 @@
-@import "../../../../node_modules/@angular/material/theming";
-@import "../../../app/app-theme.scss";
+@import '../../../../node_modules/@angular/material/theming';
+@import '../../../app/app-theme.scss';
 
 @mixin material-custom-theme($theme) {
   $primary: map-get($theme, primary);

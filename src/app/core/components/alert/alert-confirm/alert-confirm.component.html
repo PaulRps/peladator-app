@@ -1,13 +1,15 @@
 <div class="text-center">
   <mat-icon class="alert-icon" color="accent">help</mat-icon>
 </div>
-<h1 class="text-center" mat-dialog-title>{{data.title}}</h1>
+<h1 class="text-center" mat-dialog-title>{{ data.title }}</h1>
 <div mat-dialog-content style="height: 20%;">
   <div class="text-center">
-    <input type="text" matInput [(ngModel)]="data.content" disabled>
+    <input type="text" matInput [(ngModel)]="data.content" disabled />
   </div>
 </div>
 <div mat-dialog-actions class="d-flex justify-content-center align-bottom">
-  <button mat-raised-button (click)="close()" cdkFocusInitial>{{data.cancelTextButton}}</button>
-  <button mat-raised-button color="primary" (click)="data.confirm();close();" cdkFocusInitial>{{data.confirmTextButton}}</button>
+  <button mat-raised-button (click)="close()" cdkFocusInitial>{{ data.cancelTextButton }}</button>
+  <button mat-raised-button color="primary" (click)="data.confirm(); close()" cdkFocusInitial>
+    {{ data.confirmTextButton }}
+  </button>
 </div>
