@@ -12,8 +12,8 @@ export class LoggerService {
   }
 
   public static log(message: string, object: any) {
-    // if (!environment.production) {
-    console.log(message, object);
-    // }
+    if (!environment.production) {
+      console.log(message, object);
+    }
   }
 }

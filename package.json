@@ -15,7 +15,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --no-restaged"
+      "pre-commit": "pretty-quick --staged"
     }
   },
   "private": true,
