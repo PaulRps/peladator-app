@@ -9,11 +9,10 @@ import { Observable } from 'rxjs';
 const USER_URL = environment.apiUrl + '/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getById(id: number): Observable<User> {
     return this.http.get<User>(`${USER_URL}/${id}`).pipe(

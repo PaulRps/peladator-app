@@ -13,7 +13,15 @@
       </p>
       <p>
         <mat-form-field>
-          <input formControlName="password" id="user-password" autocomplete="on" type="password" matInput placeholder="Senha" required/>
+          <input
+            formControlName="password"
+            id="user-password"
+            autocomplete="on"
+            type="password"
+            matInput
+            placeholder="Senha"
+            required
+          />
           <mat-error *ngIf="f.password.hasError('required')">Campo obrigatório</mat-error>
         </mat-form-field>
       </p>
