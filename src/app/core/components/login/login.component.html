@@ -7,13 +7,13 @@
     <form [formGroup]="loginForm">
       <p>
         <mat-form-field>
-          <input formControlName="name" id="name" matInput placeholder="Nome" required />
+          <input formControlName="name" id="user-name" matInput placeholder="Nome" required />
           <mat-error *ngIf="f.name.hasError('required')">Campo obrigatório</mat-error>
         </mat-form-field>
       </p>
       <p>
         <mat-form-field>
-          <input formControlName="password" id="password" type="password" matInput placeholder="Senha" required />
+          <input formControlName="password" id="user-password" autocomplete="on" type="password" matInput placeholder="Senha" required/>
           <mat-error *ngIf="f.password.hasError('required')">Campo obrigatório</mat-error>
         </mat-form-field>
       </p>

@@ -5,7 +5,6 @@ export class LoggerService {
   public static handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       if (error && error.message) {
-        console.error(error); // log to console instead
         LoggerService.log(`${operation} failed: ${error.message}`, error);
       }
       return throwError(result as T);
@@ -13,8 +12,8 @@ export class LoggerService {
   }
 
   public static log(message: string, object: any) {
-    if (!environment.production) {
+    // if (!environment.production) {
       console.log(message, object);
-    }
+    // }
   }
 }

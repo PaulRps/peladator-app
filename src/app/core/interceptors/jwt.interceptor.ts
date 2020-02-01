@@ -1,3 +1,4 @@
+import { LoggerService } from './../services/logger.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
@@ -9,10 +10,11 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const jwt = this.authService.currentToken;
-    if (jwt && jwt.token) {
+    if (jwt && jwt.value) {
+      LoggerService.log(`url: ${request.url} jwt: `, jwt);
       request = request.clone({
         setHeaders: {
-          Authorization: `${jwt.type} ${jwt.token}`,
+          Authorization: `${jwt.type} ${jwt.value}`,
         },
       });
     }

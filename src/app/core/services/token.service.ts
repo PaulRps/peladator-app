@@ -1,3 +1,4 @@
+import { Token } from './../../shared/models/token.model';
 import { Injectable } from '@angular/core';
 
 const TOKEN_KEY = 'token';
@@ -6,11 +7,11 @@ const TOKEN_KEY = 'token';
   providedIn: 'root',
 })
 export class TokenService {
-  getToken() {
+  getToken(): Token {
     return JSON.parse(localStorage.getItem(TOKEN_KEY));
   }
 
-  setToken(token: any) {
+  setToken(token: Token) {
     localStorage.setItem(TOKEN_KEY, JSON.stringify(token));
   }
 
