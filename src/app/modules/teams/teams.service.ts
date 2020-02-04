@@ -9,7 +9,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
-const TEAM_URL = environment.apiUrl + '/team';
+const TEAM_URL = `${environment.apiUrl}/team`;
 
 @Injectable({
   providedIn: 'root',
@@ -18,14 +18,14 @@ export class TeamsService {
   constructor(private http: HttpClient) {}
 
   public loadTeamsPage() {
-    return this.http.get(TEAM_URL + '/load-teams-page').pipe(
+    return this.http.get(`${TEAM_URL}/load-teams-page`).pipe(
       tap((players: any) => LoggerService.log(`load teams page w/ id=${players ? players.toString() : ''}`, players)),
       catchError(LoggerService.handleError<Player[]>('loadTeamsPage'))
     );
   }
 
   public sort(sortTeam: any) {
-    return this.http.post(TEAM_URL + '/sort-teams', sortTeam, httpOptions).pipe(
+    return this.http.post(`${TEAM_URL}/sort-teams`, sortTeam, httpOptions).pipe(
       tap((players: Player[]) => LoggerService.log(`sort teams w/ id=${players ? players.toString() : ''}`, players)),
       catchError(LoggerService.handleError<Player[]>('sortTeams'))
     );

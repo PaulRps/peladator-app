@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <form [formGroup]="playerForm">
     <div class="form-group">
-      <mat-form-field class="">
+      <mat-form-field>
         <img
           matPrefix
           src="../../../assets/images/icons8-user-96-2.png"
@@ -15,16 +15,16 @@
     <div class="form-group">
       <mat-form-field>
         <input formControlName="name" id="name" matInput placeholder="Nome" value="" required />
-        <mat-error *ngIf="hasError('name', 'required')">Campo obrigatório</mat-error>
+        <mat-error *ngIf="f.name.hasError('required')">Campo obrigatório</mat-error>
       </mat-form-field>
     </div>
 
     <div class="form-group">
       <mat-form-field class="">
         <input formControlName="age" id="age" type="number" matInput placeholder="Idade" required />
-        <mat-error *ngIf="hasError('age', 'required')">Campo obrigatório</mat-error>
-        <mat-error *ngIf="hasError('age', 'min')">Valor mínimo é 1</mat-error>
-        <mat-error *ngIf="hasError('age', 'max')">Valor máximo é 99</mat-error>
+        <mat-error *ngIf="f.age.hasError('required')">Campo obrigatório</mat-error>
+        <mat-error *ngIf="f.age.hasError('min')">Valor mínimo é 1</mat-error>
+        <mat-error *ngIf="f.age.hasError('max')">Valor máximo é 99</mat-error>
       </mat-form-field>
     </div>
 
@@ -37,7 +37,7 @@
             {{ pos.name }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="hasError('position', 'required')">Campo obrigatório</mat-error>
+        <mat-error *ngIf="f.position.hasError('required')">Campo obrigatório</mat-error>
       </mat-form-field>
     </div>
 
@@ -51,9 +51,9 @@
           placeholder="Número da camisa"
           required
         />
-        <mat-error *ngIf="hasError('shirtNumber', 'required')">Campo obrigatório</mat-error>
-        <mat-error *ngIf="hasError('shirtNumber', 'min')">Valor mínimo é 1</mat-error>
-        <mat-error *ngIf="hasError('shirtNumber', 'max')">Valor máximo é 99</mat-error>
+        <mat-error *ngIf="f.shirtNumber.hasError('required')">Campo obrigatório</mat-error>
+        <mat-error *ngIf="f.shirtNumber.hasError('min')">Valor mínimo é 1</mat-error>
+        <mat-error *ngIf="f.shirtNumber.hasError('max')">Valor máximo é 99</mat-error>
       </mat-form-field>
     </div>
 

@@ -11,20 +11,23 @@
           <mat-error *ngIf="f.name.hasError('required')">Campo obrigatório</mat-error>
         </mat-form-field>
       </p>
-      <p>
+      <div class="form-group">
         <mat-form-field>
           <input
             formControlName="password"
             id="user-password"
             autocomplete="on"
-            type="password"
+            [type]="hide ? 'password' : 'text'"
             matInput
             placeholder="Senha"
             required
           />
           <mat-error *ngIf="f.password.hasError('required')">Campo obrigatório</mat-error>
         </mat-form-field>
-      </p>
+        <div class="d-flex justify-content-end">
+          <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </div>
+      </div>
       <div *ngIf="error" class="error">Usuário ou senha inválido!</div>
       <button mat-raised-button color="primary" (click)="submit()">Entrar</button>
     </form>

@@ -1,10 +1,10 @@
-import { RoleEnum } from './player.position';
+import { RoleEnum } from './role.enum';
 
 export class User {
-  _id: number;
-  _name: string;
-  _password: string;
-  _role: RoleEnum;
+  id: number;
+  name: string;
+  password: string;
+  role: RoleEnum;
 
   constructor() {}
 
@@ -12,23 +12,23 @@ export class User {
     return new User();
   }
 
-  public id(id: number): User {
-    this._id = id;
+  public sId(id: number): User {
+    this.id = id;
     return this;
   }
 
-  public name(name: string): User {
-    this._name = name;
+  public sName(name: string): User {
+    this.name = name;
     return this;
   }
 
-  public password(password: string): User {
-    this._password = password;
+  public sPassword(password: string): User {
+    this.password = password;
     return this;
   }
 
-  public role(role: RoleEnum): User {
-    this._role = role;
+  public sRole(role: RoleEnum): User {
+    this.role = role;
     return this;
   }
 }

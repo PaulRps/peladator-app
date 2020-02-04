@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   loginForm: FormGroup;
   error: any;
+  hide = true;
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) {
     if (this.authService.currentToken) {

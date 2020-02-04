@@ -7,32 +7,36 @@ export class Player {
   skillLevel: any;
   isSelected: boolean;
 
-  public setId(id) {
+  public static Build() {
+    return new Player();
+  }
+
+  public sId(id) {
     this.id = id;
     return this;
   }
 
-  public setName(name: string) {
+  public sName(name: string) {
     this.name = name;
     return this;
   }
 
-  public setAge(age: number) {
+  public sAge(age: number) {
     this.age = age;
     return this;
   }
 
-  public setShirtNumber(number) {
-    this.shirtNumber = number;
+  public sShirtNumber(shirtNumber: number) {
+    this.shirtNumber = shirtNumber;
     return this;
   }
 
-  public setPosition(position) {
+  public sPosition(position) {
     this.position = position;
     return this;
   }
 
-  public setSkillLevel(skillLevel) {
+  public sSkillLevel(skillLevel) {
     this.skillLevel = skillLevel;
     return this;
   }

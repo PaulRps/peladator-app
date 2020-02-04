@@ -6,16 +6,10 @@ import { Injectable } from '@angular/core';
 export class StyleManagerService {
   constructor() {}
 
-  /**
-   * Set the stylesheet with the specified key.
-   */
   setStyle(key: string, href: string) {
     getLinkElementForKey(key).setAttribute('href', href);
   }
 
-  /**
-   * Remove the stylesheet with the specified key.
-   */
   removeStyle(key: string) {
     const existingLinkElement = getExistingLinkElementByKey(key);
     if (existingLinkElement) {
@@ -25,7 +19,6 @@ export class StyleManagerService {
 }
 
 function getLinkElementForKey(key: string) {
-  // return document.getElementById('themeAsset');
   return getExistingLinkElementByKey(key) || createLinkElementWithKey(key);
 }
 

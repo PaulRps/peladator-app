@@ -2,7 +2,9 @@
 <div
   class="col-1 offset-9 col-sm-1 offset-sm-9 col-md-1 offset-md-9 col-lg-1 offset-lg-10 div-float-button fixed-bottom"
 >
-  <app-player-crud #playerCrud></app-player-crud>
+  <button mat-fab color="accent" (click)="create()" title="Add Jogador">
+    <mat-icon class="material-primary-color">person_add</mat-icon>
+  </button>
 </div>
 <div class="row">
   <mat-form-field class="col-4 col-sm-4 col-md-4 col-lg-4">
@@ -22,7 +24,7 @@
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr (click)="update(row)" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr (click)="select(row)" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
     <mat-paginator style="display: flex; justify-content: left;" [pageSizeOptions]="[10]" showFirstLastButtons>

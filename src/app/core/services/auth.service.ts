@@ -1,6 +1,4 @@
 import { Token } from './../../shared/models/token.model';
-import { UserService } from './user.service';
-import { User } from './../../shared/models/user.model';
 import { TokenService } from './token.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -24,14 +22,8 @@ const AUTH_URL = environment.apiUrl + '/auth';
 export class AuthService {
   private token: BehaviorSubject<Token>;
   public tokenObservable: Observable<Token>;
-  private user: User;
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private tokenService: TokenService,
-    private userService: UserService
-  ) {
+  constructor(private http: HttpClient, private router: Router, private tokenService: TokenService) {
     this.token = new BehaviorSubject<Token>(this.tokenService.getToken());
     this.tokenObservable = this.token.asObservable();
   }
@@ -40,16 +32,11 @@ export class AuthService {
     return this.token.value;
   }
 
-  public getCurrentUser() {
-    return this.user;
-  }
-
-  login(user: any): Observable<Token> {
+  public login(user: any): Observable<Token> {
     return this.http.post<Token>(AUTH_URL, user, httpOptions).pipe(
       tap(token => {
         this.tokenService.setToken(token);
         this.token.next(token);
-        this.userService.getById(token.id).subscribe(user => (this.user = user));
         return token;
       }),
       catchError(LoggerService.handleError<any>('Login'))

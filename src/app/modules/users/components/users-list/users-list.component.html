@@ -1,0 +1,31 @@
+<div
+  class="col-1 offset-9 col-sm-1 offset-sm-9 col-md-1 offset-md-9 col-lg-1 offset-lg-10 div-float-button fixed-bottom"
+>
+  <button mat-fab color="accent" (click)="create()" title="Add Usuário">
+    <mat-icon class="material-primary-color">person_add</mat-icon>
+  </button>
+</div>
+<mat-table mat-table [dataSource]="users" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="role">
+    <mat-header-cell *matHeaderCellDef> Função </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.role }} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+  <mat-row (click)="select(row)" *matRowDef="let row; columns: tableColumns"></mat-row>
+</mat-table>
+<mat-paginator
+  style="display: flex; justify-content: left;"
+  [pageSizeOptions]="[10]"
+  showFirstLastButtons
+></mat-paginator>

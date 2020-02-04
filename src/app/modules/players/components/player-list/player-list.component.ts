@@ -1,10 +1,11 @@
-import { PlayerCrudComponent } from '../player-crud/player-crud.component';
+import { PlayerFormComponent } from './../player-form/player-form.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Player } from '../../../../shared/models/player.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PlayersService } from '../../players.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-player-list',
@@ -18,9 +19,8 @@ export class PlayerListComponent implements OnInit {
   enablePlayersSelection = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild('playerCrud', { static: true }) playerCrud: PlayerCrudComponent;
 
-  constructor(private playerService: PlayersService) {}
+  constructor(private playerService: PlayersService, private modalService: MatDialog) {}
 
   ngOnInit() {
     this.paginator.hidePageSize = true;
@@ -47,7 +47,6 @@ export class PlayerListComponent implements OnInit {
     return numSelected === numRows;
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: Player): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
@@ -55,13 +54,21 @@ export class PlayerListComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ? this.selection.clear() : this.players.data.forEach(row => this.selection.select(row));
   }
 
-  update(player: Player) {
-    this.playerCrud.updateDelete(player);
+  select(row) {
+    this.modalService.open(PlayerFormComponent, {
+      autoFocus: false,
+      data: row,
+    });
+  }
+
+  create() {
+    this.modalService.open(PlayerFormComponent, {
+      autoFocus: false,
+    });
   }
 
   allowPlayersSelection() {

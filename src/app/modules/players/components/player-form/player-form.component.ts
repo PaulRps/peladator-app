@@ -1,7 +1,4 @@
-import { DialogService } from 'src/app/core/services/dialog.service';
-import { CrudOperations } from 'src/app/shared/constants/crud-operation';
 import { Component, OnInit, Input } from '@angular/core';
-
 import { PlayersService } from '../../players.service';
 import { Player } from '../../../../shared/models/player.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -32,7 +29,6 @@ export class PlayerFormComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<PlayerFormComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogService: DialogService,
     private playerService: PlayersService
   ) {}
 
@@ -61,9 +57,13 @@ export class PlayerFormComponent implements OnInit {
     });
   }
 
-  submit(isDeletion) {
+  get f() {
+    return this.playerForm.controls;
+  }
+
+  submit(isDeletion: boolean) {
     if (this.playerForm.invalid) {
-      this.formMarkAllasTouched();
+      this.playerForm.markAllAsTouched();
       return;
     }
 
@@ -72,45 +72,28 @@ export class PlayerFormComponent implements OnInit {
       return;
     }
 
-    const temp = isDeletion
-      ? this.data
-      : new Player()
-          .setId(this.data ? this.data.id : null)
-          .setName(this.playerForm.value.name)
-          .setAge(this.playerForm.value.age)
-          .setShirtNumber(this.playerForm.value.shirtNumber)
-          .setPosition(this.playerForm.value.position);
+    const player = Player.Build()
+      .sName(this.f.name.value)
+      .sAge(this.f.age.value)
+      .sShirtNumber(this.f.shirtNumber.value)
+      .sPosition(this.f.position.value);
 
-    this.setSkillLevel(temp);
-
-    this.playerForm.reset();
+    this.setSkillLevel(player);
 
     if (isDeletion) {
-      // delete
-      this.dialogRef.close({
-        operation: CrudOperations.DELETE,
-        player: temp,
-      });
+      this.playerService.delete(this.data.id).subscribe();
     } else if (this.data) {
-      // update
-      this.dialogRef.close({
-        operation: CrudOperations.UPDATE,
-        player: temp,
-      });
+      this.playerService.update(player.sId(this.data.id)).subscribe();
     } else {
-      // create
-      this.dialogRef.close(temp);
+      this.playerService.save(player).subscribe();
     }
+
+    this.playerForm.reset();
+    this.close();
   }
 
   close() {
     this.dialogRef.close();
-  }
-
-  formMarkAllasTouched() {
-    for (const field in this.playerForm.controls) {
-      this.playerForm.controls[field].markAsTouched();
-    }
   }
 
   setSkillLevel(player) {
@@ -147,8 +130,4 @@ export class PlayerFormComponent implements OnInit {
   compareItemSelect(a, b) {
     return a && b ? a.id === b.id : a === b;
   }
-
-  hasError = (controlName: string, errorName: string) => {
-    return this.playerForm.controls[controlName].hasError(errorName);
-  };
 }

@@ -3,7 +3,7 @@
     <h2 matSubheader><mat-icon color="white">sports_soccer</mat-icon>&nbsp;&nbsp;Peladator</h2>
   </div>
 
-  <a class="clickable" mat-list-item routerLink="/player" routerLinkActive="active" (click)="onSidenavClose()">
+  <a class="clickable" mat-list-item routerLink="/players" routerLinkActive="active" (click)="onSidenavClose()">
     <mat-icon color="primary" class="material-primary-color">people</mat-icon>
     <span class="nav-caption">Jogadores</span>
   </a>
@@ -18,4 +18,10 @@
     <mat-icon class="material-primary-color">monetization_on</mat-icon>
     <span class="nav-caption">Pagamento</span>
   </a> -->
+  <p *ngIf="isAdmin()" mat-list-item class="nav-caption">Administrador</p>
+  <mat-divider *ngIf="isAdmin()"></mat-divider>
+  <a *ngIf="isAdmin()" class="clickable" mat-list-item routerLink="/users" (click)="onSidenavClose()">
+    <mat-icon color="primary">supervised_user_circle</mat-icon>
+    <span class="nav-caption">Usuários</span>
+  </a>
 </mat-nav-list>

@@ -1,6 +1,5 @@
 import { TeamsModule } from './../teams/teams.module';
 import { PlayerListComponent } from './components/player-list/player-list.component';
-import { PlayerCrudComponent } from './components/player-crud/player-crud.component';
 import { SharedModule } from '../../shared/shared.module';
 import { PlayerFormComponent } from './components/player-form/player-form.component';
 import { NgModule } from '@angular/core';
@@ -9,7 +8,7 @@ import { CoreModule } from 'src/app/core/core.module';
 import { PlayersRoutingModule } from './players-routing.module';
 
 @NgModule({
-  declarations: [PlayerFormComponent, PlayerListComponent, PlayersComponent, PlayerCrudComponent],
+  declarations: [PlayerFormComponent, PlayerListComponent, PlayersComponent],
   imports: [PlayersRoutingModule, CoreModule, SharedModule, TeamsModule],
   exports: [],
   entryComponents: [PlayerFormComponent],

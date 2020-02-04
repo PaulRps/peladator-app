@@ -11,7 +11,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
-const PLAYER_URL = environment.apiUrl + '/player';
+const PLAYER_URL = `${environment.apiUrl}/player`;
 
 @Injectable({
   providedIn: 'root',
@@ -21,15 +21,15 @@ export class PlayersService {
 
   constructor(private http: HttpClient, private dialogService: DialogService) {}
 
-  getAll() {
-    return this.http.get<any[]>(PLAYER_URL).pipe(
+  getAll(): Observable<Player[]> {
+    return this.http.get<Player[]>(PLAYER_URL).pipe(
       tap(_ => LoggerService.log('fetched players', _)),
       catchError(LoggerService.handleError('getPlayers', []))
     );
   }
 
   getFormData(): Observable<any> {
-    return this.http.get<any>(PLAYER_URL + '/form-data').pipe(
+    return this.http.get<any>(`${PLAYER_URL}/form-data`).pipe(
       tap(_ => LoggerService.log('fetched form-data', _)),
       catchError(LoggerService.handleError('getFormData', []))
     );
@@ -68,15 +68,15 @@ export class PlayersService {
     );
   }
 
-  groupByPosition() {
-    return this.http.get(PLAYER_URL + '/groupby-position').pipe(
+  groupByPosition(): Observable<any> {
+    return this.http.get(`${PLAYER_URL}/groupby-position`).pipe(
       tap(_ => LoggerService.log('group by position players', _)),
       catchError(LoggerService.handleError('groupByPosition', []))
     );
   }
 
-  sortTeams(selectedPlayers: Player[]) {
-    return this.http.post(PLAYER_URL + '/sort-teams', selectedPlayers, httpOptions).pipe(
+  sortTeams(selectedPlayers: Player[]): Observable<any> {
+    return this.http.post(`${PLAYER_URL}/sort-teams`, selectedPlayers, httpOptions).pipe(
       tap((players: Player[]) => LoggerService.log(`sort teams w/ id=${players ? players.toString() : ''}`, players)),
       catchError(LoggerService.handleError<Player[]>('sortTeams'))
     );
