@@ -5,7 +5,7 @@ import { PlayerFormComponent } from './components/player-form/player-form.compon
 import { NgModule } from '@angular/core';
 import { PlayersComponent } from './page/players.component';
 import { CoreModule } from 'src/app/core/core.module';
-import { PlayersRoutingModule } from './players-routing.module';
+import { PlayersRoutingModule } from './players.routing.module';
 
 @NgModule({
   declarations: [PlayerFormComponent, PlayerListComponent, PlayersComponent],

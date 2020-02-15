@@ -13,7 +13,7 @@ const httpOptions = {
   }),
 };
 
-const USER_URL = environment.apiUrl + '/user';
+const USER_URL = `${environment.apiUrl}/user`;
 
 @Injectable({
   providedIn: 'root',

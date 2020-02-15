@@ -20,8 +20,9 @@ export class UsersListComponent implements OnInit {
   constructor(private userService: UserService, private modalService: MatDialog) {}
 
   ngOnInit() {
+    this.paginator.hidePageSize = true;
     this.userService.getAll().subscribe(users => {
-      this.users = new MatTableDataSource(users);
+      this.users.data = users;
       this.users.paginator = this.paginator;
     });
     this.userService.getEvent().subscribe(users => (this.users.data = users));

@@ -8,17 +8,19 @@
     <span class="nav-caption">Jogadores</span>
   </a>
   <mat-divider></mat-divider>
-  <!-- <app-team-menu-item class="clickable" (click)="onSidenavClose()"> </app-team-menu-item> -->
   <a class="clickable" mat-list-item routerLink="/teams" (click)="onSidenavClose()">
     <mat-icon color="primary" class=" align-middle">casino</mat-icon>
     <span>&nbsp;&nbsp;Times</span>
   </a>
   <mat-divider></mat-divider>
-  <!-- <a class="clickable" mat-list-item routerLink="#" (click)="onSidenavClose()">
+  <nav class="navbar">
+    <span *ngIf="isAdmin()" class="">Administrador</span>
+  </nav>
+  <mat-divider *ngIf="isAdmin()"></mat-divider>
+  <a class="clickable" mat-list-item routerLink="/payments" (click)="onSidenavClose()">
     <mat-icon class="material-primary-color">monetization_on</mat-icon>
-    <span class="nav-caption">Pagamento</span>
-  </a> -->
-  <p *ngIf="isAdmin()" mat-list-item class="nav-caption">Administrador</p>
+    <span class="nav-caption">Pagamentos</span>
+  </a>
   <mat-divider *ngIf="isAdmin()"></mat-divider>
   <a *ngIf="isAdmin()" class="clickable" mat-list-item routerLink="/users" (click)="onSidenavClose()">
     <mat-icon color="primary">supervised_user_circle</mat-icon>
