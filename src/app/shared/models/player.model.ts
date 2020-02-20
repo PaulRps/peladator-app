@@ -6,6 +6,7 @@ export class Player {
   position: any;
   skillLevel: any;
   isSelected: boolean;
+  paymentDate: string;
 
   public static Build() {
     return new Player();
@@ -38,6 +39,11 @@ export class Player {
 
   public sSkillLevel(skillLevel) {
     this.skillLevel = skillLevel;
+    return this;
+  }
+
+  public sPaymentDate(paymentDate:string) {
+    this.paymentDate = paymentDate;
     return this;
   }
 
