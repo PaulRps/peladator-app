@@ -8,6 +8,8 @@ export class Player {
   isSelected: boolean;
   paymentDate: string;
 
+  constructor() {this.isSelected = false;}
+
   public static Build() {
     return new Player();
   }

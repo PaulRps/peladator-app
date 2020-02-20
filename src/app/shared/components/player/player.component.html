@@ -2,7 +2,8 @@
   cols="1"
   rowHeight="10px"
   gutterSize="10px"
-  [ngClass]="{ 'selected-player': data.isSelected, 'default-player': !data.isSelected }"
+  [ngStyle]="{'opacity': data.isSelected === undefined || data.isSelected ? 1 : 0.5 }"
+  class="default-player"  
 >
   <mat-grid-tile [colspan]="1" [rowspan]="2" style="margin-top: 5px;">
     <div class="flex w-full justify-center relative my-2">

@@ -49,14 +49,15 @@
       </mat-form-field>
       <mat-form-field class="w-full">
         <mat-chip-list>
-          <mat-chip
-            *ngFor="let item of sortStrategies"
-            [hidden]="item.isSelected"
-            color="accent"
-            (click)="add(item)"
-            selected
-            >Posição</mat-chip
-          >
+          <div *ngFor="let item of sortStrategies">
+            <mat-chip
+              *ngIf="!item.isSelected"
+              color="accent"
+              (click)="add(item)"
+              selected
+              >Posição</mat-chip
+            >
+          </div>
         </mat-chip-list>
       </mat-form-field>
     </div>
@@ -66,7 +67,7 @@
   </form>
 </div>
 
-<div *ngFor="let player of players | keyvalue: originalOrder" class="col col-sm-12" style="padding: 0 0 0 0;">
+<div *ngFor="let player of players | keyvalue: originalOrder" class="w-full" style="padding: 0 0 0 0;">
   <mat-card *ngIf="player.value.length > 0">
     <mat-card-header>
       <div mat-card-avatar>

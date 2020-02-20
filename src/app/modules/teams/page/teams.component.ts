@@ -13,7 +13,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
   styleUrls: ['./teams.component.scss'],
 })
 export class TeamsComponent implements OnInit {
-  players: any; // {[key:string] : Player[]};
+  players: { [key: string]: Player[] };
   sortTeamForm: FormGroup;
   amount: number;
   sortFields: any[];
@@ -33,6 +33,11 @@ export class TeamsComponent implements OnInit {
     });
     this.teamService.loadTeamsPage().subscribe(response => {
       this.players = response.playersGroupedByPosition;
+      new Map(Object.entries(this.players)).forEach((v, k) => {
+        v.forEach(p => {
+          p.isSelected = false;
+        });
+      });
       this.sortStrategies = response.sortStrategies;
     });
     this.sortFields = [{ id: 0, name: 'Nível' }];
