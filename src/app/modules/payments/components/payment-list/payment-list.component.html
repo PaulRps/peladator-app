@@ -1,11 +1,9 @@
-<div
-  class="col-1 offset-9 col-sm-1 offset-sm-9 col-md-1 offset-md-9 col-lg-1 offset-lg-10 div-float-button fixed-bottom"
->
+<div class="fixed z-50" style="bottom: 24px; right: 24px;">
   <button mat-fab color="accent" (click)="create()" title="Add Pagamento">
     <mat-icon class="material-primary-color">add</mat-icon>
   </button>
 </div>
-<mat-table mat-table [dataSource]="payments" class="mat-elevation-z8">
+<mat-table mat-table [dataSource]="payments" class="z-8">
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>

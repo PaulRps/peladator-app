@@ -1,5 +1,5 @@
 <!-- <div class="d-flex justify-content-center"> -->
-<mat-card class="border rounded">
+<mat-card class="rounded-lg">
   <mat-card-header>
     <mat-card-title>Login</mat-card-title>
   </mat-card-header>
@@ -11,26 +11,29 @@
           <mat-error *ngIf="f.name.hasError('required')">Campo obrigatório</mat-error>
         </mat-form-field>
       </p>
-      <div class="form-group">
-        <mat-form-field>
-          <input
-            formControlName="password"
-            id="user-password"
-            autocomplete="on"
-            [type]="hide ? 'password' : 'text'"
-            matInput
-            placeholder="Senha"
-            required
-          />
-          <mat-error *ngIf="f.password.hasError('required')">Campo obrigatório</mat-error>
-        </mat-form-field>
-        <div class="d-flex justify-content-end">
-          <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-        </div>
-      </div>
+      <mat-form-field>
+        <input
+          formControlName="password"
+          id="user-password"
+          autocomplete="on"
+          [type]="hide ? 'password' : 'text'"
+          matInput
+          placeholder="Senha"
+          required
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon matSuffix>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="f.password.hasError('required')">Campo obrigatório</mat-error>
+      </mat-form-field>
       <div *ngIf="error" class="error">Usuário ou senha inválido!</div>
       <button mat-raised-button color="primary" (click)="submit()">Entrar</button>
     </form>
   </mat-card-content>
 </mat-card>
-<!-- </div> -->

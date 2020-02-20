@@ -1,11 +1,11 @@
 <div
-  class="col-1 offset-9 col-sm-1 offset-sm-9 col-md-1 offset-md-9 col-lg-1 offset-lg-10 div-float-button fixed-bottom"
+  class="fixed z-50" style="bottom: 24px; right: 24px;"
 >
   <button mat-fab color="accent" (click)="create()" title="Add Usuário">
     <mat-icon class="material-primary-color">person_add</mat-icon>
   </button>
 </div>
-<mat-table mat-table [dataSource]="users" class="mat-elevation-z8">
+<mat-table mat-table [dataSource]="users" class="shadow">
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
@@ -25,7 +25,7 @@
   <mat-row (click)="select(row)" *matRowDef="let row; columns: tableColumns"></mat-row>
 </mat-table>
 <mat-paginator
-  style="display: flex; justify-content: left;"
+  style="display: flex;"
   [pageSizeOptions]="[10]"
   showFirstLastButtons
 ></mat-paginator>

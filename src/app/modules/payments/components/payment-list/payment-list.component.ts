@@ -29,6 +29,7 @@ export class PaymentListComponent implements OnInit {
 
   select(row) {
     this.modalService.open(PaymentFormComponent, {
+      width: '400px',
       autoFocus: false,
       data: row,
     });
@@ -36,6 +37,7 @@ export class PaymentListComponent implements OnInit {
 
   create() {
     this.modalService.open(PaymentFormComponent, {
+      width: '400px',
       autoFocus: false,
     });
   }

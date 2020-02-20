@@ -7,7 +7,7 @@
     <input type="text" matInput [(ngModel)]="data.content" disabled />
   </div>
 </div>
-<div mat-dialog-actions class="d-flex justify-content-center align-bottom">
+<div mat-dialog-actions class="flex justify-center items-end">
   <button mat-raised-button (click)="close()" cdkFocusInitial>{{ data.cancelTextButton }}</button>
   <button mat-raised-button color="primary" (click)="data.confirm(); close()" cdkFocusInitial>
     {{ data.confirmTextButton }}

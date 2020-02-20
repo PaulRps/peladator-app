@@ -1,86 +1,75 @@
 <h4 mat-dialog-title id="modal-basic-title">Dados do Jogador</h4>
 <div mat-dialog-content>
   <form [formGroup]="playerForm">
-    <div class="form-group">
-      <mat-form-field>
-        <img
-          matPrefix
-          src="../../../assets/images/icons8-user-96-2.png"
-          class="img-fluid rounded-circle hoverable"
-          alt="hoverable"
-        />
-        <input matInput placeholder="" id="issueType" disabled />
-      </mat-form-field>
-    </div>
-    <div class="form-group">
-      <mat-form-field>
-        <input formControlName="name" id="name" matInput placeholder="Nome" value="" required />
-        <mat-error *ngIf="f.name.hasError('required')">Campo obrigatório</mat-error>
-      </mat-form-field>
-    </div>
+    <mat-form-field>
+      <img
+        matPrefix
+        src="../../../assets/images/icons8-user-96-2.png"
+        class="img-fluid rounded-circle hoverable"
+        alt="hoverable"
+      />
+      <input matInput placeholder="" id="issueType" disabled />
+    </mat-form-field>
 
-    <div class="form-group">
-      <mat-form-field class="">
-        <input formControlName="age" id="age" type="number" matInput placeholder="Idade" required />
-        <mat-error *ngIf="f.age.hasError('required')">Campo obrigatório</mat-error>
-        <mat-error *ngIf="f.age.hasError('min')">Valor mínimo é 1</mat-error>
-        <mat-error *ngIf="f.age.hasError('max')">Valor máximo é 99</mat-error>
-      </mat-form-field>
-    </div>
+    <mat-form-field>
+      <input formControlName="name" id="name" matInput placeholder="Nome" value="" required />
+      <mat-error *ngIf="f.name.hasError('required')">Campo obrigatório</mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <mat-form-field>
-        <mat-label>Posição</mat-label>
-        <mat-select name="position" [compareWith]="compareItemSelect" formControlName="position" required>
-          <mat-option [value]="">--</mat-option>
-          <mat-option *ngFor="let pos of playerPositions" [value]="pos">
-            {{ pos.name }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="f.position.hasError('required')">Campo obrigatório</mat-error>
-      </mat-form-field>
-    </div>
+    <mat-form-field>
+      <input formControlName="age" id="age" type="number" matInput placeholder="Idade" required />
+      <mat-error *ngIf="f.age.hasError('required')">Campo obrigatório</mat-error>
+      <mat-error *ngIf="f.age.hasError('min')">Valor mínimo é 1</mat-error>
+      <mat-error *ngIf="f.age.hasError('max')">Valor máximo é 99</mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <mat-form-field class="">
-        <input
-          formControlName="shirtNumber"
-          id="shirtNumber"
-          type="number"
-          matInput
-          placeholder="Número da camisa"
-          required
-        />
-        <mat-error *ngIf="f.shirtNumber.hasError('required')">Campo obrigatório</mat-error>
-        <mat-error *ngIf="f.shirtNumber.hasError('min')">Valor mínimo é 1</mat-error>
-        <mat-error *ngIf="f.shirtNumber.hasError('max')">Valor máximo é 99</mat-error>
-      </mat-form-field>
-    </div>
+    <mat-form-field>
+      <mat-label>Posição</mat-label>
+      <mat-select name="position" [compareWith]="compareItemSelect" formControlName="position" required>
+        <mat-option [value]="">--</mat-option>
+        <mat-option *ngFor="let pos of playerPositions" [value]="pos">
+          {{ pos.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.position.hasError('required')">Campo obrigatório</mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <mat-form-field>
-        <input matInput placeholder="Nível" id="skillLevel" disabled required />
-        <mat-icon style="cursor: pointer;" #star1 (click)="activeStar(star1, 1)" [ngClass]="starIconClasses[0]"
-          >grade
-        </mat-icon>
-        <mat-icon style="cursor: pointer;" #star2 (click)="activeStar(star2, 2)" [ngClass]="starIconClasses[1]"
-          >grade
-        </mat-icon>
-        <mat-icon style="cursor: pointer;" #star3 (click)="activeStar(star3, 3)" [ngClass]="starIconClasses[2]"
-          >grade
-        </mat-icon>
-        <mat-icon style="cursor: pointer;" #star4 (click)="activeStar(star4, 4)" [ngClass]="starIconClasses[3]"
-          >grade
-        </mat-icon>
-        <mat-icon style="cursor: pointer;" #star5 (click)="activeStar(star5, 5)" [ngClass]="starIconClasses[4]"
-          >grade
-        </mat-icon>
-        <p class="has-error" *ngIf="hasErrorSkillLevelField">Campo obrigatório</p>
-      </mat-form-field>
-    </div>
+    <mat-form-field>
+      <input
+        formControlName="shirtNumber"
+        id="shirtNumber"
+        type="number"
+        matInput
+        placeholder="Número da camisa"
+        required
+      />
+      <mat-error *ngIf="f.shirtNumber.hasError('required')">Campo obrigatório</mat-error>
+      <mat-error *ngIf="f.shirtNumber.hasError('min')">Valor mínimo é 1</mat-error>
+      <mat-error *ngIf="f.shirtNumber.hasError('max')">Valor máximo é 99</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Nível" id="skillLevel" disabled required />
+      <mat-icon style="cursor: pointer;" #star1 (click)="activeStar(star1, 1)" [ngClass]="starIconClasses[0]"
+        >grade
+      </mat-icon>
+      <mat-icon style="cursor: pointer;" #star2 (click)="activeStar(star2, 2)" [ngClass]="starIconClasses[1]"
+        >grade
+      </mat-icon>
+      <mat-icon style="cursor: pointer;" #star3 (click)="activeStar(star3, 3)" [ngClass]="starIconClasses[2]"
+        >grade
+      </mat-icon>
+      <mat-icon style="cursor: pointer;" #star4 (click)="activeStar(star4, 4)" [ngClass]="starIconClasses[3]"
+        >grade
+      </mat-icon>
+      <mat-icon style="cursor: pointer;" #star5 (click)="activeStar(star5, 5)" [ngClass]="starIconClasses[4]"
+        >grade
+      </mat-icon>
+      <p class="has-error" *ngIf="hasErrorSkillLevelField">Campo obrigatório</p>
+    </mat-form-field>
   </form>
 </div>
-<div mat-dialog-actions class="d-flex justify-content-end">
+<div mat-dialog-actions class="flex justify-end">
   <button
     class="decrease-horizontal-padding"
     *ngIf="data"

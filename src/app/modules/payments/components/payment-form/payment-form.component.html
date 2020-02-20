@@ -1,47 +1,41 @@
 <h4 mat-dialog-title id="modal-basic-title">Dados do Pagamento</h4>
 <div mat-dialog-content>
   <form [formGroup]="paymentForm">
-    <div class="form-group">
-      <mat-form-field>
-        <mat-label>Jogador</mat-label>
-        <mat-select name="player" [compareWith]="compareItemSelect" formControlName="player" required>
-          <mat-option [value]="">--</mat-option>
-          <mat-option *ngFor="let p of players" [value]="p">
-            {{ p.name }}
-            <small> - {{ p.position.shortName }}</small>
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="f.player.hasError('required')">Campo obrigatório</mat-error>
-      </mat-form-field>
-    </div>
+    <mat-form-field class="w-full">
+      <mat-label>Jogador</mat-label>
+      <mat-select name="player" [compareWith]="compareItemSelect" formControlName="player" required>
+        <mat-option [value]="">--</mat-option>
+        <mat-option *ngFor="let p of players" [value]="p">
+          {{ p.name }}
+          <small> - {{ p.position.shortName }}</small>
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.player.hasError('required')">Campo obrigatório</mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <mat-form-field>
-        <input
-          [specialCharacters]="['$', ',', 'R']"
-          mask="R$00,00"
-          formControlName="value"
-          id="value"
-          matInput
-          placeholder="Valor"
-          value=""
-          required
-        />
-        <mat-error *ngIf="f.value.hasError('required')">Campo obrigatório</mat-error>
-      </mat-form-field>
-    </div>
+    <mat-form-field class="w-full">
+      <input
+        [specialCharacters]="['$', ',', 'R']"
+        mask="R$00,00"
+        formControlName="value"
+        id="value"
+        matInput
+        placeholder="Valor"
+        value=""
+        required
+      />
+      <mat-error *ngIf="f.value.hasError('required')">Campo obrigatório</mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <mat-form-field>
-        <input formControlName="date" id="date-id" matInput [matDatepicker]="picker" placeholder="Data" required />
-        <mat-error *ngIf="f.date.hasError('required')">Campo obrigatório</mat-error>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
+    <mat-form-field class="w-full">
+      <input formControlName="date" id="date-id" matInput [matDatepicker]="picker" placeholder="Data" required />
+      <mat-error *ngIf="f.date.hasError('required')">Campo obrigatório</mat-error>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
   </form>
 </div>
-<div mat-dialog-actions class="d-flex justify-content-end">
+<div mat-dialog-actions class="flex justify-end">
   <button
     class="decrease-horizontal-padding"
     *ngIf="data"

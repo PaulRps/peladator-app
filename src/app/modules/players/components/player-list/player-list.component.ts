@@ -60,6 +60,7 @@ export class PlayerListComponent implements OnInit {
 
   select(row) {
     this.modalService.open(PlayerFormComponent, {
+      width: '400px',
       autoFocus: false,
       data: row,
     });
@@ -67,6 +68,7 @@ export class PlayerListComponent implements OnInit {
 
   create() {
     this.modalService.open(PlayerFormComponent, {
+      width: '400px',
       autoFocus: false,
     });
   }

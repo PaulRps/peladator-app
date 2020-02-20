@@ -1,34 +1,31 @@
-<div class="col-md-2">&nbsp;</div>
-<div
-  class="col-1 offset-9 col-sm-1 offset-sm-9 col-md-1 offset-md-9 col-lg-1 offset-lg-10 div-float-button fixed-bottom"
->
+<div class="fixed z-50" style="bottom: 24px; right: 24px;">
   <button mat-fab color="accent" (click)="create()" title="Add Jogador">
     <mat-icon class="material-primary-color">person_add</mat-icon>
   </button>
 </div>
-<div class="row">
-  <mat-form-field class="col-4 col-sm-4 col-md-4 col-lg-4">
+<div class="flex">
+  <mat-form-field class="w-4/12">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar" />
   </mat-form-field>
-  <div class="col-3 col-sm-3 col-md-3 col-lg-3 pull-right">
+  <div class="w-8/12 justify-end">
     <button mat-button>
       <app-teams-menu-item></app-teams-menu-item>
     </button>
   </div>
-  <div class="col-md-12">
-    <table mat-table [dataSource]="players" class="mat-elevation-z8">
-      <ng-container matColumnDef="player">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td class="clickable" mat-cell *matCellDef="let element">
-          <app-player [data]="element"></app-player>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr (click)="select(row)" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-
-    <mat-paginator style="display: flex; justify-content: left;" [pageSizeOptions]="[10]" showFirstLastButtons>
-    </mat-paginator>
-  </div>
 </div>
-<div class="col-md-2">&nbsp;</div>
+<div class="w-full">
+  <table mat-table [dataSource]="players" class="z-8">
+    <ng-container matColumnDef="player">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td class="clickable" mat-cell *matCellDef="let element">
+        <app-player [data]="element"></app-player>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr (click)="select(row)" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator style="display: flex; justify-content: left;" [pageSizeOptions]="[10]" showFirstLastButtons>
+  </mat-paginator>
+</div>
+<div class="w-2/12">&nbsp;</div>

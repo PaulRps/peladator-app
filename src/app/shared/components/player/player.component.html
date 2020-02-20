@@ -5,27 +5,30 @@
   [ngClass]="{ 'selected-player': data.isSelected, 'default-player': !data.isSelected }"
 >
   <mat-grid-tile [colspan]="1" [rowspan]="2" style="margin-top: 5px;">
-    <h4 class="text-center">{{ data.name }}</h4>
+    <div class="flex w-full justify-center relative my-2">
+      <h4 class="m-0 font-bold text-2xl">{{ data.name }}</h4>
+      <div class="absolute color-white" style="right: 10px; top: 2px">
+        <mat-icon> {{ data.paymentDate ? 'attach_money' : 'money_off' }}</mat-icon>
+      </div>
+    </div>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="6">
-    <div class="col-sm-1 border-right text-center" style="padding-left: 0px;">
-      <h2>{{ data.shirtNumber }}</h2>
+    <div class="w-6/12 items-end mr-2 pr-4 border-r-2 flex flex-col">
+      <h2 class="font-bold text-xl">{{ data.shirtNumber }}</h2>
       <h6>{{ data.position.shortName }}</h6>
       <small>{{ data.age }} anos</small>
     </div>
-    <div class="col-sm-2">
+    <div class="w-6/12">
       <img src="../../../assets/images/icons8-user-96-2.png" class="rounded-circle hoverable" alt="hoverable" />
     </div>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="3">
-    <div class="row">
-      <div class="col-sm-12 text-center">
-        <mat-icon [ngClass]="data.skillLevel.id >= 1 ? 'level-icon-active' : 'level-icon-inactive'">grade</mat-icon>
-        <mat-icon [ngClass]="data.skillLevel.id >= 2 ? 'level-icon-active' : 'level-icon-inactive'">grade</mat-icon>
-        <mat-icon [ngClass]="data.skillLevel.id >= 3 ? 'level-icon-active' : 'level-icon-inactive'">grade</mat-icon>
-        <mat-icon [ngClass]="data.skillLevel.id >= 4 ? 'level-icon-active' : 'level-icon-inactive'">grade</mat-icon>
-        <mat-icon [ngClass]="data.skillLevel.id >= 5 ? 'level-icon-active' : 'level-icon-inactive'">grade</mat-icon>
-      </div>
+    <div class="w-full text-center">
+      <mat-icon [ngClass]="data.skillLevel.id >= 1 ? 'level-icon-active' : 'level-icon-inactive'">grade</mat-icon>
+      <mat-icon [ngClass]="data.skillLevel.id >= 2 ? 'level-icon-active' : 'level-icon-inactive'">grade</mat-icon>
+      <mat-icon [ngClass]="data.skillLevel.id >= 3 ? 'level-icon-active' : 'level-icon-inactive'">grade</mat-icon>
+      <mat-icon [ngClass]="data.skillLevel.id >= 4 ? 'level-icon-active' : 'level-icon-inactive'">grade</mat-icon>
+      <mat-icon [ngClass]="data.skillLevel.id >= 5 ? 'level-icon-active' : 'level-icon-inactive'">grade</mat-icon>
     </div>
   </mat-grid-tile>
 </mat-grid-list>
