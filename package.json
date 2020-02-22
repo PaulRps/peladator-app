@@ -11,8 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prettier-format": "prettier --config ./.prettierrc.yml ./*.{ts,css,sass,html,json}",
-    "prettier-check": "prettier --config ./.prettierrc.yml ./*.{ts,css,sass,html,json}",
+    "prettier-format": "prettier --write --config ./.prettierrc.yml ./*.{ts,css,sass,html,json}",
+    "prettier-check": "prettier --debug-check --check --config ./.prettierrc.yml ./*.{ts,css,sass,html,json}",
     "compile-themes": "node-sass src/assets/styles/themes/source --output src/assets/styles/themes/compiled --output-style compressed",
     "tailwind-style": "tailwindcss build src/assets/styles/tailwindcss/tailwind.css -o src/assets/styles/tailwindcss/compiled-style.css"
   },
