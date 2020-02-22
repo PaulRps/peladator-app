@@ -11,6 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "prettier-format": "prettier --config ./.prettierrc.yml src/**/*.{ts,css,sass,html}",
+    "prettier-check": "prettier --config ./.prettierrc.yml src/**/*.{ts,css,sass,html}",
     "compile-themes": "node-sass src/assets/styles/themes/source --output src/assets/styles/themes/compiled --output-style compressed",
     "tailwind-style": "tailwindcss build src/assets/styles/tailwindcss/tailwind.css -o src/assets/styles/tailwindcss/compiled-style.css"
   },
@@ -27,6 +29,7 @@
     "@angular/compiler": "^9.0.2",
     "@angular/core": "~9.0.2",
     "@angular/forms": "~9.0.2",
+    "@angular/localize": "^9.0.2",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "~9.0.2",
     "@angular/platform-browser-dynamic": "~9.0.2",
@@ -68,6 +71,6 @@
     "tailwindcss": "^1.2.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "^3.7.5"
+    "typescript": "3.7.5"
   }
 }
