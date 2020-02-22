@@ -93,16 +93,19 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               "src/styles.scss",
-              {"inject":false,
+              {
+                "inject": false,
                 "input": "src/assets/styles/themes/compiled/pink-grey.css",
                 "bundleName": "pink-grey"
               },
-              {"inject":false,
+              {
+                "inject": false,
                 "input": "src/assets/styles/themes/compiled/purple-green.css",
                 "bundleName": "purple-green"
               },
 
-              {"inject":false,
+              {
+                "inject": false,
                 "input": "src/assets/styles/themes/compiled/deeppurple-amber.css",
                 "bundleName": "deeppurple-amber"
               }
