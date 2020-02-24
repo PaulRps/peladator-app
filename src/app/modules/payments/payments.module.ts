@@ -12,6 +12,5 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
 @NgModule({
   declarations: [PaymentListComponent, PaymentFormComponent, PaymentsComponent],
   imports: [CommonModule, PaymentsRoutingModule, SharedModule, NgxMaskModule.forRoot()],
-  entryComponents: [PaymentFormComponent],
 })
 export class PaymentsModule {}

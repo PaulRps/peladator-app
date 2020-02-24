@@ -11,7 +11,7 @@ export class AdminGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authService.currentToken;
-    if (currentUser && RoleEnum.ROLE_ADMIN === currentUser.role) {
+    if (currentUser?.role === RoleEnum.ROLE_ADMIN) {
       return true;
     }
 

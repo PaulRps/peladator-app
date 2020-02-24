@@ -70,29 +70,29 @@ export class TeamsComponent implements OnInit {
         players: selectedPlayers,
       })
       .subscribe(response => {
-        if (response && response.length > 0) {
+        if (response?.length > 0) {
           this.router.navigateByUrl('/teams/sorted', { state: response });
         }
       });
   }
 
-  selectPlayer = (player: Player) => {
+  selectPlayer(player: Player): void {
     player.isSelected = !player.isSelected;
-  };
+  }
 
-  selectAllPlayer = (players: Player[]): void => {
+  selectAllPlayer(players: Player[]): void {
     for (const p of players) {
       this.selectPlayer(p);
     }
-  };
+  }
 
-  originalOrder = (a: KeyValue<string, Player[]>, b: KeyValue<string, Player[]>): number => {
+  originalOrder(a: KeyValue<string, Player[]>, b: KeyValue<string, Player[]>): number {
     return 0;
-  };
+  }
 
-  keyDescOrder = (a: KeyValue<string, Player[]>, b: KeyValue<string, Player[]>): number => {
+  keyDescOrder(a: KeyValue<string, Player[]>, b: KeyValue<string, Player[]>): number {
     return a.key > b.key ? -1 : b.key > a.key ? 1 : 0;
-  };
+  }
 
   add(field): void {
     if (field) {

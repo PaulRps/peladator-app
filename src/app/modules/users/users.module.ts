@@ -9,6 +9,5 @@ import { UsersRoutingModule } from './users.routing.module';
 @NgModule({
   declarations: [UsersComponent, UsersListComponent, UserFormComponent],
   imports: [UsersRoutingModule, CommonModule, SharedModule],
-  entryComponents: [UserFormComponent],
 })
 export class UsersModule {}

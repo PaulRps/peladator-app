@@ -11,6 +11,5 @@ import { PlayersRoutingModule } from './players.routing.module';
   declarations: [PlayerFormComponent, PlayerListComponent, PlayersComponent],
   imports: [PlayersRoutingModule, CoreModule, SharedModule, TeamsModule],
   exports: [],
-  entryComponents: [PlayerFormComponent],
 })
 export class PlayersModule {}

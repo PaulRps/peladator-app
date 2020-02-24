@@ -10,6 +10,5 @@ import { TeamsRoutingModule } from './teams-routing.module';
   imports: [TeamsRoutingModule, SharedModule],
   exports: [TeamsSortedComponent, TeamsComponent, TeamsMenuItemComponent],
   providers: [],
-  entryComponents: [],
 })
 export class TeamsModule {}

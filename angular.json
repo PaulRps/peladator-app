@@ -103,7 +103,6 @@
                 "input": "src/assets/styles/themes/compiled/purple-green.css",
                 "bundleName": "purple-green"
               },
-
               {
                 "inject": false,
                 "input": "src/assets/styles/themes/compiled/deeppurple-amber.css",
@@ -150,5 +149,8 @@
       }
     }
   },
-  "defaultProject": "peladator-app"
+  "defaultProject": "peladator-app",
+  "cli": {
+    "analytics": false
+  }
 }

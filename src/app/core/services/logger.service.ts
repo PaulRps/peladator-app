@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 export class LoggerService {
   public static handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      if (error && error.message) {
+      if (error?.message) {
         LoggerService.log(`${operation} failed: ${error.message}`, error);
       }
       return throwError(result as T);
