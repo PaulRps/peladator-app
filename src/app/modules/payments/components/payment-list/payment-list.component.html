@@ -3,6 +3,9 @@
     <mat-icon class="material-primary-color">add</mat-icon>
   </button>
 </div>
+<mat-form-field class="w-4/12">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar" />
+</mat-form-field>
 <mat-table mat-table [dataSource]="payments" class="z-8">
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> # </mat-header-cell>

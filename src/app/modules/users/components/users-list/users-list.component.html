@@ -5,6 +5,9 @@
     <mat-icon class="material-primary-color">person_add</mat-icon>
   </button>
 </div>
+<mat-form-field class="w-4/12">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar" />
+</mat-form-field>
 <mat-table mat-table [dataSource]="users" class="shadow">
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> # </mat-header-cell>

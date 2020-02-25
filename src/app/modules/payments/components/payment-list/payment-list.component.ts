@@ -20,6 +20,10 @@ export class PaymentListComponent implements OnInit {
 
   ngOnInit() {
     this.paginator.hidePageSize = true;
+    this.payments.filterPredicate = (data: any, filter) => {
+      const dataStr = `${data.id}${data.player.name}${data.value}${data.date}`.toLowerCase();
+      return dataStr.indexOf(filter) != -1;
+    };
     this.paymentsService.getAll().subscribe(payments => {
       this.payments.data = payments;
       this.payments.paginator = this.paginator;
@@ -40,5 +44,9 @@ export class PaymentListComponent implements OnInit {
       width: '400px',
       autoFocus: false,
     });
+  }
+  
+  applyFilter(filterValue: string) {
+    this.payments.filter = filterValue.trim().toLowerCase();
   }
 }

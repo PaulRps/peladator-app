@@ -40,4 +40,8 @@ export class UsersListComponent implements OnInit {
       autoFocus: false,
     });
   }
+
+  applyFilter(filterValue: string) {
+    this.users.filter = filterValue.trim().toLowerCase();
+  }
 }
