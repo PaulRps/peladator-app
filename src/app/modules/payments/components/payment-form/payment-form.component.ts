@@ -19,7 +19,7 @@ export const MY_FORMATS = {
   },
 };
 
-_moment.locale('pt-br');
+_moment.locale('pt-br');//TODO: fix date format
 
 @Component({
   selector: 'app-payment-form',
