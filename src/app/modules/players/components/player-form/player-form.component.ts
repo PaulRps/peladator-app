@@ -6,9 +6,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { Optional } from '@angular/core';
 
-const activeIconClass = 'mat-icon notranslate ng-tns-c145-10 material-icons level-icon-active';
-const inactiveIconClass = 'mat-icon notranslate ng-tns-c145-10 material-icons mat-icon-no-color';
-
 @Component({
   selector: 'app-player-form',
   templateUrl: './player-form.component.html',
@@ -19,18 +16,14 @@ export class PlayerFormComponent implements OnInit {
   playerForm: FormGroup;
   playerLevels: any[];
   playerPositions: any[];
-  starIconClasses: string[] = [];
+  activesStarIcon: boolean[] = [false, false, false, false, false];
   @Input() player: Player;
 
   constructor(
     public dialogRef: MatDialogRef<PlayerFormComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private playerService: PlayersService
-  ) {
-    for (let i = 0; i < 5; i++) {
-      this.starIconClasses.push(inactiveIconClass);
-    }
-  }
+  ) {}
 
   ngOnInit() {
     this.playerForm = new FormGroup({
@@ -51,7 +44,7 @@ export class PlayerFormComponent implements OnInit {
           position: this.data.position,
         });
         for (let i = 0; i < this.data.skillLevel.id; i++) {
-          this.starIconClasses[i] = activeIconClass;
+          this.activesStarIcon[i] = true;
         }
       }
     });
@@ -67,7 +60,7 @@ export class PlayerFormComponent implements OnInit {
       return;
     }
 
-    if (this.starIconClasses.filter(el => el === activeIconClass).length === 0) {
+    if (this.activesStarIcon.filter(el => el === true).length === 0) {
       this.hasErrorSkillLevelField = true;
       return;
     }
@@ -97,30 +90,27 @@ export class PlayerFormComponent implements OnInit {
   }
 
   setSkillLevel(player) {
-    for (let i = this.starIconClasses.length; i >= 0; i--) {
-      if (this.starIconClasses[i] === activeIconClass) {
+    for (let i = this.activesStarIcon.length; i >= 0; i--) {
+      if (this.activesStarIcon[i]) {
         player.skillLevel = this.playerLevels.filter(el => el.id === i + 1)[0];
         break;
       }
     }
   }
 
-  activeStar(starIcon, index) {
+  activeStar(index) {
     this.hasErrorSkillLevelField = false;
-    let newClass = inactiveIconClass;
-    if (starIcon?._elementRef.nativeElement.className === inactiveIconClass) {
-      newClass = activeIconClass;
-    }
+    let newState = !this.activesStarIcon[index];
 
-    if (index < this.starIconClasses.length && this.starIconClasses[index] === activeIconClass) {
-      for (let i = index; i < this.starIconClasses.length; i++) {
-        this.starIconClasses[i] = inactiveIconClass;
+    if (this.activesStarIcon[index]) {
+      for (let i = index; i < this.activesStarIcon.length; i++) {
+        this.activesStarIcon[i] = false;
       }
       return;
     }
 
-    for (let i = index - 1; i >= 0; i--) {
-      this.starIconClasses[i] = newClass;
+    for (let i = index; i >= 0; i--) {
+      this.activesStarIcon[i] = newState;
     }
   }
 

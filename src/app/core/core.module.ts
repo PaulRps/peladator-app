@@ -33,12 +33,5 @@ import { CoreRoutingModule } from './core-routing.module';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
-  entryComponents: [
-    AlertSuccessComponent,
-    AlertErrorComponent,
-    AlertWarnComponent,
-    AlertInfoComponent,
-    AlertConfirmComponent,
-  ],
 })
 export class CoreModule {}

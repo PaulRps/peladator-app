@@ -50,19 +50,34 @@
 
     <mat-form-field>
       <input matInput placeholder="Nível" id="skillLevel" disabled required />
-      <mat-icon style="cursor: pointer;" #star1 (click)="activeStar(star1, 1)" [ngClass]="starIconClasses[0]"
+      <mat-icon
+        style="cursor: pointer;"
+        (click)="activeStar(0)"
+        [ngClass]="{ 'level-icon-active': activesStarIcon[0], 'level-icon-inactive': !activesStarIcon[0] }"
         >grade
       </mat-icon>
-      <mat-icon style="cursor: pointer;" #star2 (click)="activeStar(star2, 2)" [ngClass]="starIconClasses[1]"
+      <mat-icon
+        style="cursor: pointer;"
+        (click)="activeStar(1)"
+        [ngClass]="{ 'level-icon-active': activesStarIcon[1], 'level-icon-inactive': !activesStarIcon[1] }"
         >grade
       </mat-icon>
-      <mat-icon style="cursor: pointer;" #star3 (click)="activeStar(star3, 3)" [ngClass]="starIconClasses[2]"
+      <mat-icon
+        style="cursor: pointer;"
+        (click)="activeStar(2)"
+        [ngClass]="{ 'level-icon-active': activesStarIcon[2], 'level-icon-inactive': !activesStarIcon[2] }"
         >grade
       </mat-icon>
-      <mat-icon style="cursor: pointer;" #star4 (click)="activeStar(star4, 4)" [ngClass]="starIconClasses[3]"
+      <mat-icon
+        style="cursor: pointer;"
+        (click)="activeStar(3)"
+        [ngClass]="{ 'level-icon-active': activesStarIcon[3], 'level-icon-inactive': !activesStarIcon[3] }"
         >grade
       </mat-icon>
-      <mat-icon style="cursor: pointer;" #star5 (click)="activeStar(star5, 5)" [ngClass]="starIconClasses[4]"
+      <mat-icon
+        style="cursor: pointer;"
+        (click)="activeStar(4)"
+        [ngClass]="{ 'level-icon-active': activesStarIcon[4], 'level-icon-inactive': !activesStarIcon[4] }"
         >grade
       </mat-icon>
       <p class="has-error" *ngIf="hasErrorSkillLevelField">Campo obrigatório</p>

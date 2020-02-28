@@ -23,7 +23,7 @@
 
   <mat-divider *ngIf="isAdmin()"></mat-divider>
 
-  <a class="clickable" mat-list-item routerLink="/payments" (click)="onSidenavClose()">
+  <a *ngIf="isAdmin()" class="clickable" mat-list-item routerLink="/payments" (click)="onSidenavClose()">
     <mat-icon class="material-primary-color">monetization_on</mat-icon>
     <span class="px-2">Pagamentos</span>
   </a>
