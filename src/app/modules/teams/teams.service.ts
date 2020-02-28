@@ -18,16 +18,16 @@ export class TeamsService {
   constructor(private http: HttpClient) {}
 
   public loadTeamsPage() {
-    return this.http.get(`${TEAM_URL}/load-teams-page`).pipe(
-      tap((players: any) => LoggerService.log(`load teams page w/ id=${players ? players.toString() : ''}`, players)),
-      catchError(LoggerService.handleError<Player[]>('loadTeamsPage'))
+    return this.http.get(`${TEAM_URL}/load-page`).pipe(
+      tap((players: any) => LoggerService.log(`load page w/ id=${players ? players.toString() : ''}`, players)),
+      catchError(LoggerService.handleError<Player[]>('loadPage'))
     );
   }
 
   public sort(sortTeam: any) {
-    return this.http.post(`${TEAM_URL}/sort-teams`, sortTeam, httpOptions).pipe(
-      tap((players: Player[]) => LoggerService.log(`sort teams w/ id=${players ? players.toString() : ''}`, players)),
-      catchError(LoggerService.handleError<Player[]>('sortTeams'))
+    return this.http.post(`${TEAM_URL}/sort`, sortTeam, httpOptions).pipe(
+      tap((players: Player[]) => LoggerService.log(`sort w/ id=${players ? players.toString() : ''}`, players)),
+      catchError(LoggerService.handleError<Player[]>('sort'))
     );
   }
 }
