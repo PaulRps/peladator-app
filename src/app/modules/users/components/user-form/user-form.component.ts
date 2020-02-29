@@ -22,23 +22,21 @@ export class UserFormComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogService: DialogService,
     private userService: UserService
-  ) {}
+  ) {
+    this.userForm = new FormGroup({
+      name: new FormControl(this.data?.name, [Validators.required, Validators.maxLength(30)]),
+      role: new FormControl(this.data?.role, [Validators.required]),
+      password: new FormControl(this.data?.password, [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(8),
+      ]),
+    });
+  }
 
   ngOnInit() {
-    this.userForm = new FormGroup({
-      name: new FormControl(null, [Validators.required, Validators.maxLength(30)]),
-      role: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(8)]),
-    });
     this.userService.getFormData().subscribe(formData => {
       this.roles = formData.roles;
-      if (this.data) {
-        this.userForm.setValue({
-          name: this.data.name,
-          role: this.data.role,
-          password: this.data.password,
-        });
-      }
     });
   }
 

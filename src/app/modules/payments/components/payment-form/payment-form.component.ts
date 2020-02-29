@@ -5,21 +5,22 @@ import { PaymentsService } from '../../payments.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Player } from 'src/app/shared/models/player.model';
 import * as _moment from 'moment';
-import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 export const MY_FORMATS = {
   parse: {
-    dateInput: 'l',
+    dateInput: 'LL',
   },
   display: {
     dateInput: 'DD/MM/YYYY',
-    monthYearLabel: 'l',
-    dateA11yLabel: 'l',
-    monthYearA11yLabel: 'l',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
   },
 };
 
-_moment.locale('pt-br');//TODO: fix date format
+_moment.locale('pt-br');
 
 @Component({
   selector: 'app-payment-form',
@@ -27,6 +28,7 @@ _moment.locale('pt-br');//TODO: fix date format
   styleUrls: ['./payment-form.component.scss'],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-br' },
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
@@ -41,22 +43,15 @@ export class PaymentFormComponent implements OnInit {
     private paymentService: PaymentsService
   ) {
     this.paymentForm = new FormGroup({
-      player: new FormControl(null, [Validators.required]),
-      value: new FormControl(null, [Validators.required]),
-      date: new FormControl(null, [Validators.required]),
+      player: new FormControl(this.data?.player, [Validators.required]),
+      value: new FormControl(this.data?.value, [Validators.required]),
+      date: new FormControl(_moment(this.data?.date, 'DD/MM/YYYY'), [Validators.required]),
     });
   }
 
   ngOnInit() {
     this.paymentService.getFormData().subscribe(formData => {
       this.players = formData.players;
-      if (this.data) {
-        this.paymentForm.setValue({
-          player: this.data.player,
-          value: this.data.value,
-          date: new Date(this.data.date),
-        });
-      }
     });
   }
 

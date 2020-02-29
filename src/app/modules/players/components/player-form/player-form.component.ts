@@ -23,30 +23,26 @@ export class PlayerFormComponent implements OnInit {
     public dialogRef: MatDialogRef<PlayerFormComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private playerService: PlayersService
-  ) {}
+  ) {
+    this.playerForm = new FormGroup({
+      name: new FormControl(this.data?.name, [Validators.required, Validators.maxLength(30)]),
+      age: new FormControl(this.data?.age, [Validators.required, Validators.min(1), Validators.max(99)]),
+      shirtNumber: new FormControl(this.data?.shirtNumber, [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(99),
+      ]),
+      position: new FormControl(this.data?.position, [Validators.required]),
+    });
+    for (let i = 0; i < this.data?.skillLevel.id; i++) {
+      this.activesStarIcon[i] = true;
+    }
+  }
 
   ngOnInit() {
-    this.playerForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-      age: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(99)]),
-      shirtNumber: new FormControl(null, [Validators.required, Validators.min(1), , Validators.max(99)]),
-      position: new FormControl(null, [Validators.required]),
-    });
-
     this.playerService.getFormData().subscribe(formData => {
       this.playerLevels = formData.skillLevels;
       this.playerPositions = formData.positions;
-      if (this.data) {
-        this.playerForm.setValue({
-          name: this.data.name,
-          age: this.data.age,
-          shirtNumber: this.data.shirtNumber,
-          position: this.data.position,
-        });
-        for (let i = 0; i < this.data.skillLevel.id; i++) {
-          this.activesStarIcon[i] = true;
-        }
-      }
     });
   }
 
