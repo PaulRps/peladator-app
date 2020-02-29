@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <div class="container flex">
+    <div *ngIf="isLogged">
+      <button mat-icon-button (click)="onToggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div class="flex w-full items-center justify-between">
+      <span>Peladator</span>
+      <div>
+        <app-theme-picker></app-theme-picker>
+        <button *ngIf="isLogged" (click)="logout()" mat-button>Sair</button>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

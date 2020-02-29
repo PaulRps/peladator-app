@@ -1,0 +1,39 @@
+<div class="fixed z-50" style="bottom: 24px; right: 24px;">
+  <button mat-fab color="accent" (click)="create()" title="Add Pagamento">
+    <mat-icon class="material-primary-color">add</mat-icon>
+  </button>
+</div>
+<mat-form-field class="w-4/12">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar" />
+</mat-form-field>
+<mat-table mat-table [dataSource]="payments" class="z-8">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.player.name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="value">
+    <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ 'R$' + (element.value | mask: '00,00') }}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef> Data do Pagamento </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.date }} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+  <mat-row (click)="select(row)" *matRowDef="let row; columns: tableColumns"></mat-row>
+</mat-table>
+<mat-paginator
+  style="display: flex; justify-content: left;"
+  [pageSizeOptions]="[10]"
+  showFirstLastButtons
+></mat-paginator>

@@ -1,0 +1,34 @@
+<div
+  class="fixed z-50" style="bottom: 24px; right: 24px;"
+>
+  <button mat-fab color="accent" (click)="create()" title="Add Usuário">
+    <mat-icon class="material-primary-color">person_add</mat-icon>
+  </button>
+</div>
+<mat-form-field class="w-4/12">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar" />
+</mat-form-field>
+<mat-table mat-table [dataSource]="users" class="shadow">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="role">
+    <mat-header-cell *matHeaderCellDef> Função </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.role }} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+  <mat-row (click)="select(row)" *matRowDef="let row; columns: tableColumns"></mat-row>
+</mat-table>
+<mat-paginator
+  style="display: flex;"
+  [pageSizeOptions]="[10]"
+  showFirstLastButtons
+></mat-paginator>
