@@ -1,0 +1,31 @@
+<div class="fixed z-50" style="bottom: 24px; right: 24px;">
+  <button mat-fab color="accent" (click)="create()" title="Add Jogador">
+    <mat-icon class="material-primary-color">person_add</mat-icon>
+  </button>
+</div>
+<div class="flex">
+  <mat-form-field class="w-4/12">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar" />
+  </mat-form-field>
+  <div class="w-8/12 justify-end">
+    <button mat-button>
+      <app-teams-menu-item></app-teams-menu-item>
+    </button>
+  </div>
+</div>
+<div class="w-full">
+  <table mat-table [dataSource]="players" class="z-8">
+    <ng-container matColumnDef="player">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td class="clickable" mat-cell *matCellDef="let element">
+        <app-player [data]="element"></app-player>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr (click)="select(row)" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator style="display: flex; justify-content: left;" [pageSizeOptions]="[10]" showFirstLastButtons>
+  </mat-paginator>
+</div>
+<div class="w-2/12">&nbsp;</div>

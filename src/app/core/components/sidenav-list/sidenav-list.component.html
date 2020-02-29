@@ -1,0 +1,38 @@
+<mat-nav-list>
+  <div class="background-material-primary-color">
+    <h2 matSubheader><mat-icon color="white">sports_soccer</mat-icon>&nbsp;&nbsp;Peladator</h2>
+  </div>
+
+  <a class="clickable" mat-list-item routerLink="/players" routerLinkActive="active" (click)="onSidenavClose()">
+    <mat-icon color="primary" class="material-primary-color">people</mat-icon>
+    <span class="nav-caption">Jogadores</span>
+  </a>
+  
+  <mat-divider></mat-divider>
+
+  <a class="clickable" mat-list-item routerLink="/teams" (click)="onSidenavClose()">
+    <mat-icon color="primary" class=" align-middle">casino</mat-icon>
+    <span>&nbsp;&nbsp;Times</span>
+  </a>
+
+  <mat-divider></mat-divider>
+
+  <nav class="px-2">
+    <span *ngIf="isAdmin()">Administrador</span>
+  </nav>
+
+  <mat-divider *ngIf="isAdmin()"></mat-divider>
+
+  <a *ngIf="isAdmin()" class="clickable" mat-list-item routerLink="/payments" (click)="onSidenavClose()">
+    <mat-icon class="material-primary-color">monetization_on</mat-icon>
+    <span class="px-2">Pagamentos</span>
+  </a>
+
+  <mat-divider *ngIf="isAdmin()"></mat-divider>
+
+  <a *ngIf="isAdmin()" class="clickable" mat-list-item routerLink="/users" (click)="onSidenavClose()">
+    <mat-icon color="primary">supervised_user_circle</mat-icon>
+    <span class="px-2">Usuários</span>
+  </a>
+
+</mat-nav-list>

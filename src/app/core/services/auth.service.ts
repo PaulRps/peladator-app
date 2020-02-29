@@ -1,32 +1,51 @@
+import { Token } from './../../shared/models/token.model';
+import { TokenService } from './token.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap, catchError } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { LoggerService } from './logger.service';
 
 const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'my-auth-token'
-    })
-  };
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  }),
+};
+
+const AUTH_URL = environment.apiUrl + '/auth';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private token: BehaviorSubject<Token>;
+  public tokenObservable: Observable<Token>;
 
-    private authUrl = environment.apiUrl + '/auth';
+  constructor(private http: HttpClient, private router: Router, private tokenService: TokenService) {
+    this.token = new BehaviorSubject<Token>(this.tokenService.getToken());
+    this.tokenObservable = this.token.asObservable();
+  }
 
-    constructor(private http: HttpClient) {}
+  public get currentToken(): Token {
+    return this.token.value;
+  }
 
-    getToken() {
-        // return this.http.post(this.authUrl,{userName: "Paulo", password: "123456"}, httpOptions)
-        //     .pipe(tap((response) => {
-        //         console.log(response);
-        //     }),
-        //     catchError((a) => {
+  public login(user: any): Observable<Token> {
+    return this.http.post<Token>(AUTH_URL, user, httpOptions).pipe(
+      tap(token => {
+        this.tokenService.setToken(token);
+        this.token.next(token);
+        return token;
+      }),
+      catchError(LoggerService.handleError<any>('Login'))
+    );
+  }
 
-        //         console.error('auth error', a); return a;
-        //     }));
-    }
+  logout() {
+    this.tokenService.remove();
+    this.token.next(null);
+    this.router.navigate(['/login']);
+  }
 }

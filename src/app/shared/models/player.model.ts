@@ -1,71 +1,80 @@
 export class Player {
-    id: number;
-    name: string;
-    age: number;
-    shirtNumber: number;
-    position: any;
-    skillLevel: any;
-    isSelected: boolean;
+  id: number;
+  name: string;
+  age: number;
+  shirtNumber: number;
+  position: any;
+  skillLevel: any;
+  isSelected: boolean;
+  paymentDate: string;
 
-    public setId(id) {
-        this.id = id;
-        return this;
-    }
+  constructor() {this.isSelected = false;}
 
-    public setName(name: string) {
-        this.name = name;
-        return this;
-    }
+  public static Build() {
+    return new Player();
+  }
 
-    public setAge(age: number) {
-        this.age = age;
-        return this;
-    }
+  public sId(id) {
+    this.id = id;
+    return this;
+  }
 
-    public setShirtNumber(number) {
-        this.shirtNumber = number;
-        return this;
-    }
+  public sName(name: string) {
+    this.name = name;
+    return this;
+  }
 
-    public setPosition(position) {
-        this.position = position;
-        return this;
-    }
+  public sAge(age: number) {
+    this.age = age;
+    return this;
+  }
 
-    public setSkillLevel(skillLevel) {
-        this.skillLevel = skillLevel;
-        return this;
-    }
+  public sShirtNumber(shirtNumber: number) {
+    this.shirtNumber = shirtNumber;
+    return this;
+  }
 
-    public getId(): number {
-        return this.id;
-    }
+  public sPosition(position) {
+    this.position = position;
+    return this;
+  }
 
-    public getAge(): number {
-        return this.age;
-    }
+  public sSkillLevel(skillLevel) {
+    this.skillLevel = skillLevel;
+    return this;
+  }
 
-    public getName(): string {
-        return this.name;
-    }
+  public sPaymentDate(paymentDate:string) {
+    this.paymentDate = paymentDate;
+    return this;
+  }
 
-    public getShirtNumber() {
-        return this.shirtNumber;
-    }
+  public getId(): number {
+    return this.id;
+  }
 
-    public getPosition() {
-        return this.position;
-    }
+  public getAge(): number {
+    return this.age;
+  }
 
-    public getSkillLevel() {
-        return this.skillLevel;
-    }
+  public getName(): string {
+    return this.name;
+  }
 
-    public toString(): string {
-        return 'id: ' + this.id +
-            '\nname: ' + this.name +
-            '\nage: ' + this.age +
-            '\nskillLevel: ' + this.skillLevel; // +
-        //    "\nposition: " + this.positionId;
-    }
+  public getShirtNumber() {
+    return this.shirtNumber;
+  }
+
+  public getPosition() {
+    return this.position;
+  }
+
+  public getSkillLevel() {
+    return this.skillLevel;
+  }
+
+  public toString(): string {
+    return 'id: ' + this.id + '\nname: ' + this.name + '\nage: ' + this.age + '\nskillLevel: ' + this.skillLevel; // +
+    //    "\nposition: " + this.positionId;
+  }
 }

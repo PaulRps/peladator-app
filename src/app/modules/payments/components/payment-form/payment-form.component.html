@@ -1,0 +1,55 @@
+<h4 mat-dialog-title id="modal-basic-title">Dados do Pagamento</h4>
+<div mat-dialog-content>
+  <form [formGroup]="paymentForm">
+    <mat-form-field class="w-full">
+      <mat-label>Jogador</mat-label>
+      <mat-select name="player" [compareWith]="compareItemSelect" formControlName="player" required>
+        <mat-option [value]="">--</mat-option>
+        <mat-option *ngFor="let p of players" [value]="p">
+          {{ p.name }}
+          <small> - {{ p.position.shortName }}</small>
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.player.hasError('required')">Campo obrigatório</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <input
+        [specialCharacters]="['$', ',', 'R']"
+        mask="R$00,00"
+        formControlName="value"
+        id="value"
+        matInput
+        placeholder="Valor"
+        value=""
+        required
+      />
+      <mat-error *ngIf="f.value.hasError('required')">Campo obrigatório</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <input formControlName="date" id="date-id" matInput [matDatepicker]="picker" placeholder="Data" required />
+      <mat-error *ngIf="f.date.hasError('required')">Campo obrigatório</mat-error>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="flex justify-end">
+  <button
+    class="decrease-horizontal-padding"
+    *ngIf="data"
+    type="submit"
+    mat-raised-button
+    color="warn"
+    (click)="submit(true)"
+  >
+    Remover
+  </button>
+  <button class="decrease-horizontal-padding" type="button" mat-raised-button (click)="close(); paymentForm.reset()">
+    Cancelar
+  </button>
+  <button class="decrease-horizontal-padding" type="submit" mat-raised-button color="primary" (click)="submit(false)">
+    Salvar
+  </button>
+</div>

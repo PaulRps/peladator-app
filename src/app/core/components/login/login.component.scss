@@ -1,0 +1,26 @@
+.mat-form-field {
+  width: 100%;
+  // min-width: 300px;
+}
+
+// mart-card {
+//   width: 100%;
+// }
+
+mat-card-header,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  padding-bottom: 10px;
+  justify-content: center;
+  // width: 300px;
+  color: red;
+  // background-color: red;
+}
+
+button {
+  width: 100%;
+}
