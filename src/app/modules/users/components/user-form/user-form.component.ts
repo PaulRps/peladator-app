@@ -5,7 +5,6 @@ import { DialogService } from 'src/app/core/services/dialog.service';
 import { UserService } from '../../user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RoleEnum } from 'src/app/shared/models/role.enum';
-import { throwMatDuplicatedDrawerError } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-user-form',

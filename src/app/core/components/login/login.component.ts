@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     }
 
     const user = {
-      userName: this.f.name.value,
+      userName: this.f.name.value.trim(),
       password: this.f.password.value,
     };
 
