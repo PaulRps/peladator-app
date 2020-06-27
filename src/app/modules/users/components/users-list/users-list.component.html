@@ -1,6 +1,4 @@
-<div
-  class="fixed z-50" style="bottom: 24px; right: 24px;"
->
+<div class="fixed z-50" style="bottom: 24px; right: 24px;">
   <button mat-fab color="accent" (click)="create()" title="Add Usuário">
     <mat-icon class="material-primary-color">person_add</mat-icon>
   </button>
@@ -11,7 +9,7 @@
 <mat-table mat-table [dataSource]="users" class="shadow">
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+    <mat-cell *matCellDef="let row; let i = index"> {{ i + 1 }} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="name">
@@ -27,8 +25,4 @@
   <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
   <mat-row (click)="select(row)" *matRowDef="let row; columns: tableColumns"></mat-row>
 </mat-table>
-<mat-paginator
-  style="display: flex;"
-  [pageSizeOptions]="[10]"
-  showFirstLastButtons
-></mat-paginator>
+<mat-paginator style="display: flex;" [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
