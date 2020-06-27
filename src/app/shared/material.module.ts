@@ -8,7 +8,7 @@ import { MatOptionModule, MatNativeDateModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
@@ -20,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -69,4 +70,15 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatNativeDateModule,
   ],
 })
-export class MaterialModule {}
+export class MaterialModule {
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+    this.matIconRegistry.addSvgIcon(
+      `linkedin`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`../../assets/icons/icons8-linkedin-outfit.svg`)
+    );
+    this.matIconRegistry.addSvgIcon(
+      `github`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`../../assets/icons/github-icon.svg`)
+    );
+  }
+}
