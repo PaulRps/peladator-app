@@ -29,21 +29,21 @@ export class UserService {
 
   getById(id: number): Observable<User> {
     return this.http.get<User>(`${USER_URL}/${id}`).pipe(
-      tap(_ => LoggerService.log('fetched user', _)),
+      tap(_ => LoggerService.debug('fetched user', _)),
       catchError(LoggerService.handleError('user', undefined))
     );
   }
 
   getFormData(): Observable<any> {
     return this.http.get<any>(`${USER_URL}/form-data`).pipe(
-      tap(_ => LoggerService.log('fetched userFormData', _)),
+      tap(_ => LoggerService.debug('fetched userFormData', _)),
       catchError(LoggerService.handleError('userFormData', undefined))
     );
   }
 
   getAll(): Observable<User[]> {
     return this.http.get<User[]>(USER_URL).pipe(
-      tap(_ => LoggerService.log('fetched users', _)),
+      tap(_ => LoggerService.debug('fetched users', _)),
       catchError(LoggerService.handleError('users', undefined))
     );
   }
@@ -51,7 +51,7 @@ export class UserService {
   save(user: User): Observable<User[]> {
     return this.http.post<User[]>(USER_URL, user, httpOptions).pipe(
       tap(users => {
-        LoggerService.log('saved user', user);
+        LoggerService.debug('saved user', user);
         this.usersEvent.emit(users);
         this.dialogService.successMessage('Usuário Adicionado!');
       }),
@@ -62,7 +62,7 @@ export class UserService {
   update(user: User): Observable<User[]> {
     return this.http.put<User[]>(USER_URL, user, httpOptions).pipe(
       tap(users => {
-        LoggerService.log('updated user', user);
+        LoggerService.debug('updated user', user);
         this.usersEvent.emit(users);
         this.dialogService.successMessage('Usuário Atualizado!');
       }),
@@ -73,7 +73,7 @@ export class UserService {
   delete(id: number): Observable<User[]> {
     return this.http.delete<User[]>(`${USER_URL}/${id}`).pipe(
       tap(users => {
-        LoggerService.log('deleted user', id);
+        LoggerService.debug('deleted user', id);
         this.usersEvent.emit(users);
         this.dialogService.successMessage('Usuário Deletado!');
       }),

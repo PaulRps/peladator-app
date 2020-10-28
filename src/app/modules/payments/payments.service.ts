@@ -27,14 +27,14 @@ export class PaymentsService {
 
   getFormData(): Observable<any> {
     return this.http.get(`${PAYMENT_URL}/form-data`).pipe(
-      tap(_ => LoggerService.log('fetched form-data', _)),
+      tap(_ => LoggerService.debug('fetched form-data', _)),
       catchError(LoggerService.handleError('form-data', undefined))
     );
   }
 
   getAll(): Observable<any[]> {
     return this.http.get<any[]>(PAYMENT_URL).pipe(
-      tap(_ => LoggerService.log('fetched payments', _)),
+      tap(_ => LoggerService.debug('fetched payments', _)),
       catchError(LoggerService.handleError('payments', undefined))
     );
   }
@@ -42,7 +42,7 @@ export class PaymentsService {
   save(payment: any): Observable<any[]> {
     return this.http.post<any[]>(PAYMENT_URL, payment, httpOptions).pipe(
       tap(_ => {
-        LoggerService.log('saved payments', payment);
+        LoggerService.debug('saved payments', payment);
         this.paymentsEvent.emit(_);
       }),
       catchError(LoggerService.handleError('payments', undefined))
@@ -52,7 +52,7 @@ export class PaymentsService {
   update(payment: any): Observable<any[]> {
     return this.http.put<any[]>(PAYMENT_URL, payment, httpOptions).pipe(
       tap(_ => {
-        LoggerService.log('updated payments', payment);
+        LoggerService.debug('updated payments', payment);
         this.paymentsEvent.emit(_);
       }),
       catchError(LoggerService.handleError('payments', undefined))
@@ -61,7 +61,7 @@ export class PaymentsService {
   delete(id: any): Observable<any[]> {
     return this.http.delete<any[]>(`${PAYMENT_URL}/${id}`).pipe(
       tap(_ => {
-        LoggerService.log('deleted payments', id);
+        LoggerService.debug('deleted payments', id);
         this.paymentsEvent.emit(_);
       }),
       catchError(LoggerService.handleError('payments', undefined))

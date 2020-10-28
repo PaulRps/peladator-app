@@ -19,14 +19,14 @@ export class TeamsService {
 
   public loadTeamsPage() {
     return this.http.get(`${TEAM_URL}/load-page`).pipe(
-      tap((players: any) => LoggerService.log(`load page w/ id=${players ? players.toString() : ''}`, players)),
+      tap((players: any) => LoggerService.debug(`load page w/ id=${players ? players.toString() : ''}`, players)),
       catchError(LoggerService.handleError<Player[]>('loadPage'))
     );
   }
 
   public sort(sortTeam: any) {
     return this.http.post(`${TEAM_URL}/sort`, sortTeam, httpOptions).pipe(
-      tap((players: Player[]) => LoggerService.log(`sort w/ id=${players ? players.toString() : ''}`, players)),
+      tap((players: Player[]) => LoggerService.debug(`sort w/ id=${players ? players.toString() : ''}`, players)),
       catchError(LoggerService.handleError<Player[]>('sort'))
     );
   }
