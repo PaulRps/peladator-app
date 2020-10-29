@@ -1,3 +1,4 @@
+import { APIInfoService } from './../../services/apiinfo.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -13,14 +14,21 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   error: any;
   hide = true;
+  apiInfo: any;
 
-  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService,
+    private apiInfoService: APIInfoService
+  ) {
     if (this.authService.currentToken) {
       this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
+    this.apiInfo = this.apiInfoService.APIInfo;
     this.loginForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
       password: new FormControl('', [Validators.required /* , Validators.maxLength(4), Validators.maxLength(7) */]),
@@ -39,7 +47,7 @@ export class LoginComponent implements OnInit {
     }
 
     const user = {
-      userName: this.f.name.value,
+      userName: this.f.name.value.trim(),
       password: this.f.password.value,
     };
 

@@ -1,4 +1,3 @@
-import { PaymentsModule } from './modules/payments/payments.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
