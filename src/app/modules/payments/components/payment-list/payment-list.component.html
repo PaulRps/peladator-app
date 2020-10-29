@@ -9,7 +9,7 @@
 <mat-table mat-table [dataSource]="payments" class="z-8">
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+    <mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="name">

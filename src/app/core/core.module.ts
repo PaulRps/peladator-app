@@ -14,6 +14,7 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { LoginComponent } from './components/login/login.component';
 import { CoreRoutingModule } from './core-routing.module';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +27,10 @@ import { CoreRoutingModule } from './core-routing.module';
     AlertInfoComponent,
     AlertConfirmComponent,
     LoginComponent,
+    FooterComponent,
   ],
   imports: [CoreRoutingModule, SharedModule, TeamsModule],
-  exports: [HeaderComponent, SidenavListComponent, ThemePickerComponent],
+  exports: [HeaderComponent, FooterComponent, SidenavListComponent, ThemePickerComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
