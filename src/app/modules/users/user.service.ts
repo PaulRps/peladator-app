@@ -49,35 +49,49 @@ export class UserService {
   }
 
   save(user: User): Observable<User[]> {
-    return this.http.post<User[]>(USER_URL, user, httpOptions).pipe(
-      tap(users => {
-        LoggerService.debug('saved user', user);
-        this.usersEvent.emit(users);
-        this.dialogService.successMessage('Usuário Adicionado!');
-      }),
-      catchError(LoggerService.handleError('saved user', undefined))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.post<User>(USER_URL, user, httpOptions).pipe(
+        tap(usr => {
+          LoggerService.debug('saved user', usr);
+          this.dialogService.successMessage('Usuário Adicionado!');
+        }),
+        catchError(LoggerService.handleError('saved user', undefined))
+      );
+    });
   }
 
   update(user: User): Observable<User[]> {
-    return this.http.put<User[]>(USER_URL, user, httpOptions).pipe(
-      tap(users => {
-        LoggerService.debug('updated user', user);
-        this.usersEvent.emit(users);
-        this.dialogService.successMessage('Usuário Atualizado!');
-      }),
-      catchError(LoggerService.handleError('updated user', undefined))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.put(USER_URL, user, httpOptions).pipe(
+        tap(_ => {
+          LoggerService.debug('updated user', user);
+          this.dialogService.successMessage('Usuário Atualizado!');
+        }),
+        catchError(LoggerService.handleError('updated user', undefined))
+      );
+    });
   }
 
   delete(id: number): Observable<User[]> {
-    return this.http.delete<User[]>(`${USER_URL}/${id}`).pipe(
-      tap(users => {
-        LoggerService.debug('deleted user', id);
-        this.usersEvent.emit(users);
-        this.dialogService.successMessage('Usuário Deletado!');
-      }),
-      catchError(LoggerService.handleError('deleted user', undefined))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.delete(`${USER_URL}/${id}`).pipe(
+        tap(_ => {
+          LoggerService.debug('deleted user', id);
+          this.dialogService.successMessage('Usuário Deletado!');
+        }),
+        catchError(LoggerService.handleError('deleted user', undefined))
+      );
+    });
+  }
+
+  private doRequestAndReturnAll(callback: () => Observable<any>): Observable<User[]> {
+    return new Observable(observer => {
+      callback().subscribe(any =>
+        this.getAll().subscribe(users => {
+          this.usersEvent.emit(users);
+          observer.next(users);
+        })
+      );
+    });
   }
 }
