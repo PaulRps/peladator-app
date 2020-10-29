@@ -29,55 +29,69 @@ export class UserService {
 
   getById(id: number): Observable<User> {
     return this.http.get<User>(`${USER_URL}/${id}`).pipe(
-      tap(_ => LoggerService.log('fetched user', _)),
+      tap(_ => LoggerService.debug('fetched user', _)),
       catchError(LoggerService.handleError('user', undefined))
     );
   }
 
   getFormData(): Observable<any> {
     return this.http.get<any>(`${USER_URL}/form-data`).pipe(
-      tap(_ => LoggerService.log('fetched userFormData', _)),
+      tap(_ => LoggerService.debug('fetched userFormData', _)),
       catchError(LoggerService.handleError('userFormData', undefined))
     );
   }
 
   getAll(): Observable<User[]> {
     return this.http.get<User[]>(USER_URL).pipe(
-      tap(_ => LoggerService.log('fetched users', _)),
+      tap(_ => LoggerService.debug('fetched users', _)),
       catchError(LoggerService.handleError('users', undefined))
     );
   }
 
   save(user: User): Observable<User[]> {
-    return this.http.post<User[]>(USER_URL, user, httpOptions).pipe(
-      tap(users => {
-        LoggerService.log('saved user', user);
-        this.usersEvent.emit(users);
-        this.dialogService.successMessage('Usuário Adicionado!');
-      }),
-      catchError(LoggerService.handleError('saved user', undefined))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.post<User>(USER_URL, user, httpOptions).pipe(
+        tap(usr => {
+          LoggerService.debug('saved user', usr);
+          this.dialogService.successMessage('Usuário Adicionado!');
+        }),
+        catchError(LoggerService.handleError('saved user', undefined))
+      );
+    });
   }
 
   update(user: User): Observable<User[]> {
-    return this.http.put<User[]>(USER_URL, user, httpOptions).pipe(
-      tap(users => {
-        LoggerService.log('updated user', user);
-        this.usersEvent.emit(users);
-        this.dialogService.successMessage('Usuário Atualizado!');
-      }),
-      catchError(LoggerService.handleError('updated user', undefined))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.put(USER_URL, user, httpOptions).pipe(
+        tap(_ => {
+          LoggerService.debug('updated user', user);
+          this.dialogService.successMessage('Usuário Atualizado!');
+        }),
+        catchError(LoggerService.handleError('updated user', undefined))
+      );
+    });
   }
 
   delete(id: number): Observable<User[]> {
-    return this.http.delete<User[]>(`${USER_URL}/${id}`).pipe(
-      tap(users => {
-        LoggerService.log('deleted user', id);
-        this.usersEvent.emit(users);
-        this.dialogService.successMessage('Usuário Deletado!');
-      }),
-      catchError(LoggerService.handleError('deleted user', undefined))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.delete(`${USER_URL}/${id}`).pipe(
+        tap(_ => {
+          LoggerService.debug('deleted user', id);
+          this.dialogService.successMessage('Usuário Deletado!');
+        }),
+        catchError(LoggerService.handleError('deleted user', undefined))
+      );
+    });
+  }
+
+  private doRequestAndReturnAll(callback: () => Observable<any>): Observable<User[]> {
+    return new Observable(observer => {
+      callback().subscribe(any =>
+        this.getAll().subscribe(users => {
+          this.usersEvent.emit(users);
+          observer.next(users);
+        })
+      );
+    });
   }
 }
