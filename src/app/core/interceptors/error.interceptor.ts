@@ -12,15 +12,15 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      catchError(err => {
-        if (err.status === 401 /* || err.status === 403 */) {
+      catchError(response => {
+        if ((response?.error?.status || response.status) === 401 /* || err.status === 403 */) {
           this.authService.logout();
           // location.reload();
-        } else if (err.status === 403) {
+        } else if ((response?.error?.status || response.status) === 403) {
           this.dialogService.errorMessage('Usuário não tem permissão para executar essa operação!', '200px');
         }
-        LoggerService.log('error interceptor', err);
-        const error = err.message || err.statusText;
+        LoggerService.error('error interceptor', response);
+        const error = response?.error.message || response.statusText;
         return throwError(error);
       })
     );

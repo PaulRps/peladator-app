@@ -27,44 +27,59 @@ export class PaymentsService {
 
   getFormData(): Observable<any> {
     return this.http.get(`${PAYMENT_URL}/form-data`).pipe(
-      tap(_ => LoggerService.log('fetched form-data', _)),
+      tap(_ => LoggerService.debug('fetched form-data', _)),
       catchError(LoggerService.handleError('form-data', undefined))
     );
   }
 
   getAll(): Observable<any[]> {
     return this.http.get<any[]>(PAYMENT_URL).pipe(
-      tap(_ => LoggerService.log('fetched payments', _)),
+      tap(_ => LoggerService.debug('fetched payments', _)),
       catchError(LoggerService.handleError('payments', undefined))
     );
   }
 
   save(payment: any): Observable<any[]> {
-    return this.http.post<any[]>(PAYMENT_URL, payment, httpOptions).pipe(
-      tap(_ => {
-        LoggerService.log('saved payments', payment);
-        this.paymentsEvent.emit(_);
-      }),
-      catchError(LoggerService.handleError('payments', undefined))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.post<any>(PAYMENT_URL, payment, httpOptions).pipe(
+        tap(paymnt => {
+          LoggerService.debug('saved payments', paymnt);
+        }),
+        catchError(LoggerService.handleError('payments', undefined))
+      );
+    });
   }
 
   update(payment: any): Observable<any[]> {
-    return this.http.put<any[]>(PAYMENT_URL, payment, httpOptions).pipe(
-      tap(_ => {
-        LoggerService.log('updated payments', payment);
-        this.paymentsEvent.emit(_);
-      }),
-      catchError(LoggerService.handleError('payments', undefined))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.put(PAYMENT_URL, payment, httpOptions).pipe(
+        tap(_ => {
+          LoggerService.debug('updated payments', payment);
+        }),
+        catchError(LoggerService.handleError('payments', undefined))
+      );
+    });
   }
+
   delete(id: any): Observable<any[]> {
-    return this.http.delete<any[]>(`${PAYMENT_URL}/${id}`).pipe(
-      tap(_ => {
-        LoggerService.log('deleted payments', id);
-        this.paymentsEvent.emit(_);
-      }),
-      catchError(LoggerService.handleError('payments', undefined))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.delete(`${PAYMENT_URL}/${id}`).pipe(
+        tap(_ => {
+          LoggerService.debug('deleted payments', id);
+        }),
+        catchError(LoggerService.handleError('payments', undefined))
+      );
+    });
+  }
+
+  private doRequestAndReturnAll(callback: () => Observable<any>): Observable<any[]> {
+    return new Observable(observer => {
+      callback().subscribe(any =>
+        this.getAll().subscribe(payments => {
+          this.paymentsEvent.emit(payments);
+          observer.next(payments);
+        })
+      );
+    });
   }
 }

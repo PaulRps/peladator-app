@@ -23,62 +23,76 @@ export class PlayersService {
 
   getAll(): Observable<Player[]> {
     return this.http.get<Player[]>(PLAYER_URL).pipe(
-      tap(_ => LoggerService.log('fetched players', _)),
+      tap(_ => LoggerService.debug('fetched players', _)),
       catchError(LoggerService.handleError('getPlayers', []))
     );
   }
 
   getFormData(): Observable<any> {
     return this.http.get<any>(`${PLAYER_URL}/form-data`).pipe(
-      tap(_ => LoggerService.log('fetched form-data', _)),
+      tap(_ => LoggerService.debug('fetched form-data', _)),
       catchError(LoggerService.handleError('getFormData', []))
     );
   }
 
   save(player: Player): Observable<Player[]> {
-    return this.http.post<Player[]>(PLAYER_URL, player, httpOptions).pipe(
-      tap((players: Player[]) => {
-        LoggerService.log(`added player w/ id=${players ? players.toString() : ''}`, players);
-        this.dialogService.successMessage('Jogador Adicionado!');
-        this.playersEvent.emit(players);
-      }),
-      catchError(LoggerService.handleError<Player[]>('addPlayer'))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.post<Player>(PLAYER_URL, player, httpOptions).pipe(
+        tap((player: Player) => {
+          LoggerService.debug(`added player w/ id=${player.toString()}`);
+          this.dialogService.successMessage('Jogador Adicionado!');
+        }),
+        catchError(LoggerService.handleError<any>('addPlayer'))
+      );
+    });
   }
 
   update(player: Player): Observable<Player[]> {
-    return this.http.put<Player[]>(PLAYER_URL, player, httpOptions).pipe(
-      tap((players: Player[]) => {
-        LoggerService.log(`update player w/ id=${players ? players.toString() : ''}`, players);
-        this.dialogService.successMessage('Jogador Atualizado!');
-        this.playersEvent.emit(players);
-      }),
-      catchError(LoggerService.handleError<Player[]>('updatePlayer'))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.put(PLAYER_URL, player, httpOptions).pipe(
+        tap(() => {
+          LoggerService.debug(`update player w/ id=${player.toString()}`);
+          this.dialogService.successMessage('Jogador Atualizado!');
+        }),
+        catchError(LoggerService.handleError<any>('updatePlayer'))
+      );
+    });
   }
 
   delete(id: number): Observable<Player[]> {
-    return this.http.delete<Player[]>(`${PLAYER_URL}/${id}`, httpOptions).pipe(
-      tap((players: Player[]) => {
-        LoggerService.log(`deleted player w/ id=${players ? players.toString() : ''}`, players);
-        this.dialogService.successMessage('Jogador deletado!');
-        this.playersEvent.emit(players);
-      }),
-      catchError(LoggerService.handleError<Player[]>('deletePlayer'))
-    );
+    return this.doRequestAndReturnAll(() => {
+      return this.http.delete(`${PLAYER_URL}/${id}`, httpOptions).pipe(
+        tap(() => {
+          LoggerService.debug(`deleted player w/ id=${id}`);
+          this.dialogService.successMessage('Jogador deletado!');
+        }),
+        catchError(LoggerService.handleError<any>('deletePlayer'))
+      );
+    });
   }
 
   groupByPosition(): Observable<any> {
     return this.http.get(`${PLAYER_URL}/groupby-position`).pipe(
-      tap(_ => LoggerService.log('group by position players', _)),
+      tap(_ => LoggerService.debug('group by position players', _)),
       catchError(LoggerService.handleError('groupByPosition', []))
     );
   }
 
   sortTeams(selectedPlayers: Player[]): Observable<any> {
     return this.http.post(`${PLAYER_URL}/sort-teams`, selectedPlayers, httpOptions).pipe(
-      tap((players: Player[]) => LoggerService.log(`sort teams w/ id=${players ? players.toString() : ''}`, players)),
+      tap((players: Player[]) => LoggerService.debug(`sort teams w/ id=${players ? players.toString() : ''}`, players)),
       catchError(LoggerService.handleError<Player[]>('sortTeams'))
     );
+  }
+
+  private doRequestAndReturnAll(callback: () => Observable<any>): Observable<Player[]> {
+    return new Observable(observer => {
+      callback().subscribe(any =>
+        this.getAll().subscribe(players => {
+          this.playersEvent.emit(players);
+          observer.next(players);
+        })
+      );
+    });
   }
 }
