@@ -1,5 +1,7 @@
 # PeladatorApp
 
+Peladator app is a web application for management funny soccer matches. It is hosted in Netlify and it consumes the REST API peladator-api.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.2.
 
 ## Development server
