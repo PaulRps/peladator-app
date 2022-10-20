@@ -1,5 +1,6 @@
 {
   "name": "peladator-app",
+  "author": "PaulRps",
   "version": "0.0.0",
   "description": "web app to manage funny soccer matches",
   "scripts": {
