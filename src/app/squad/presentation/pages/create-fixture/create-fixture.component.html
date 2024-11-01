@@ -50,10 +50,11 @@
       <mat-form-field>
         <mat-label title="Qtd. Jogadores por time">Qtd. Jogadores por time</mat-label>
         <input matInput formControlName="amountPlayersInLineUp" placeholder="Ex. 8 Jogadores por time" required />
+        <mat-error *ngIf="fixtureFormGroup.get('amountPlayersInLineUp')?.invalid">Campo obrigatório</mat-error>
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button (click)="createFixture(stepper)">Gerar times</button>
+        <button mat-button [disabled]="!fixtureFormGroup.valid" (click)="createFixture(stepper)">Gerar times</button>
       </div>
     </form>
   </mat-step>

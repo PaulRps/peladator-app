@@ -23,7 +23,7 @@ export class CreateFixtureComponent {
 
   constructor(private readonly getAllPlayers: GetAllPlayers, private readonly createFixtur: CreateFixture) {
     this.fixtureFormGroup = new FormGroup({
-      amountPlayersInLineUp: new FormControl(0, Validators.required),
+      amountPlayersInLineUp: new FormControl(null, Validators.required),
     });
   }
 
@@ -71,4 +71,5 @@ export class CreateFixtureComponent {
       });
   }
 }
+
 
