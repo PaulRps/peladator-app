@@ -7,6 +7,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FixtureCriteria } from '../../../domain/models/fixture-criteria';
 import { CreateFixture } from '../../../domain/usecases/create-fixture';
 import { Fixture } from '../../../domain/models/fixture';
+import { MatStepper } from '@angular/material/stepper';
+import { ShowMessage } from '../../../../core/domain/usecases/show-message';
 
 @Component({
   selector: 'app-create-fixture',
@@ -20,8 +22,14 @@ export class CreateFixtureComponent {
   fixtureFormGroup: FormGroup;
   selection = new SelectionModel<Player>(true, []);
   fixture?: Fixture;
+  hasSelectedPlayers = false;
+  hasReachedStepOne = false;
 
-  constructor(private readonly getAllPlayers: GetAllPlayers, private readonly createFixtur: CreateFixture) {
+  constructor(
+    private readonly getAllPlayers: GetAllPlayers,
+    private readonly createFixtur: CreateFixture,
+    private readonly showMessage: ShowMessage
+  ) {
     this.fixtureFormGroup = new FormGroup({
       amountPlayersInLineUp: new FormControl(null, Validators.required),
     });
@@ -53,9 +61,14 @@ export class CreateFixtureComponent {
   createFixture(stepper: any) {
     if (this.fixtureFormGroup.invalid) {
       this.fixtureFormGroup.markAllAsTouched();
+      this.showMessage.execute('Preencha todos os campos').subscribe();
       return;
     }
-    if (this.selection.selected.length == 0) return;
+
+    if (this.selection.selected.length == 0) {
+      this.showMessage.execute('Selecione os jogadores').subscribe();
+      return;
+    }
 
     this.createFixtur
       .execute(
@@ -69,6 +82,16 @@ export class CreateFixtureComponent {
         this.fixture = fixture;
         stepper.next();
       });
+  }
+
+  next(stepper: MatStepper, step: number) {
+    if (step == 1) {
+      this.hasReachedStepOne = true;
+      this.hasSelectedPlayers = this.selection.selected.length > 0;
+      if (!this.hasSelectedPlayers) this.showMessage.execute('Selecione os jogadores').subscribe();
+    }
+
+    stepper.next();
   }
 }
 

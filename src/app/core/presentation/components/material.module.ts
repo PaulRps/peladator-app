@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
@@ -23,10 +24,12 @@ const materialModules = [
   MatSelectModule,
   MatCheckboxModule,
   MatStepperModule,
+  MatSnackBarModule,
 ];
 @NgModule({
   imports: [...materialModules],
   exports: [...materialModules],
 })
 export class MaterialModule {}
+
 

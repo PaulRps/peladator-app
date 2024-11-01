@@ -42,7 +42,8 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
     <div>
-      <button mat-button matStepperNext>Próximo</button>
+      <mat-error *ngIf="hasReachedStepOne && !hasSelectedPlayers">Selecione jogadores</mat-error>
+      <button mat-button (click)="next(stepper, 1)">Próximo</button>
     </div>
   </mat-step>
   <mat-step label="Defina a quantidade de jogadores por time">
@@ -54,7 +55,7 @@
       </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button [disabled]="!fixtureFormGroup.valid" (click)="createFixture(stepper)">Gerar times</button>
+        <button mat-button [disabled]="!fixtureFormGroup.valid || this.selection.selected.length == 0" (click)="createFixture(stepper)">Gerar times</button>
       </div>
     </form>
   </mat-step>
