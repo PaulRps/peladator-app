@@ -2,14 +2,15 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { LogLevel } from 'src/app/shared/models/log.level.enum';
 
 export const environment = {
   production: false,
   logging: {
-    level: LogLevel.DEBUG,
+    level: 'DEBUG',
   },
-  apiUrl: 'http://localhost:5000/api',
+  // apiUrl: 'http://localhost:3000',
+  apiUrl: 'https://peladator-api.onrender.com',
+  squadId: '6725025471fa5e756fa52808'
 };
 
 /*
@@ -20,3 +21,10 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+
+
+
+
+
+

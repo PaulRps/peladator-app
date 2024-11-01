@@ -1,9 +1,8 @@
-import { LogLevel } from 'src/app/shared/models/log.level.enum';
-
 export const environment = {
   production: true,
   logging: {
-    level: LogLevel.ERROR,
+    level: 'ERROR',
   },
-  apiUrl: 'https://peladator.herokuapp.com/api',
+  apiUrl: 'https://peladator-api.onrender.com',
 };
+

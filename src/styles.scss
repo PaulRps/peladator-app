@@ -1,20 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-// @import '~bootstrap/dist/css/bootstrap.min.css';
-@import '~@angular/material/theming';
-@import './assets/styles/themes/theme.scss';
-
-@include mat-core();
-
-$primary: mat-palette($mat-red);
-$accent: mat-palette($primary, 200, 100, 400);
-$warn: mat-palette($mat-deep-orange, 500, 500, 500);
-$theme: mat-dark-theme($primary, $accent, $warn);
-
-@include angular-material-theme($theme);
-@include material-custom-theme($theme);
+// @tailwind base;
+// @tailwind components;
+@tailwind utilities;
 
 html,
 body {
-  margin: 0;
   height: 100%;
 }
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #101414;
+  color: white;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+

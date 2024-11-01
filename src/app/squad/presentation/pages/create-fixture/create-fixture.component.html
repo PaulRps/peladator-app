@@ -1,0 +1,70 @@
+<mat-stepper orientation="vertical" [linear]="false" #stepper>
+  <mat-step label="Selecione os jogadores">
+    <table mat-table [dataSource]="data" matSort>
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? toggleAllRows() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Progress Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Posição</th>
+        <td mat-cell *matCellDef="let row">{{ row.position }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+
+      <!-- Fruit Column -->
+      <ng-container matColumnDef="level">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nível</th>
+        <td mat-cell *matCellDef="let row">{{ row.level }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <div>
+      <button mat-button matStepperNext>Próximo</button>
+    </div>
+  </mat-step>
+  <mat-step label="Defina a quantidade de jogadores por time">
+    <form [formGroup]="fixtureFormGroup">
+      <mat-form-field>
+        <mat-label title="Qtd. Jogadores por time">Qtd. Jogadores por time</mat-label>
+        <input matInput formControlName="amountPlayersInLineUp" placeholder="Ex. 8 Jogadores por time" required />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button (click)="createFixture(stepper)">Gerar times</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Times Gerados</ng-template>
+    <div *ngFor="let squad of fixture?.lineUps; index as i">
+      <p>{{ 'Time ' + (i + 1) + ' (Nível=' + squad.level + ')' }}</p>
+      <ul *ngFor="let player of squad.players">
+        <li>Jogador: {{ player.name }} ({{ player.position }}) - Ordem: {{ player.sequence }}</li>
+      </ul>
+    </div>
+  </mat-step>
+</mat-stepper>
+
