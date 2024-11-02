@@ -61,12 +61,12 @@ export class CreateFixtureComponent {
   createFixture(stepper: any) {
     if (this.fixtureFormGroup.invalid) {
       this.fixtureFormGroup.markAllAsTouched();
-      this.showMessage.execute('Preencha todos os campos').subscribe();
+      this.showMessage.execute('Preencha todos os campos')
       return;
     }
 
     if (this.selection.selected.length == 0) {
-      this.showMessage.execute('Selecione os jogadores').subscribe();
+      this.showMessage.execute('Selecione os jogadores')
       return;
     }
 
@@ -88,7 +88,7 @@ export class CreateFixtureComponent {
     if (step == 1) {
       this.hasReachedStepOne = true;
       this.hasSelectedPlayers = this.selection.selected.length > 0;
-      if (!this.hasSelectedPlayers) this.showMessage.execute('Selecione os jogadores').subscribe();
+      if (!this.hasSelectedPlayers) this.showMessage.execute('Selecione os jogadores')
     }
 
     stepper.next();

@@ -17,8 +17,8 @@ export class PlayerService {
     return this.http.get<Player[]>(`${this.url}/filter/${environment.squadId}`);
   }
 
-  getPlayer(id: number): Observable<Player> {
-    return this.http.get<Player>(`${this.url}/${id}`);
+  getPlayer(id: string): Observable<Player> {
+    return this.http.get<Player>(`${this.url}?id=${id}`);
   }
 
   createPlayer(player: Player): Observable<Player> {
@@ -31,7 +31,7 @@ export class PlayerService {
     return this.http.put<void>(`${this.url}`, player, httpOptions);
   }
 
-  deletePlayer(id: number): Observable<void> {
+  deletePlayer(id: string): Observable<void> {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
 
@@ -39,4 +39,7 @@ export class PlayerService {
     return this.http.get<string[]>(`${this.url}/positions`);
   }
 }
+
+
+
 

@@ -8,11 +8,12 @@ import { IFixtureRepository } from '../repositories/fixture.repository';
 @Injectable({
   providedIn: 'root',
 })
-export class CreateFixture implements Usecase<FixtureCriteria, Fixture> {
+export class CreateFixture implements Usecase<FixtureCriteria, Observable<Fixture>> {
   constructor(@Inject(IFixtureRepository.name) private readonly fixtureRepository: IFixtureRepository) {}
 
   execute(param: FixtureCriteria): Observable<Fixture> {
     return this.fixtureRepository.create(param);
   }
 }
+
 

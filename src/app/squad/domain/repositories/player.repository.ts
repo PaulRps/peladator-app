@@ -3,14 +3,16 @@ import { Player, PlayerId } from '../models/player';
 
 export interface IPlayerRepository {
   getAll(): Observable<Player[]>;
-  get(id: number): Observable<Player>;
+  get(id: string): Observable<Player>;
   create(player: Player): Observable<Player>;
   update(player: Player): Observable<void>;
-  delete(id: number): Observable<void>;
+  delete(id: string): Observable<void>;
   getPlayerPositions(): Observable<string[]>;
 }
 
 export namespace IPlayerRepository {
   export const name = 'IPlayerRepository';
 }
+
+
 

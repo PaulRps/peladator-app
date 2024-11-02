@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -25,11 +26,13 @@ const materialModules = [
   MatCheckboxModule,
   MatStepperModule,
   MatSnackBarModule,
+  MatDialogModule,
 ];
 @NgModule({
   imports: [...materialModules],
   exports: [...materialModules],
 })
 export class MaterialModule {}
+
 
 

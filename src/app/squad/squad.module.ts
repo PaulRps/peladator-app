@@ -12,6 +12,8 @@ import { CreateFixtureComponent } from './presentation/pages/create-fixture/crea
 import { IFixtureRepository } from './domain/repositories/fixture.repository';
 import { FixtureRepository } from './data/repositories/fixture.repository';
 import { LatestCreatedFixtureComponent } from './presentation/pages/latest-created-fixture/latest-created-fixture.component';
+import { PlayerFormComponent } from './presentation/components/player-form/player-form.component';
+import { UpdatePlayerComponent } from './presentation/pages/update-player/update-player.component';
 
 @NgModule({
   providers: [
@@ -24,7 +26,7 @@ import { LatestCreatedFixtureComponent } from './presentation/pages/latest-creat
       useClass: FixtureRepository,
     },
   ],
-  declarations: [ListPlayersComponent, AddPlayerComponent, CreateFixtureComponent, LatestCreatedFixtureComponent],
+  declarations: [ListPlayersComponent, AddPlayerComponent, CreateFixtureComponent, LatestCreatedFixtureComponent, PlayerFormComponent, UpdatePlayerComponent],
   imports: [CommonModule, ReactiveFormsModule, CoreModule, SquadRoutingModule],
 })
 export class SquadModule {}

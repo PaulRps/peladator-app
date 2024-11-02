@@ -4,6 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { GetAllPlayers } from '../../../domain/usecases/get-all-players';
 import { Player } from '../../../domain/models/player';
+import { ShowDialog } from '../../../../core/domain/usecases/show-dialog';
+import { DeletePlayer } from '../../../domain/usecases/delete-player';
 
 @Component({
   selector: 'app-list-players',
@@ -17,7 +19,11 @@ export class ListPlayersComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [/* 'id', */ 'name', 'position', 'level'];
   pageSize = 5;
 
-  constructor(private readonly getAllPlayers: GetAllPlayers) {}
+  constructor(
+    private readonly getAllPlayers: GetAllPlayers,
+    private readonly showDialog: ShowDialog,
+    private readonly deletePlayer: DeletePlayer
+  ) {}
 
   ngOnInit(): void {
     this.getAllPlayers.execute().subscribe((players) => {
@@ -46,5 +52,30 @@ export class ListPlayersComponent implements OnInit, AfterViewInit {
     this.pageSize = e.pageSize;
     // this.pageIndex = e.pageIndex;
   }
+
+  showActions(row: any, column: string): void {
+    row.hovered = true;
+    row.hoveredColumn = column;
+  }
+
+  hideActions(row: any): void {
+    row.hovered = false;
+  }
+
+  delete(player: Player) {
+    this.showDialog.execute({
+      title: 'Deletar jogador',
+      content: `Deseja deletar o jogador ${player.name}?`,
+      confirmTextButton: 'Sim',
+      cancelTextButton: 'Não',
+      onConfirm: () => {
+        this.deletePlayer.execute(player.id || '').subscribe(() => {
+          this.ngOnInit();
+        });
+      },
+      onCancel: () => {},
+    });
+  }
 }
+
 

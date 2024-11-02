@@ -12,7 +12,7 @@ export class PlayerRepository implements IPlayerRepository {
     return this.playerService.getPlayers();
   }
 
-  get(id: number): Observable<Player> {
+  get(id: string): Observable<Player> {
     return this.playerService.getPlayer(id);
   }
 
@@ -24,7 +24,7 @@ export class PlayerRepository implements IPlayerRepository {
     return this.playerService.updatePlayer(player);
   }
 
-  delete(id: number): Observable<void> {
+  delete(id: string): Observable<void> {
     return this.playerService.deletePlayer(id);
   }
 
@@ -32,4 +32,6 @@ export class PlayerRepository implements IPlayerRepository {
     return this.playerService.getPlayerPositions();
   }
 }
+
+
 

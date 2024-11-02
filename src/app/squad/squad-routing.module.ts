@@ -4,6 +4,7 @@ import { ListPlayersComponent } from './presentation/pages/list-players/list-pla
 import { AddPlayerComponent } from './presentation/pages/add-player/add-player.component';
 import { CreateFixtureComponent } from './presentation/pages/create-fixture/create-fixture.component';
 import { LatestCreatedFixtureComponent } from './presentation/pages/latest-created-fixture/latest-created-fixture.component';
+import { UpdatePlayerComponent } from './presentation/pages/update-player/update-player.component';
 
 const routes: Routes = [
   {
@@ -11,8 +12,12 @@ const routes: Routes = [
     component: ListPlayersComponent,
   },
   {
-    path: 'add',
+    path: 'add-player',
     component: AddPlayerComponent,
+  },
+  {
+    path: 'update-player/:id',
+    component: UpdatePlayerComponent,
   },
   {
     path: 'create-fixture',
@@ -29,4 +34,5 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class SquadRoutingModule {}
+
 

@@ -1,36 +1,4 @@
-<form [formGroup]="playerForm">
-  <mat-form-field>
-    <mat-label>Nome</mat-label>
-    <input matInput formControlName="name">
-    <mat-error *ngIf="playerForm.get('name')?.invalid">Campo obrigatório</mat-error>
-  </mat-form-field>
-
-  <mat-form-field *ngIf="playerPositions.length">
-    <mat-label>Posição</mat-label>
-    <mat-select formControlName="position" required>
-      <mat-option value="">None</mat-option>
-      @for (position of playerPositions; track position) {
-        <mat-option [value]="position">{{position}}</mat-option>
-      }
-    </mat-select>
-    <mat-error *ngIf="playerForm.get('position')?.invalid">Campo obrigatório</mat-error>
-  </mat-form-field>
-  
-  <mat-form-field>
-    <mat-label>Nível</mat-label>
-    <mat-select formControlName="level" required>
-      <mat-option value="1">1</mat-option>
-      <mat-option value="2">2</mat-option>
-      <mat-option value="3">3</mat-option>
-      <mat-option value="4">4</mat-option>
-      <mat-option value="5">5</mat-option>
-    </mat-select>
-    <mat-error *ngIf="playerForm.get('level')?.invalid">Campo obrigatório</mat-error>
-  </mat-form-field>
-
-
-  <button mat-raised-button [disabled]="!playerForm.valid" (click)="create()">Criar</button>
-</form>
+<app-player-form (onSave)="create($event)"></app-player-form>
 
 
 

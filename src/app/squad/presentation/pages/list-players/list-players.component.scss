@@ -1,0 +1,12 @@
+.actions {
+  position: absolute;
+  // background-color: #fff;
+  // border: 1px solid #ddd;
+  // padding: 10px;
+  width: 200px;
+  z-index: 1;
+}
+
+.mat-row:hover .actions {
+  display: block;
+}

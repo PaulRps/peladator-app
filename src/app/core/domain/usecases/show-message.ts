@@ -9,11 +9,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ShowMessage implements Usecase<string, void> {
   private _snackBar = inject(MatSnackBar);
 
-  execute(message: string): Observable<void> {
-    return new Observable((observer) => {
-      this._snackBar.open(message, 'Fechar');
-      observer.complete();
-    });
+  execute(message: string): void {
+    this._snackBar.open(message, 'Fechar');
   }
 }
+
 

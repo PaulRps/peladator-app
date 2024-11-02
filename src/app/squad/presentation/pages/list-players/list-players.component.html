@@ -7,7 +7,7 @@
       </mat-form-field>
     </div>
     <div class="col-start-4 col-end-5">
-      <a mat-flat-button color="primary" aria-label="Adicionar jogador" extended routerLink="add">
+      <a mat-flat-button color="primary" aria-label="Adicionar jogador" extended routerLink="add-player">
         <mat-icon>add</mat-icon>
         Novo
       </a>
@@ -16,22 +16,56 @@
 
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="data" matSort>
-      <!-- Progress Column -->
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Posição</th>
-        <td mat-cell *matCellDef="let row">{{ row.position }}</td>
+        <td mat-cell *matCellDef="let row" (mouseout)="hideActions(row)" (mouseover)="showActions(row, 'position')">
+          {{ row.position }}
+          <div class="actions" *ngIf="row.hovered && row.hoveredColumn === 'position'">
+            <a mat-button color="primary" aria-label="atualizar jogador" extended routerLink="update-player/{{ row.id }}">
+              <mat-icon>edit</mat-icon>
+              Editar
+            </a>
+            
+            <button mat-button color="warn" aria-label="deletar jogador" extended (click)="delete(row)">
+              <mat-icon>delete</mat-icon>
+              Deletar
+            </button>
+          </div>
+        </td>
       </ng-container>
 
-      <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
-        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        <td mat-cell *matCellDef="let row" (mouseout)="hideActions(row)" (mouseover)="showActions(row, 'name')">
+          {{ row.name }}
+          <div class="actions" *ngIf="row.hovered && row.hoveredColumn === 'name'">
+            <a mat-button color="primary" aria-label="atualizar jogador" extended routerLink="update-player/{{ row.id }}">
+              <mat-icon>edit</mat-icon>
+              Editar
+            </a>
+            <a mat-button color="warn" aria-label="deletar jogador" extended (click)="delete(row)">
+              <mat-icon>delete</mat-icon>
+              Deletar
+            </a>
+          </div>
+        </td>
       </ng-container>
 
-      <!-- Fruit Column -->
       <ng-container matColumnDef="level">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nível</th>
-        <td mat-cell *matCellDef="let row">{{ row.level }}</td>
+        <td mat-cell *matCellDef="let row" (mouseout)="hideActions(row)" (mouseover)="showActions(row, 'level')">
+          {{ row.level }}
+          <div class="actions" *ngIf="row.hovered && row.hoveredColumn === 'level'">
+            <a mat-button color="primary" aria-label="atualizar jogador" extended routerLink="update-player/{{ row.id }}">
+              <mat-icon>edit</mat-icon>
+              Editar
+            </a>
+            <a mat-button color="warn" aria-label="deletar jogador" extended (click)="delete(row)">
+              <mat-icon>delete</mat-icon>
+              Deletar
+            </a>
+          </div>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -62,7 +62,7 @@
   <mat-step>
     <ng-template matStepLabel>Times Gerados</ng-template>
     <div *ngFor="let squad of fixture?.lineUps; index as i">
-      <p>{{ 'Time ' + (i + 1) + ' (Nível=' + squad.level + ')' }}</p>
+      <p>{{ 'Time ' + (i + 1) + ' (Nível=' + squad.level + ' Jogadores=' + squad.players?.length + ')' }}</p>
       <ul *ngFor="let player of squad.players">
         <li>Jogador: {{ player.name }} ({{ player.position }}) - Ordem: {{ player.sequence }}</li>
       </ul>
