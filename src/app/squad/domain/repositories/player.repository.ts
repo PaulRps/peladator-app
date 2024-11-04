@@ -8,11 +8,12 @@ export interface IPlayerRepository {
   update(player: Player): Observable<void>;
   delete(id: string): Observable<void>;
   getPlayerPositions(): Observable<string[]>;
+  savePlayerForFixture(player: Player): Observable<void>;
+  getPlayersForFixture(): Observable<Player[]>;
 }
 
 export namespace IPlayerRepository {
   export const name = 'IPlayerRepository';
 }
-
 
 

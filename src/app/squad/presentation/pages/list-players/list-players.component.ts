@@ -1,65 +1,46 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { GetAllPlayers } from '../../../domain/usecases/get-all-players';
-import { Player } from '../../../domain/models/player';
 import { ShowDialog } from '../../../../core/domain/usecases/show-dialog';
+import { Player } from '../../../domain/models/player';
 import { DeletePlayer } from '../../../domain/usecases/delete-player';
+import { GetAllPlayers } from '../../../domain/usecases/get-all-players';
+import { SavePlayerForFixture } from '../../../domain/usecases/save-player-for-fixture';
+import { ShowMessage } from '../../../../core/domain/usecases/show-message';
 
 @Component({
   selector: 'app-list-players',
   templateUrl: './list-players.component.html',
   styleUrl: './list-players.component.scss',
 })
-export class ListPlayersComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
-  @ViewChild(MatSort) sort?: MatSort;
+export class ListPlayersComponent implements OnInit {
   data: MatTableDataSource<Player> = new MatTableDataSource();
-  displayedColumns: string[] = [/* 'id', */ 'name', 'position', 'level'];
-  pageSize = 5;
+  displayedColumns: string[] = [/* 'id', */ 'name', 'position', 'level' /* , 'actions' */];
 
   constructor(
     private readonly getAllPlayers: GetAllPlayers,
     private readonly showDialog: ShowDialog,
-    private readonly deletePlayer: DeletePlayer
+    private readonly deletePlayer: DeletePlayer,
+    private readonly savePlayerForFixture: SavePlayerForFixture,
+    private readonly showMessage: ShowMessage
   ) {}
 
   ngOnInit(): void {
     this.getAllPlayers.execute().subscribe((players) => {
       this.data = new MatTableDataSource(players);
-      console.log(players);
     });
-  }
-
-  ngAfterViewInit() {
-    this.data.paginator = <any>this.paginator;
-    this.data.sort = <any>this.sort;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.data.filter = filterValue.trim().toLowerCase();
-
-    if (this.data.paginator) {
-      this.data.paginator.firstPage();
-    }
   }
 
-  handlePageEvent(e: PageEvent) {
-    // this.pageEvent = e;
-    // this.length = e.length;
-    this.pageSize = e.pageSize;
-    // this.pageIndex = e.pageIndex;
-  }
-
-  showActions(row: any, column: string): void {
+  showActions(row: any): void {
     row.hovered = true;
-    row.hoveredColumn = column;
   }
 
   hideActions(row: any): void {
-    row.hovered = false;
+    row.hovered = null;
   }
 
   delete(player: Player) {
@@ -76,6 +57,11 @@ export class ListPlayersComponent implements OnInit, AfterViewInit {
       onCancel: () => {},
     });
   }
-}
 
+  saveForFixture(player: Player) {
+    this.savePlayerForFixture.execute(player).subscribe(() => {
+      this.showMessage.execute(`Jogador ${player.name} selecionado para a partida`);
+    });
+  }
+}
 

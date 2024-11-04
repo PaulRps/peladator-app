@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Player, PlayerId } from '../../domain/models/player';
+import { Observable } from 'rxjs';
+import { Player } from '../../domain/models/player';
 import { IPlayerRepository } from '../../domain/repositories/player.repository';
 import { PlayerService } from '../services/player.service';
-import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class PlayerRepository implements IPlayerRepository {
@@ -30,6 +30,14 @@ export class PlayerRepository implements IPlayerRepository {
 
   getPlayerPositions(): Observable<string[]> {
     return this.playerService.getPlayerPositions();
+  }
+
+  savePlayerForFixture(player: Player): Observable<void> {
+    return this.playerService.savePlayerForFixture(player);
+  }
+
+  getPlayersForFixture(): Observable<Player[]> {
+    return this.playerService.getPlayersForFixture();
   }
 }
 

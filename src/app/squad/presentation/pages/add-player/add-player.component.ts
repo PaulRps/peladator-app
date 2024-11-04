@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Player } from '../../../domain/models/player';
 import { CreatePlayer } from '../../../domain/usecases/create-player';
+import { ShowMessage } from '../../../../core/domain/usecases/show-message';
 
 @Component({
   selector: 'app-add-player',
@@ -9,12 +10,18 @@ import { CreatePlayer } from '../../../domain/usecases/create-player';
   styleUrl: './add-player.component.scss',
 })
 export class AddPlayerComponent {
-  constructor(private readonly createPlayer: CreatePlayer, private readonly roouter: Router) {}
+  constructor(
+    private readonly createPlayer: CreatePlayer,
+    private readonly roouter: Router,
+    private readonly showMessage: ShowMessage
+  ) {}
 
   create(player: Player): void {
     this.createPlayer.execute(player).subscribe((_) => {
+      this.showMessage.execute(`Jogador ${player.name} salvo com sucesso`);
       this.roouter.navigate(['squad']);
     });
   }
 }
+
 

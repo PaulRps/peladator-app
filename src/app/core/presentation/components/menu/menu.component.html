@@ -1,8 +1,10 @@
-<button mat-raised-button (click)="redirectTo('/squad')">Elenco</button>
-
-<button mat-button [matMenuTriggerFor]="fixturesMenu">Partidas</button>
-<mat-menu #fixturesMenu="matMenu" yPosition="above">
-  <button mat-menu-item (click)="redirectTo('/squad/create-fixture')">Gerar Times</button>
-  <button mat-menu-item (click)="redirectTo('/squad/latest-fixture')">Últimos Times Gerados</button>
-</mat-menu>
+<div class="container mx-auto py-4">
+  <button mat-raised-button (click)="redirectTo('/squad')">Elenco</button>
+  
+  <button mat-button [matMenuTriggerFor]="fixturesMenu">Partidas</button>
+  <mat-menu #fixturesMenu="matMenu" yPosition="above">
+    <button mat-menu-item (click)="redirectTo('/squad/create-fixture')">Gerar Times</button>
+    <button mat-menu-item (click)="redirectTo('/squad/latest-fixture')">Últimos Times Gerados</button>
+  </mat-menu>
+</div>
 

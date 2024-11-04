@@ -38,7 +38,17 @@ export class PlayerService {
   getPlayerPositions(): Observable<string[]> {
     return this.http.get<string[]>(`${this.url}/positions`);
   }
+
+  savePlayerForFixture(player: Player): Observable<void> {
+    player.squadId = environment.squadId;
+    return this.http.post<void>(`${this.url}/for-fixture`, player, httpOptions);
+  }
+
+  getPlayersForFixture(): Observable<Player[]> {
+    return this.http.get<Player[]>(`${this.url}/for-fixture?squadId=${environment.squadId}`);
+  }
 }
+
 
 
 

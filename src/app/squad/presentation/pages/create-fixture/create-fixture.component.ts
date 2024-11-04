@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { Player } from '../../../domain/models/player';
-import { GetAllPlayers } from '../../../domain/usecases/get-all-players';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FixtureCriteria } from '../../../domain/models/fixture-criteria';
-import { CreateFixture } from '../../../domain/usecases/create-fixture';
-import { Fixture } from '../../../domain/models/fixture';
 import { MatStepper } from '@angular/material/stepper';
+import { MatTableDataSource } from '@angular/material/table';
 import { ShowMessage } from '../../../../core/domain/usecases/show-message';
+import { Fixture } from '../../../domain/models/fixture';
+import { FixtureCriteria } from '../../../domain/models/fixture-criteria';
+import { Player } from '../../../domain/models/player';
+import { CreateFixture } from '../../../domain/usecases/create-fixture';
+import { GetPlayersForFixture } from '../../../domain/usecases/get-players-for-fixture';
 
 @Component({
   selector: 'app-create-fixture',
@@ -26,7 +26,7 @@ export class CreateFixtureComponent {
   hasReachedStepOne = false;
 
   constructor(
-    private readonly getAllPlayers: GetAllPlayers,
+    private readonly getPlayersForFixture: GetPlayersForFixture,
     private readonly createFixtur: CreateFixture,
     private readonly showMessage: ShowMessage
   ) {
@@ -36,9 +36,8 @@ export class CreateFixtureComponent {
   }
 
   ngOnInit(): void {
-    this.getAllPlayers.execute().subscribe((players) => {
+    this.getPlayersForFixture.execute().subscribe((players) => {
       this.data = new MatTableDataSource(players);
-      console.log(players);
     });
   }
 
@@ -61,12 +60,12 @@ export class CreateFixtureComponent {
   createFixture(stepper: any) {
     if (this.fixtureFormGroup.invalid) {
       this.fixtureFormGroup.markAllAsTouched();
-      this.showMessage.execute('Preencha todos os campos')
+      this.showMessage.execute('Preencha todos os campos');
       return;
     }
 
     if (this.selection.selected.length == 0) {
-      this.showMessage.execute('Selecione os jogadores')
+      this.showMessage.execute('Selecione os jogadores');
       return;
     }
 
@@ -88,11 +87,10 @@ export class CreateFixtureComponent {
     if (step == 1) {
       this.hasReachedStepOne = true;
       this.hasSelectedPlayers = this.selection.selected.length > 0;
-      if (!this.hasSelectedPlayers) this.showMessage.execute('Selecione os jogadores')
+      if (!this.hasSelectedPlayers) this.showMessage.execute('Selecione os jogadores');
     }
 
     stepper.next();
   }
 }
-
 

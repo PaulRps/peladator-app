@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Player } from '../../../domain/models/player';
 import { GetPlayerById } from '../../../domain/usecases/get-player-by-id';
 import { UpdatePlayer } from '../../../domain/usecases/update-player';
+import { ShowMessage } from '../../../../core/domain/usecases/show-message';
 
 @Component({
   selector: 'app-update-player',
@@ -16,7 +17,8 @@ export class UpdatePlayerComponent implements OnInit {
     private readonly getPlayerById: GetPlayerById,
     private readonly updatePlayer: UpdatePlayer,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly showMessage: ShowMessage
   ) {}
 
   ngOnInit(): void {
@@ -30,9 +32,11 @@ export class UpdatePlayerComponent implements OnInit {
 
   update(player: Player): void {
     this.updatePlayer.execute(player).subscribe(() => {
+      this.showMessage.execute(`Jogador ${player.name} atualizado com sucesso`);
       this.player = player;
       this.router.navigate(['squad']);
     });
   }
 }
+
 

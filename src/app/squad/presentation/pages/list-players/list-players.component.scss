@@ -1,10 +1,18 @@
 .actions {
   position: absolute;
-  // background-color: #fff;
-  // border: 1px solid #ddd;
-  // padding: 10px;
-  width: 200px;
+  margin-top: -20px;
+  background-color: #191c1c;
+  width: 292px;
+  height: 20;
   z-index: 1;
+
+  a {
+    height: inherit !important;
+  }
+}
+
+td {
+  cursor: pointer;
 }
 
 .mat-row:hover .actions {
