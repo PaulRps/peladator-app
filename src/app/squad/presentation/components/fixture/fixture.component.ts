@@ -31,14 +31,17 @@ export class FixtureComponent implements OnChanges {
     player.hovered = null;
   }
 
-  move(player: PlayerForFixture, playerIndex: number, squadIndex: number): void {
+  move(player: any, playerIndex: number, squadIndex: number): void {
     const validIndexes = [0, 1];
     if (player && validIndexes.includes(squadIndex) && validIndexes.includes(playerIndex)) {
       const otherSquad = squadIndex == 0 ? 1 : 0;
       this.lineUps[otherSquad].players.push(player);
       this.lineUps[squadIndex].players.splice(playerIndex, 1);
+      player.hovered = null;
     }
   }
 }
+
+
 
 
