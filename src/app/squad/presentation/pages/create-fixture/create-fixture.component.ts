@@ -9,6 +9,7 @@ import { FixtureCriteria } from '../../../domain/models/fixture-criteria';
 import { Player } from '../../../domain/models/player';
 import { CreateFixture } from '../../../domain/usecases/create-fixture';
 import { GetPlayersForFixture } from '../../../domain/usecases/get-players-for-fixture';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-fixture',
@@ -28,7 +29,8 @@ export class CreateFixtureComponent {
   constructor(
     private readonly getPlayersForFixture: GetPlayersForFixture,
     private readonly createFixtur: CreateFixture,
-    private readonly showMessage: ShowMessage
+    private readonly showMessage: ShowMessage,
+    private readonly router: Router
   ) {
     this.fixtureFormGroup = new FormGroup({
       amountPlayersInLineUp: new FormControl(null, Validators.required),
@@ -79,7 +81,8 @@ export class CreateFixtureComponent {
       .subscribe((fixture) => {
         // this.selection.clear();
         this.fixture = fixture;
-        stepper.next();
+        this.showMessage.execute('Times criados com sucesso');
+        this.router.navigate(['squad', 'latest-fixture']);
       });
   }
 
@@ -93,4 +96,6 @@ export class CreateFixtureComponent {
     stepper.next();
   }
 }
+
+
 
