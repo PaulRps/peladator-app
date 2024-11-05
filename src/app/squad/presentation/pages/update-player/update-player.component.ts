@@ -37,6 +37,11 @@ export class UpdatePlayerComponent implements OnInit {
       this.router.navigate(['squad']);
     });
   }
+
+  routeToSquad() {
+    this.router.navigate(['squad']);
+  }
 }
+
 
 

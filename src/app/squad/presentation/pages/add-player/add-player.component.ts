@@ -12,16 +12,19 @@ import { ShowMessage } from '../../../../core/domain/usecases/show-message';
 export class AddPlayerComponent {
   constructor(
     private readonly createPlayer: CreatePlayer,
-    private readonly roouter: Router,
+    private readonly router: Router,
     private readonly showMessage: ShowMessage
   ) {}
 
   create(player: Player): void {
     this.createPlayer.execute(player).subscribe((_) => {
       this.showMessage.execute(`Jogador ${player.name} salvo com sucesso`);
-      this.roouter.navigate(['squad']);
+      this.router.navigate(['squad']);
     });
   }
+
+  routeToSquad(): void {
+    this.router.navigate(['squad']);
+  }
+
 }
-
-

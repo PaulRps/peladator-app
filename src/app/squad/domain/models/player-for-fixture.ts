@@ -1,7 +1,7 @@
 import { Player } from './player';
 
 export class PlayerForFixture extends Player {
-  sequence?: number;
+  sequence: number;
 
   constructor({
     id,
@@ -17,7 +17,8 @@ export class PlayerForFixture extends Player {
     sequence?: number;
   } = {}) {
     super({ id, name, position, level });
-    this.sequence = sequence;
+    this.sequence = sequence || -1;
   }
 }
+
 

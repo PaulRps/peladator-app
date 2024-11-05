@@ -1,0 +1,13 @@
+.actions {
+  background-color: #191c1c;
+  width: 100px;
+  height: 25px;
+
+  button {
+    height: inherit !important;
+  }
+}
+
+mat-list-item {
+  cursor: pointer;
+}

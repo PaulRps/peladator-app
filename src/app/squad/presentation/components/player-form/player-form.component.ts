@@ -11,6 +11,7 @@ import { GetPlayerPositions } from '../../../domain/usecases/get-player-position
 export class PlayerFormComponent implements OnChanges, OnInit {
   @Input() player?: Player;
   @Output() onSave = new EventEmitter<Player>();
+  @Output() onCancel = new EventEmitter<void>();
 
   playerForm: FormGroup;
   playerPositions: string[] = [];
@@ -59,5 +60,10 @@ export class PlayerFormComponent implements OnChanges, OnInit {
 
     this.onSave.emit(this.player);
   }
+
+  cancel(): void {
+    this.onCancel.emit();
+  }
 }
+
 

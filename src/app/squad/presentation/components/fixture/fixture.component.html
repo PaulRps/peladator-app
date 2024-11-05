@@ -1,0 +1,31 @@
+<div *ngFor="let squad of lineUps; index as squadIndex">
+  <p>{{ 'Time ' + (squadIndex + 1) + ' (Nível=' + squad.level + '  |  Qtd. Jogadores=' + squad.players?.length + ')' }}</p>
+  <mat-list>
+    @for (player of squad.players; track $index) {
+    <mat-list-item (mouseover)="showActions(player)" (mouseout)="hideActions(player)" matRipple>
+      <span matListItemTitle>
+        {{ player.name }}
+        <span *ngIf="player?.hovered" class="actions">
+          <button
+            mat-button
+            color="primary"
+            aria-label="mover jogador para outro time"
+            (click)="move(player, $index, squadIndex)"
+            extended
+          >
+            <mat-icon>sync_alt</mat-icon>
+            Mover
+          </button>
+        </span>
+      </span>
+      <span matListItemLine>
+        Ordem: {{ player.sequence }}
+      </span>
+      <span matListItemLine>
+        Posição/Nível: {{ player.position }} / {{ player.level }}
+      </span>
+    </mat-list-item>
+    }
+  </mat-list>
+</div>
+
