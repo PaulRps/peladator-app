@@ -1,5 +1,12 @@
+<div class="grid grid-cols-1 pb-4" *ngIf="hasLineupChanged">
+  <button class="justify-self-end" mat-button color="primary" (click)="update()">Salvar Alterações</button>
+  <mat-divider></mat-divider>
+</div>
+
 <div *ngFor="let squad of lineUps; index as squadIndex">
-  <p>{{ 'Time ' + (squadIndex + 1) + ' (Nível=' + squad.level + '  |  Qtd. Jogadores=' + squad.players?.length + ')' }}</p>
+  <p>
+    {{ 'Time ' + (squadIndex + 1) + ' (Nível=' + squad.level + '  |  Qtd. Jogadores=' + squad.players?.length + ')' }}
+  </p>
   <mat-list>
     @for (player of squad.players; track $index) {
     <mat-list-item (mouseover)="showActions(player)" (mouseout)="hideActions(player)" matRipple>
@@ -18,12 +25,8 @@
           </button>
         </span>
       </span>
-      <span matListItemLine>
-        Ordem: {{ player.sequence }}
-      </span>
-      <span matListItemLine>
-        Posição/Nível: {{ player.position }} / {{ player.level }}
-      </span>
+      <span matListItemLine> Ordem: {{ player.sequence }} </span>
+      <span matListItemLine> Posição/Nível: {{ player.position }} / {{ player.level }} </span>
     </mat-list-item>
     }
   </mat-list>

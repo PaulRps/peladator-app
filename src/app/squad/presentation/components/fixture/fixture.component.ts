@@ -2,6 +2,8 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Fixture } from '../../../domain/models/fixture';
 import { LineUp } from '../../../domain/models/lineup';
 import { PlayerForFixture } from '../../../domain/models/player-for-fixture';
+import { UpdateFixture } from '../../../domain/usecases/update-fixture';
+import { ShowMessage } from '../../../../core/domain/usecases/show-message';
 
 @Component({
   selector: 'app-fixture',
@@ -12,6 +14,9 @@ export class FixtureComponent implements OnChanges {
   @Input() fixture?: Fixture;
 
   lineUps: any[] = [];
+  hasLineupChanged: boolean = false;
+
+  constructor(private readonly updateFixture: UpdateFixture, private readonly showMessage: ShowMessage) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['fixture'].currentValue) {
@@ -33,12 +38,22 @@ export class FixtureComponent implements OnChanges {
 
   move(player: any, playerIndex: number, squadIndex: number): void {
     const validIndexes = [0, 1];
-    if (player && validIndexes.includes(squadIndex) && validIndexes.includes(playerIndex)) {
-      const otherSquad = squadIndex == 0 ? 1 : 0;
-      this.lineUps[otherSquad].players.push(player);
+    if (player && validIndexes.includes(squadIndex) && playerIndex >= 0) {
+      const otherLineup = squadIndex == 0 ? 1 : 0;
+      this.lineUps[otherLineup].players.push(player);
       this.lineUps[squadIndex].players.splice(playerIndex, 1);
       player.hovered = null;
+      this.hasLineupChanged = true;
     }
+  }
+
+  update(): void {
+    if (!this.fixture) return;
+
+    this.updateFixture.execute(this.fixture).subscribe(() => {
+      this.hasLineupChanged = false;
+      this.showMessage.execute('Times atualizados com sucesso!');
+    });
   }
 }
 

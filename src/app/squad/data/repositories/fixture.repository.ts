@@ -16,5 +16,10 @@ export class FixtureRepository implements IFixtureRepository {
   create(fixture: FixtureCriteria): Observable<Fixture> {
     return this.fixtureService.createFixture(fixture);
   }
+
+  update(fixture: Fixture): Observable<void> {
+    return this.fixtureService.updateFixture(fixture);
+  }
 }
+
 

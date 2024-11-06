@@ -20,5 +20,11 @@ export class FixtureService {
   getLatestFixture(): Observable<Fixture> {
     return this.http.get<Fixture>(`${this.url}/latest?squadId=${environment.squadId}`);
   }
+
+  updateFixture(fixture: Fixture): Observable<void> {
+    fixture.squadId = environment.squadId;
+    return this.http.put<void>(`${this.url}`, fixture);
+  }
 }
+
 
