@@ -10,7 +10,7 @@ export interface DialogData {
   cancelTextButton?: string;
 
   onConfirm(): void;
-  onCancel(): void;
+  onCancel?: () => void;
 }
 
 @Injectable({
@@ -25,4 +25,5 @@ export class ShowDialog implements Usecase<DialogData, void> {
     });
   }
 }
+
 

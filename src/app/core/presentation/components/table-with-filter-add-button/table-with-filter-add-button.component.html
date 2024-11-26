@@ -1,0 +1,23 @@
+<ng-template #filterSection let-data="data">
+  <div class="grid grid-cols-4 gap-1">
+    <div class="col-start-1">
+      <mat-form-field class="mr-4">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event, data)" [placeholder]="filterPlaceholder" />
+      </mat-form-field>
+    </div>
+    <div class="col-start-4 col-end-5 grid" *ngIf="addButton">
+      <button mat-flat-button color="{{ addButton.color }}" class="justify-self-end" extended (click)="addButtonClick()">
+        <mat-icon>add</mat-icon>
+        {{ addButton.text }}
+      </button>
+    </div>
+  </div>
+</ng-template>
+<app-table
+  [datasource]="datasource"
+  [columns]="columns"
+  [actionsOnRowTemplate]="actionsOnRow"
+  [filterTemplate]="filterSection"
+></app-table>
+

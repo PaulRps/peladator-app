@@ -6,6 +6,10 @@ const routes: Routes = [
     path: 'squad',
     loadChildren: () => import('./squad/squad.module').then((m) => m.SquadModule),
   },
+  {
+    path: 'payments',
+    loadChildren: () => import('./payment/payment.module').then((m) => m.PaymentModule),
+  },
 ];
 
 @NgModule({
@@ -13,4 +17,5 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+
 

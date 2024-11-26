@@ -1,0 +1,42 @@
+<div *ngIf="filterTemplate">
+  <ng-container
+    *ngTemplateOutlet="
+      filterTemplate;
+      context: {
+        data: this._datasource
+      }
+    "
+  >
+  </ng-container>
+</div>
+<table mat-table [dataSource]="_datasource">
+  @for (columnData of columns; track $index) {
+  <ng-container matColumnDef="{{ columnData.name }}">
+    <th mat-header-cell *matHeaderCellDef>{{ columnData.label }}</th>
+    <td mat-cell *matCellDef="let row" (mouseout)="hideActions(row)" (mouseover)="showActions(row)">
+      <div *ngIf="actionsOnRowTemplate">
+        <ng-container
+          *ngTemplateOutlet="
+            actionsOnRowTemplate;
+            context: {
+              row: row,
+              columnData: columnData
+            }
+          "
+        >
+        </ng-container>
+      </div>
+      {{ applyPipe(row, columnData) }}
+    </td>
+  </ng-container>
+  }
+
+  <tr mat-header-row *matHeaderRowDef="_displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: _displayedColumns"></tr>
+
+  <!-- Row shown when there is no matching data. -->
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">Nada para exibir"</td>
+  </tr>
+</table>
+

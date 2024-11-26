@@ -3,7 +3,7 @@
   {{ data.content }}
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="cancel()">{{ data.cancelTextButton }}</button>
+  <button *ngIf="data.cancelTextButton" mat-button mat-dialog-close (click)="cancel()">{{ data.cancelTextButton }}</button>
   <button mat-button mat-dialog-close (click)="confirm()">{{ data.confirmTextButton }}</button>
 </mat-dialog-actions>
 
