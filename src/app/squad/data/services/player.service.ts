@@ -13,8 +13,8 @@ export class PlayerService {
   private readonly url = `${environment.apiUrl}/api/v1/player`;
   constructor(private readonly http: HttpClient) {}
 
-  getPlayers(): Observable<Player[]> {
-    return this.http.get<Player[]>(`${this.url}/filter/${environment.squadId}`);
+  filterPlayers(squadId: string, ids?: string[]): Observable<Player[]> {
+    return this.http.get<Player[]>(`${this.url}/filter?squadId=${squadId}${ids ? `&ids=${ids.join(',')}` : ''}`);
   }
 
   getPlayer(id: string): Observable<Player> {
@@ -48,6 +48,8 @@ export class PlayerService {
     return this.http.get<Player[]>(`${this.url}/for-fixture?squadId=${environment.squadId}`);
   }
 }
+
+
 
 
 

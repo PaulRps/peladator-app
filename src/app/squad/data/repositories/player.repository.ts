@@ -8,8 +8,8 @@ import { PlayerService } from '../services/player.service';
 export class PlayerRepository implements IPlayerRepository {
   constructor(private readonly playerService: PlayerService) {}
 
-  getAll(): Observable<Player[]> {
-    return this.playerService.getPlayers();
+  filterPlayers(squadId: string, ids?: string[]): Observable<Player[]> {
+    return this.playerService.filterPlayers(squadId, ids);
   }
 
   get(id: string): Observable<Player> {
@@ -40,6 +40,9 @@ export class PlayerRepository implements IPlayerRepository {
     return this.playerService.getPlayersForFixture();
   }
 }
+
+
+
 
 
 
