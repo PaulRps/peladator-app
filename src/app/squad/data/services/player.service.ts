@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Player } from '../../domain/models/player';
+import { PlayerWithFixtureHistory } from '../../domain/models/player-with-fixture-history';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -15,6 +16,10 @@ export class PlayerService {
 
   filterPlayers(squadId: string, ids?: string[]): Observable<Player[]> {
     return this.http.get<Player[]>(`${this.url}/filter?squadId=${squadId}${ids ? `&ids=${ids.join(',')}` : ''}`);
+  }
+
+  getPlayersHistory(squadId: string): Observable<PlayerWithFixtureHistory[]> {
+    return this.http.get<PlayerWithFixtureHistory[]>(`${this.url}/fixture-history?squadId=${squadId}`);
   }
 
   getPlayer(id: string): Observable<Player> {
@@ -48,6 +53,9 @@ export class PlayerService {
     return this.http.get<Player[]>(`${this.url}/for-fixture?squadId=${environment.squadId}`);
   }
 }
+
+
+
 
 
 

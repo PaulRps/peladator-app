@@ -7,7 +7,7 @@
 ></app-table-with-filter-add-button>
 
 <ng-template #actions let-columnData="columnData" let-row="row">
-  <div class="actions" *ngIf="row?.hovered && columnData.name == 'position'">
+  <div class="actions" *ngIf="row?.hovered && columnData.name == 'name'">
     <button
       mat-button
       color="primary"
@@ -17,6 +17,17 @@
     >
       <mat-icon>how_to_reg</mat-icon>
       Escalar
+    </button>
+
+    <button
+      mat-button
+      color="primary"
+      aria-label="escalar"
+      extended
+      (click)="showFixtureHistory(row)"
+    >
+      <mat-icon>timeline</mat-icon>
+      Assiduidade
     </button>
     
     <button

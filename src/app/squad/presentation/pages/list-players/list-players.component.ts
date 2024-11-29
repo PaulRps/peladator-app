@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ShowDialog } from '../../../../core/domain/usecases/show-dialog';
 import { ShowMessage } from '../../../../core/domain/usecases/show-message';
 import { ColumnData } from '../../../../core/presentation/components/table/column-data';
 import { Player } from '../../../domain/models/player';
+import { PlayerWithFixtureHistory } from '../../../domain/models/player-with-fixture-history';
 import { DeletePlayer } from '../../../domain/usecases/delete-player';
-import { GetAllPlayers } from '../../../domain/usecases/get-all-players';
+import { GetPlayersWithFixtureHistory } from '../../../domain/usecases/get-players-with-fixture-history';
 import { SavePlayerForFixture } from '../../../domain/usecases/save-player-for-fixture';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-players',
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
   styleUrl: './list-players.component.scss',
 })
 export class ListPlayersComponent implements OnInit {
-  protected dataTable: Player[] = [];
+  protected dataTable: PlayerWithFixtureHistory[] = [];
   protected addButton = {
     color: 'primary',
     text: 'Jogador',
@@ -36,7 +37,7 @@ export class ListPlayersComponent implements OnInit {
   ];
 
   constructor(
-    private readonly getAllPlayers: GetAllPlayers,
+    private readonly getPlayersWithFixtureHistory: GetPlayersWithFixtureHistory,
     private readonly showDialog: ShowDialog,
     private readonly deletePlayer: DeletePlayer,
     private readonly savePlayerForFixture: SavePlayerForFixture,
@@ -45,7 +46,7 @@ export class ListPlayersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllPlayers.execute().subscribe((players) => {
+    this.getPlayersWithFixtureHistory.execute().subscribe((players) => {
       this.dataTable = players;
     });
   }
@@ -73,5 +74,40 @@ export class ListPlayersComponent implements OnInit {
   protected edit(player: Player): void {
     this.router.navigate([`update-player/${player.id}`]);
   }
+
+  protected showFixtureHistory(player: PlayerWithFixtureHistory): void {
+    const fixtureHistory =
+      player.history
+        ?.map((fixture) => new Date(fixture.date))
+        ?.sort((a: any, b: any) => b.getTime() - a.getTime())
+        ?.map((date: any) =>
+          date.toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          })
+        )
+        ?.join('<br>') || 'Nenhum jogo';
+
+    this.showDialog.execute({
+      title: 'Histórico de jogos',
+      htmlContent: fixtureHistory,
+      confirmTextButton: 'Fechar',
+      onConfirm: () => {},
+    });
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 

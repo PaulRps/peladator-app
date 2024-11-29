@@ -5,7 +5,8 @@ import { Usecase } from './usecase';
 
 export interface DialogData {
   title: string;
-  content: string;
+  content?: string;
+  htmlContent?: string;
   confirmTextButton: string;
   cancelTextButton?: string;
 
@@ -25,5 +26,6 @@ export class ShowDialog implements Usecase<DialogData, void> {
     });
   }
 }
+
 
 
