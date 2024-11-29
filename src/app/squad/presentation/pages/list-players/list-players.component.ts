@@ -90,13 +90,14 @@ export class ListPlayersComponent implements OnInit {
         ?.join('<br>') || 'Nenhum jogo';
 
     this.showDialog.execute({
-      title: 'Histórico de jogos',
+      title: `Histórico de jogos de ${player.name}`,
       htmlContent: fixtureHistory,
       confirmTextButton: 'Fechar',
       onConfirm: () => {},
     });
   }
 }
+
 
 
 
