@@ -19,7 +19,7 @@ export class GetCustomersWithPaymentStatus implements Usecase<void, Observable<C
             const currentDay = new Date().toISOString().split('T')[0].split('-')[2];
 
             customers.forEach((customer) => {
-              customer.status = 'Pendiente';
+              customer.status = 'Pendente';
               if (payment?.customersDailyPaid && payment?.customersDailyPaid[currentDay]?.includes(customer.id)) {
                 customer.hasPaidDaily = true;
                 customer.status = 'Diária';
@@ -37,4 +37,5 @@ export class GetCustomersWithPaymentStatus implements Usecase<void, Observable<C
     );
   }
 }
+
 

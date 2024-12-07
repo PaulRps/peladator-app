@@ -66,15 +66,11 @@ export class CreateFixtureComponent {
       return;
     }
 
-    if (this.selection.selected.length == 0) {
-      this.showMessage.execute('Selecione os jogadores');
-      return;
-    }
-
     this.createFixtur
       .execute(
         new FixtureCriteria({
-          players: this.selection.selected,
+          players: this.data.data.filter((player) => !this.selection.selected.includes(player)),
+          priorityPlayers: this.selection.selected,
           amountPlayersInLineUp: Number(this.fixtureFormGroup.get('amountPlayersInLineUp')?.value),
         })
       )
@@ -96,6 +92,8 @@ export class CreateFixtureComponent {
     stepper.next();
   }
 }
+
+
 
 
 

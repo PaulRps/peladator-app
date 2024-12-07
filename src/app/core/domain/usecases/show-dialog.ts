@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../presentation/components/dialog/dialog.component';
 import { Usecase } from './usecase';
@@ -7,6 +7,7 @@ export interface DialogData {
   title: string;
   content?: string;
   htmlContent?: string;
+  htmlContentTemplate?: TemplateRef<any>;
   confirmTextButton: string;
   cancelTextButton?: string;
 
@@ -26,6 +27,4 @@ export class ShowDialog implements Usecase<DialogData, void> {
     });
   }
 }
-
-
 

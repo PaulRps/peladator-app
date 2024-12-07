@@ -3,8 +3,9 @@ import { Player } from '../../../squad/domain/models/player';
 class PaymentDetails {
   hasPaidDaily?: boolean;
   hasPaidMonthly?: boolean;
-  status?: 'Pendiente' | 'Diária' | 'Mensal' = 'Pendiente';
+  status?: 'Pendente' | 'Diária' | 'Mensal' = 'Pendente';
 }
 
 export type Customer = Pick<Player, 'id' | 'name' | 'position'> & PaymentDetails;
+
 

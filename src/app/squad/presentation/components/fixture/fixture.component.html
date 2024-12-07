@@ -32,3 +32,15 @@
   </mat-list>
 </div>
 
+<ng-template #MovePlayerDialog>
+  <mat-form-field>
+    <mat-label>Selecione o Time</mat-label>
+    <mat-select [formControl]="movePlayerFormControl">
+      <mat-option value="">Nenhum</mat-option>
+      @for (squad of lineUps; track $index) {
+      <mat-option [value]="$index">{{ 'Time ' + ($index + 1) }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</ng-template>
+
