@@ -1,4 +1,8 @@
-<app-table-with-filter-add-button
-  [datasource]="payments"
-  [columns]="columnData"
-></app-table-with-filter-add-button>
+<div class="pb-4 pl-3">
+    <p style="color: #E0E3E2;">
+      Total Arrecadado: {{revenue | brazilianMoney}}
+    </p>
+</div>
+
+<app-table [datasource]="payments" [columns]="columnData" (onRowClick)="goToPaymentReport($event)"></app-table>
+

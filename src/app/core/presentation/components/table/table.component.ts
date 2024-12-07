@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ColumnData } from './column-data';
 
@@ -12,6 +12,7 @@ export class TableComponent implements OnChanges {
   @Input() columns: ColumnData[] = [];
   @Input() actionsOnRowTemplate?: TemplateRef<any>;
   @Input() filterTemplate?: TemplateRef<any>;
+  @Output() onRowClick = new EventEmitter<any>();
 
   protected _displayedColumns: string[] = [];
   protected _datasource: MatTableDataSource<any> = new MatTableDataSource();
@@ -35,6 +36,10 @@ export class TableComponent implements OnChanges {
 
   hideActions(player: any): void {
     player.hovered = null;
+  }
+
+  clickOnRow(row: any): void {
+    this.onRowClick.emit(row);
   }
 }
 

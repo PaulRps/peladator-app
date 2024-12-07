@@ -7,10 +7,11 @@ import { Router } from '@angular/router';
   styleUrl: './menu.component.scss',
 })
 export class MenuComponent {
-  constructor(private router: Router) {}
+  constructor(private readonly router: Router) {}
 
   redirectTo(arg0: string) {
     this.router.navigate([arg0]);
   }
 }
+
 

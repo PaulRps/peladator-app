@@ -12,8 +12,8 @@ export class PaymentRepository implements IPaymentRepository {
     return this.paymentService.createPayment(payment);
   }
 
-  getPaymentByMonth(month: number, squadId: string): Observable<Payment | undefined> {
-    return this.paymentService.getPaymentByMonth(month, squadId);
+  getPaymentBy(month: number, squadId: string, id: string): Observable<Payment | undefined> {
+    return this.paymentService.getPaymentBy(month, squadId, id);
   }
 
   getAll(squadId: string): Observable<Payment[]> {
@@ -24,4 +24,7 @@ export class PaymentRepository implements IPaymentRepository {
     return this.paymentService.updatePayment(payment);
   }
 }
+
+
+
 

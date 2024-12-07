@@ -1,0 +1,27 @@
+<div class="pb-4">
+  <h6>{{ payment?.month | monthName }}/{{ payment?.year }}</h6>
+  Total Arrecadado: {{(sumDailyPay + sumMonthlyPay )| brazilianMoney}}
+</div>
+<div class="pb-4">
+  <p>Mensalistas</p>
+  <ul>
+    <li *ngFor="let customer of payment?.customersMonthlyPaid"> 
+      {{ customersMap[customer]?.name }} 
+    </li>
+  </ul>
+  Total: {{  sumMonthlyPay | brazilianMoney }}
+</div>
+<div class="pt-2">
+  <p>Diaristas</p>
+  <ul>
+    <li *ngFor="let day of daysOfDailyPayment"> 
+      Dia {{ day + "/"+ payment?.month }}
+      <ul>
+        <li *ngFor="let customer of payment?.customersDailyPaid[day]">
+          {{ customersMap[customer]?.name }}
+        </li>
+      </ul>
+    </li>
+  </ul>
+  Total: {{  sumDailyPay | brazilianMoney }}
+</div>

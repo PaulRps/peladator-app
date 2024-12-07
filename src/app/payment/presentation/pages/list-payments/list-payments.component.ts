@@ -4,6 +4,7 @@ import { Payment } from '../../../domain/models/payment';
 import { ColumnData } from '../../../../core/presentation/components/table/column-data';
 import { MonthNamePipe } from '../../../../core/pipes/month-name.pipe';
 import { BrazilianMoneyPipe } from '../../../../core/pipes/brazilian-money.pipe';
+import { Router } from '@angular/router';
 
 type ExtendedPayment = Payment & { revenue: number };
 
@@ -14,12 +15,14 @@ type ExtendedPayment = Payment & { revenue: number };
 })
 export class ListPaymentsComponent implements OnInit {
   payments: ExtendedPayment[] = [];
+  revenue: number = 0;
   protected columnData: ColumnData[];
 
   constructor(
     private readonly getAllPayments: GetAllPayments,
     private readonly monthNamePipe: MonthNamePipe,
-    private readonly brazilianMoneyPipe: BrazilianMoneyPipe
+    private readonly brazilianMoneyPipe: BrazilianMoneyPipe,
+    private readonly router: Router
   ) {
     this.columnData = [
       {
@@ -44,10 +47,21 @@ export class ListPaymentsComponent implements OnInit {
         Object.keys(p.customersDailyPaid).forEach((day) => {
           p.revenue += (p.customersDailyPaid[day].length || 0) * p.dailyFee;
         });
-
+        this.revenue += p.revenue;
         return p;
       });
     });
   }
+
+  goToPaymentReport(payment: any): void {
+    this.router.navigate([`payments/${payment.id}/details`]);
+  }
 }
+
+
+
+
+
+
+
 

@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ColumnData } from '../table/column-data';
 
@@ -17,6 +17,7 @@ export class TableWithFilterAddButtonComponent {
     text: string;
     routerLink: string;
   };
+  @Output() onRowClick = new EventEmitter<any>();
 
   constructor(private readonly router: Router) {}
 

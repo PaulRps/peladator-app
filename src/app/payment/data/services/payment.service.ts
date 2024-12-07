@@ -16,8 +16,18 @@ export class PaymentService {
 
   constructor(private readonly http: HttpClient) {}
 
-  getPaymentByMonth(month: number, squadId: string): Observable<Payment> {
-    return this.http.get<Payment>(`${this.url}?month=${month}&squadId=${squadId}`);
+  getPaymentBy(month?: number, squadId?: string, id?: string): Observable<Payment> {
+    let params = ``;
+    if (month) {
+      params += `${params == '' ? '' : '&'}month=${month}`;
+    }
+    if (squadId) {
+      params += `${params == '' ? '' : '&'}squadId=${squadId}`;
+    }
+    if (id) {
+      params += `${params == '' ? '' : '&'}id=${id}`;
+    }
+    return this.http.get<Payment>(`${this.url}?${params}`);
   }
 
   createPayment(payment: Payment): Observable<string> {
@@ -32,4 +42,10 @@ export class PaymentService {
     return this.http.get<Payment[]>(`${this.url}/all?squadId=${squadId}`);
   }
 }
+
+
+
+
+
+
 

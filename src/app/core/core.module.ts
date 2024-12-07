@@ -5,12 +5,16 @@ import { MonthNamePipe } from './pipes/month-name.pipe';
 import { BrazilianMoneyPipe } from './pipes/brazilian-money.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [MonthNamePipe, BrazilianMoneyPipe],
   imports: [CommonModule],
-  exports: [ComponentsModule],
+  exports: [ComponentsModule, MonthNamePipe, BrazilianMoneyPipe],
   providers: [MonthNamePipe, BrazilianMoneyPipe],
 })
 export class CoreModule {}
+
+
+
+
 
 
 

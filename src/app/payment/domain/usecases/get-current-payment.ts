@@ -13,7 +13,8 @@ export class GetCurrentPayment implements Usecase<void, Observable<Payment | und
 
   execute(_: void): Observable<Payment | undefined> {
     const month = new Date().getMonth() + 1;
-    return this.paymentRepository.getPaymentByMonth(month, environment.squadId);
+    return this.paymentRepository.getPaymentBy(month, environment.squadId);
   }
 }
+
 

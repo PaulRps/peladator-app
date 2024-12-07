@@ -4,6 +4,7 @@ export class Payment {
   id: string;
   squadId: string;
   month: number;
+  year: number;
   monthlyFee: number;
   dailyFee: number;
   customersMonthlyPaid: string[];
@@ -13,6 +14,7 @@ export class Payment {
     id,
     squadId,
     month,
+    year,
     monthlyFee,
     dailyFee,
     customersMonthlyPaid,
@@ -21,10 +23,12 @@ export class Payment {
     this.id = id || '';
     this.squadId = squadId || environment.squadId;
     this.month = month || 0;
+    this.year = year || 0;
     this.monthlyFee = monthlyFee || 70;
     this.dailyFee = dailyFee || 20;
     this.customersMonthlyPaid = customersMonthlyPaid || [];
     this.customersDailyPaid = customersDailyPaid || {};
   }
 }
+
 

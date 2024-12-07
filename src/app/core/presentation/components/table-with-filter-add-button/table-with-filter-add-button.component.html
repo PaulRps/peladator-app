@@ -19,5 +19,6 @@
   [columns]="columns"
   [actionsOnRowTemplate]="actionsOnRow"
   [filterTemplate]="filterSection"
+  (onRowClick)="onRowClick.emit($event)"
 ></app-table>
 

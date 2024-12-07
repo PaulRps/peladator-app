@@ -7,6 +7,7 @@ import { IPaymentRepository } from './domain/repositories/payment.repository';
 import { PaymentRoutingModule } from './payment-routing.module';
 import { ListCustomersComponent } from './presentation/pages/list-customers/list-customers.component';
 import { ListPaymentsComponent } from './presentation/pages/list-payments/list-payments.component';
+import { PaymentDetailsComponent } from './presentation/pages/payment-details/payment-details.component';
 
 @NgModule({
   providers: [
@@ -15,8 +16,10 @@ import { ListPaymentsComponent } from './presentation/pages/list-payments/list-p
       useClass: PaymentRepository,
     },
   ],
-  declarations: [ListCustomersComponent, ListPaymentsComponent],
+  declarations: [ListCustomersComponent, ListPaymentsComponent, PaymentDetailsComponent],
   imports: [CommonModule, PaymentRoutingModule, CoreModule],
 })
 export class PaymentModule {}
+
+
 

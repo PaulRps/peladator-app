@@ -12,7 +12,9 @@ export class CreatePayment implements Usecase<Payment, Observable<string>> {
 
   execute(payment: Payment): Observable<string> {
     payment.month = new Date().getMonth() + 1;
+    payment.year = new Date().getFullYear();
     return this.paymentRepository.create(payment);
   }
 }
+
 

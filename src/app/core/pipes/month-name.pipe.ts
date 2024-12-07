@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'date',
+  name: 'monthName',
 })
 export class MonthNamePipe extends DatePipe implements PipeTransform {
   override transform(value: any, args?: any): any {
@@ -25,4 +25,5 @@ const monthNames = [
   'Novembro',
   'Dezembro',
 ];
+
 
