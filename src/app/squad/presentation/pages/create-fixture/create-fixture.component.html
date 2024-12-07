@@ -42,7 +42,6 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
     <div>
-      <mat-error *ngIf="hasReachedStepOne && !hasSelectedPlayers">Selecione jogadores</mat-error>
       <button mat-button (click)="next(stepper, 1)">Próximo</button>
     </div>
   </mat-step>

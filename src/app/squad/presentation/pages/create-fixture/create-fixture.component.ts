@@ -23,7 +23,6 @@ export class CreateFixtureComponent {
   fixtureFormGroup: FormGroup;
   selection = new SelectionModel<Player>(true, []);
   fixture?: Fixture;
-  hasSelectedPlayers = false;
   hasReachedStepOne = false;
 
   constructor(
@@ -85,13 +84,11 @@ export class CreateFixtureComponent {
   next(stepper: MatStepper, step: number) {
     if (step == 1) {
       this.hasReachedStepOne = true;
-      this.hasSelectedPlayers = this.selection.selected.length > 0;
-      if (!this.hasSelectedPlayers) this.showMessage.execute('Selecione os jogadores');
     }
-
     stepper.next();
   }
 }
+
 
 
 
