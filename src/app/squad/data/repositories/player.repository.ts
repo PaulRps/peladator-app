@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Player } from '../../domain/models/player';
 import { IPlayerRepository } from '../../domain/repositories/player.repository';
 import { PlayerService } from '../services/player.service';
-import { PlayerWithFixtureHistory } from '../../domain/models/player-with-fixture-history';
+import { PlayerWithFixtureAndPaymentHistory } from '../../domain/models/player-with-fixture-history';
 
 @Injectable({ providedIn: 'root' })
 export class PlayerRepository implements IPlayerRepository {
@@ -13,7 +13,7 @@ export class PlayerRepository implements IPlayerRepository {
     return this.playerService.filterPlayers(squadId, ids);
   }
 
-  getPlayersWithHistory(squadId: string): Observable<PlayerWithFixtureHistory[]> {
+  getPlayersWithHistory(squadId: string): Observable<PlayerWithFixtureAndPaymentHistory[]> {
     return this.playerService.getPlayersHistory(squadId);
   }
 
@@ -45,6 +45,7 @@ export class PlayerRepository implements IPlayerRepository {
     return this.playerService.getPlayersForFixture();
   }
 }
+
 
 
 

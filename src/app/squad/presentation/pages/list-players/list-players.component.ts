@@ -4,9 +4,9 @@ import { ShowDialog } from '../../../../core/domain/usecases/show-dialog';
 import { ShowMessage } from '../../../../core/domain/usecases/show-message';
 import { ColumnData } from '../../../../core/presentation/components/table/column-data';
 import { Player } from '../../../domain/models/player';
-import { PlayerWithFixtureHistory } from '../../../domain/models/player-with-fixture-history';
+import { PlayerWithFixtureAndPaymentHistory } from '../../../domain/models/player-with-fixture-history';
 import { DeletePlayer } from '../../../domain/usecases/delete-player';
-import { GetPlayersWithFixtureHistory } from '../../../domain/usecases/get-players-with-fixture-history';
+import { GetPlayersWithFixtureAndPaymentHistory } from '../../../domain/usecases/get-players-with-fixture-and-payment-history';
 import { SavePlayerForFixture } from '../../../domain/usecases/save-player-for-fixture';
 
 @Component({
@@ -15,12 +15,7 @@ import { SavePlayerForFixture } from '../../../domain/usecases/save-player-for-f
   styleUrl: './list-players.component.scss',
 })
 export class ListPlayersComponent implements OnInit {
-  protected dataTable: PlayerWithFixtureHistory[] = [];
-  protected addButton = {
-    color: 'primary',
-    text: 'Jogador',
-    routerLink: 'add-player',
-  };
+  protected dataTable: PlayerWithFixtureAndPaymentHistory[] = [];
   protected columnData: ColumnData[] = [
     {
       label: 'Nome',
@@ -37,7 +32,7 @@ export class ListPlayersComponent implements OnInit {
   ];
 
   constructor(
-    private readonly getPlayersWithFixtureHistory: GetPlayersWithFixtureHistory,
+    private readonly getPlayersWithFixtureAndPaymentHistory: GetPlayersWithFixtureAndPaymentHistory,
     private readonly showDialog: ShowDialog,
     private readonly deletePlayer: DeletePlayer,
     private readonly savePlayerForFixture: SavePlayerForFixture,
@@ -46,7 +41,7 @@ export class ListPlayersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getPlayersWithFixtureHistory.execute().subscribe((players) => {
+    this.getPlayersWithFixtureAndPaymentHistory.execute().subscribe((players) => {
       this.dataTable = players;
     });
   }
@@ -75,7 +70,7 @@ export class ListPlayersComponent implements OnInit {
     this.router.navigate([`update-player/${player.id}`]);
   }
 
-  protected showFixtureHistory(player: PlayerWithFixtureHistory): void {
+  protected showFixtureHistory(player: PlayerWithFixtureAndPaymentHistory): void {
     const fixtureHistory =
       player.history
         ?.map((fixture) => new Date(fixture.date))
@@ -96,18 +91,25 @@ export class ListPlayersComponent implements OnInit {
       onConfirm: () => {},
     });
   }
+
+  protected applyFilter(event: Event, data: any): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    data.filter = filterValue;
+  }
+
+  protected filterByPaid(data: any, paidOption: any): void {
+    if (paidOption.selected) {
+      data.cached = data.data;
+      data.data = data.filteredData.filter((player: any) => player.hasPaid);
+    } else {
+      data.data = data.cached;
+    }
+  }
+
+  protected createPlayer(): void {
+    this.router.navigate(['add-player']);
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

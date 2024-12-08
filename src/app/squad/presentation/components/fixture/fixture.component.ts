@@ -47,6 +47,18 @@ export class FixtureComponent implements OnChanges {
   }
 
   move(player: any, playerIndex: number, squadIndex: number): void {
+    if (this.fixture?.createdAt) {
+      const fixtureDate = new Date(this.fixture.createdAt);
+      const today = new Date();
+      fixtureDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+
+      if (fixtureDate.getTime() != today.getTime()) {
+        this.showMessage.execute('Nao pode mover jogadores após o dia da partida');
+        return;
+      }
+    }
+
     this.showDialog.execute({
       title: `Mover ${player.name}`,
       htmlContentTemplate: this.movePlayerHtmlRef,
@@ -74,6 +86,13 @@ export class FixtureComponent implements OnChanges {
 
   update(): void {
     if (!this.fixture) return;
+    this.lineUps.forEach((squad: LineUp) => {
+      let level = 0;
+      squad?.players?.forEach((player: PlayerForFixture) => {
+        level += player.level || 0;
+      });
+      squad.level = level;
+    });
 
     this.updateFixture.execute(this.fixture).subscribe(() => {
       this.hasLineupChanged = false;

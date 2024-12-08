@@ -15,6 +15,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
+import { MatChipsModule } from '@angular/material/chips';
 
 const materialModules = [
   MatMenuModule,
@@ -33,12 +34,14 @@ const materialModules = [
   MatDividerModule,
   MatListModule,
   MatRippleModule,
+  MatChipsModule,
 ];
 @NgModule({
   imports: [...materialModules],
   exports: [...materialModules],
 })
 export class MaterialModule {}
+
 
 
 

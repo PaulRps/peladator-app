@@ -2,7 +2,9 @@
   <button class="justify-self-end" mat-button color="primary" (click)="update()">Salvar Alterações</button>
   <mat-divider></mat-divider>
 </div>
-
+<div class="pb-4">
+  <span>Data: {{ fixture?.createdAt | date: 'dd/MM/yyyy' }}</span>
+</div>
 <div *ngFor="let squad of lineUps; index as squadIndex">
   <p>
     {{ 'Time ' + (squadIndex + 1) + ' (Nível=' + squad.level + '  |  Qtd. Jogadores=' + squad.players?.length + ')' }}

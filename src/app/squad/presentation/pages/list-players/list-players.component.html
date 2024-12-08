@@ -1,58 +1,60 @@
-<div class="container mx-auto px-2">
-  <app-table-with-filter-add-button
-  [datasource]="dataTable"
-  [columns]="columnData"
-  [addButton]="addButton"
-  [actionsOnRow]="actions"
-></app-table-with-filter-add-button>
-
-<ng-template #actions let-columnData="columnData" let-row="row">
-  <div class="actions" *ngIf="row?.hovered && columnData.name == 'name'">
-    <button
-      mat-button
-      color="primary"
-      aria-label="escalar"
-      extended
-      (click)="saveForFixture(row)"
-    >
-      <mat-icon>how_to_reg</mat-icon>
-      Escalar
-    </button>
-
-    <button
-      mat-button
-      color="primary"
-      aria-label="escalar"
-      extended
-      (click)="showFixtureHistory(row)"
-    >
-      <mat-icon>timeline</mat-icon>
-      Assiduidade
-    </button>
-    
-    <button
-      mat-button
-      color="primary"
-      aria-label="atualizar"
-      extended
-      (click)="edit(row)"
-    >
-      <mat-icon>edit</mat-icon>
-      Editar
-    </button>
-
-    <button
-      mat-button
-      color="warn"
-      aria-label="deletar"
-      extended
-      (click)="delete(row)"
-    >
-      <mat-icon>delete</mat-icon>
-      Deletar
-    </button>
+<ng-template #filterSection let-data="data">
+  <div class="grid grid-cols-4 gap-1">
+    <div class="col-start-1">
+      <mat-form-field class="mr-4">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event, data)" placeholder="nome do jogador" />
+      </mat-form-field>
+      <div class="flex justify-center">
+        <div class="flex-1 self-center filter-label">
+          Filtro: 
+        </div>
+        <div class="pl-1 flex-1">
+          <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Cutest dog breeds">
+            <mat-chip-option #paidOption (click)="filterByPaid(data, paidOption)">Pago</mat-chip-option>
+          </mat-chip-listbox>
+        </div>
+      </div>
+    </div>
+    <div class="col-start-4 col-end-5 grid">
+      <button mat-flat-button color="primary" class="justify-self-end" extended (click)="createPlayer()">
+        <mat-icon>add</mat-icon>
+        Jogador
+      </button>
+    </div>
   </div>
 </ng-template>
 
+<div class="container mx-auto px-2">
+  <app-table
+    [datasource]="dataTable"
+    [columns]="columnData"
+    [actionsOnRowTemplate]="actions"
+    [filterTemplate]="filterSection"
+  ></app-table>
+
+  <ng-template #actions let-columnData="columnData" let-row="row">
+    <div class="actions" *ngIf="row?.hovered && columnData.name == 'name'">
+      <button mat-button color="primary" aria-label="escalar" extended (click)="saveForFixture(row)">
+        <mat-icon>how_to_reg</mat-icon>
+        Escalar
+      </button>
+
+      <button mat-button color="primary" aria-label="escalar" extended (click)="showFixtureHistory(row)">
+        <mat-icon>timeline</mat-icon>
+        Assiduidade
+      </button>
+
+      <button mat-button color="primary" aria-label="atualizar" extended (click)="edit(row)">
+        <mat-icon>edit</mat-icon>
+        Editar
+      </button>
+
+      <button mat-button color="warn" aria-label="deletar" extended (click)="delete(row)">
+        <mat-icon>delete</mat-icon>
+        Deletar
+      </button>
+    </div>
+  </ng-template>
 </div>
 
